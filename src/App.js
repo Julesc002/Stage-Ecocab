@@ -1,22 +1,26 @@
+import React from 'react';
+import Nav from './components/Nav';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PageDeTest from './pages/PageDeTest';
 
-import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Edit <code>src/App.js</code> and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <header>
+          <Nav />
+        </header>
+        <Routes>
+          {/* Pas encore d'attribut element={ nom de page } dans toutes les routes */}
+          <Route path='/HowItWorks' element={<PageDeTest />} />
+          <Route path='/SearchRides' />
+          <Route path='/PostARide' />
+          <Route path='/Account' />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
