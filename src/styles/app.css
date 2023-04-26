@@ -1,0 +1,9 @@
+@import url("./_settings.css");
+
+
+/* Import Pages*/
+@import url("./pages/_home.css");
+
+/* Import Components*/
+@import url("./components/_nav.css");
+@import url("./components/_footer.css");
