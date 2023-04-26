@@ -1,0 +1,161 @@
+/* Partie Ordinateur */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.navigationMenu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    min-height: 75px;
+    padding: 1rem;
+    background-color: #010922;
+    color: white;
+}
+
+.navigationMenu_titleApp {
+    padding-left: 5%;
+    font-size: clamp(10px, 2vw, 24px);
+}
+
+.navigationMenu_links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navigationMenu_links a {
+    text-decoration: none;
+    padding: 0 5rem;
+    color: inherit;
+    transition: 0.5s;
+}
+
+.navigationMenu_links a:hover {
+    color: #AAD9D9;
+}
+
+.navigationMenu_burgerButton {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: inherit;
+}
+
+
+/* Partie Téléphone */
+
+@media screen and (max-width:767px) {
+    .navigationMenu_links {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        right: -100%;
+        bottom: 0;
+        width: 1;
+        height: 100%;
+        padding: 2rem;
+        visibility: hidden;
+        background-color: #010922;
+        transition: all 0.8s ease-out;
+    }
+
+    .showNavigationMenu .navigationMenu_links {
+        right: 0;
+        width: 100%;
+        visibility: visible;
+    }
+
+    .navigationMenu_links a {
+        display: block;
+        padding: 1.5rem;
+        font-size: 5vw;
+    }
+
+    .navigationMenu_burgerButton {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .navigationMenu_burgerButton:hover {
+        cursor: pointer;
+    }
+
+    .navigationMenu_burgerButton_burgerLine,
+    .navigationMenu_burgerButton_burgerLine::before,
+    .navigationMenu_burgerButton_burgerLine::after {
+        display: block;
+        width: 40px;
+        height: 3px;
+        position: relative;
+        border-radius: 3px;
+        background: white;
+        transition: all .5s ease-in-out;
+    }
+
+    .navigationMenu_burgerButton_burgerLine::before,
+    .navigationMenu_burgerButton_burgerLine::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .navigationMenu_burgerButton_burgerLine::before {
+        transform: translateY(-12px);
+    }
+
+    .navigationMenu_burgerButton_burgerLine::after {
+        transform: translateY(12px);
+    }
+
+    .showNavigationMenu .navigationMenu_burgerButton_burgerLine {
+        width: 0;
+        background: transparent;
+    }
+
+    .showNavigationMenu .navigationMenu_burgerButton_burgerLine::before {
+        transform: rotate(45deg);
+    }
+
+    .showNavigationMenu .navigationMenu_burgerButton_burgerLine::after {
+        transform: rotate(-45deg);
+    }
+
+    .navigationMenu_links_item {
+        transform: translateY(100vh);
+    }
+
+    .showNavigationMenu .navigationMenu_links_item {
+        transform: translateY(0);
+    }
+
+
+    /* Animation d'entrée des liens du menu burger */
+
+    .showNavigationMenu .navigationMenu_links_slideInDown1 {
+        transition: all 1s ease-out;
+    }
+
+    .showNavigationMenu .navigationMenu_links_slideInDown2 {
+        transition: all 1.1s ease-out;
+    }
+
+    .showNavigationMenu .navigationMenu_links_slideInDown3 {
+        transition: all 1.2s ease-out;
+    }
+
+    .showNavigationMenu .navigationMenu_links_slideInDown4 {
+        transition: all 1.3s ease-out;
+    }
+}
