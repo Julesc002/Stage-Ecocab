@@ -1,20 +1,13 @@
 /* Partie Ordinateur */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 .navigationMenu {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     min-height: 75px;
-    padding: 1rem;
+    /* padding: 1rem; */
     background-color: #010922;
     color: white;
 }
