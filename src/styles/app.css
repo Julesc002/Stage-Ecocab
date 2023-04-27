@@ -3,6 +3,7 @@
 
 /* Import Pages*/
 @import url("./pages/_home.css");
+@import url("./pages/_posterUnTrajet.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");
@@ -11,3 +12,5 @@
 @import url("./components/_form-find-routes.css");
 @import url("./components/_container-logos.css");
 @import url("./components/_logos.css");
+@import url("./components/_boutonContact.css");
+@import url("./components/_videoExplication.css");
