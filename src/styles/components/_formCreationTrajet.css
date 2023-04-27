@@ -1,0 +1,52 @@
+.form {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form_inputsMajeurs {
+    text-align: center;
+    padding-top: 0.5%;
+    margin: 0.2%;
+    padding-bottom: 0.5%;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.form_conteneurPartieSecondaire {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.form_conteneurPartieSecondaire_conteneurInputs {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires {
+    
+}
+
+.form_texte {
+    background-color: white;
+    color: black;
+}
+
+.form_boutonCreer {
+    background-color: #AAD9D9;
+    color: black;
+    border-radius: 15px;
+    padding: 0.5% 2%;
+    border: 1px solid black;
+    margin: 0.2%;
+}
+
+.form_boutonCreer:hover {
+    transition: 0.5s;
+    background-color: var(--buttonsHoverColor);
+}

@@ -1,12 +1,16 @@
 import React from 'react';
 import BoutonContact from '../components/BoutonContact';
 import VideoExplication from '../components/VideoExplication';
+import FormCreationTrajet from '../components/FormCreationTrajet';
 
 const PosterUnTrajet = () => {
     return (
-        <article className='conteneurPosterUnTrajet'>
-            <BoutonContact />
-            <VideoExplication />
+        <article>
+            <FormCreationTrajet />
+            <div className='conteneurboutonEtPlaceholder'>
+                <BoutonContact />
+                <VideoExplication />
+            </div>
         </article>
     );
 };

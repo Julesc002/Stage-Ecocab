@@ -8,4 +8,10 @@
     padding-bottom: 1.5%;
     padding-left: 5%;
     padding-right: 5%;
+    margin: 2.5%;
+  }
+
+  .boutonContact:hover {
+    transition: 0.5s;
+    background-color: var(--buttonsHoverColor);
   }
