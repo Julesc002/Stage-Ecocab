@@ -2,6 +2,7 @@
 
 :root {
     --linksHoverColor: #8080D7;
+    --buttonsColor: #AAD9D9;
 }
 
 
@@ -24,4 +25,8 @@
 
 body {
     font-family: 'Outfit', sans-serif;
+}
+
+main {
+    color: white;
 }

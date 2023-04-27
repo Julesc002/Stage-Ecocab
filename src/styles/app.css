@@ -7,3 +7,7 @@
 /* Import Components*/
 @import url("./components/_nav.css");
 @import url("./components/_footer.css");
+@import url("./components/_home-main-titles.css");
+@import url("./components/_form-find-routes.css");
+@import url("./components/_container-logos.css");
+@import url("./components/_logos.css");
