@@ -6,6 +6,8 @@
 
 
 *, ::before, ::after{
+    background-color: #010922;
+    color: white;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

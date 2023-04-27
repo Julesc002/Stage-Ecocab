@@ -10,7 +10,7 @@ const Footer = () => {
                     <NavLink to="/"><li>Mention légales</li></NavLink>
                     <NavLink to="/"><li>CGV</li></NavLink>
                 </ul>
-                <div>
+                <div className='a'>
                     <p className='footerContainer_links_titleSecondList'>En savoir plus</p>
                     <ul className='footerContainer_links_secondList'>
                         <NavLink to="/"><li>Comment ça marche</li></NavLink>
