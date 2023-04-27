@@ -15,11 +15,11 @@ const FormFindRoutes = () => {
 
     return (
         <form className='FormFindRoutes' onSubmit={handleSubmit}>
-            <input className="FormFindRoutes_inputTextStart" type="text" value={start} onChange={(e) => setStart(e.target.value)} />
-            <input className="FormFindRoutes_inputTextDestination" type="text" value={destination} onChange={(e) => setDestination(e.target.value)} />
-            <input className="FormFindRoutes_inputDateTime" type="datetime-local" value={dateAndTime} onChange={(e) => setDateAndTime(e.target.value)} />
-            <input className="FormFindRoutes_inputNumberOfPeople" type="number" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
-            <input className="FormFindRoutes_inputTextFlightNumber" type="text" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
+            <input className="FormFindRoutes_inputTextStart" type="text" placeholder={start} onChange={(e) => setStart(e.target.value)} />
+            <input className="FormFindRoutes_inputTextDestination" type="text" placeholder={destination} onChange={(e) => setDestination(e.target.value)} />
+            <input className="FormFindRoutes_inputDateTime" type="datetime-local" placeholder={dateAndTime} onChange={(e) => setDateAndTime(e.target.value)} />
+            <input className="FormFindRoutes_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
+            <input className="FormFindRoutes_inputTextFlightNumber" type="text" placeholder={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
 
             <select className="FormFindRoutes_selectBaggageSize" value={baggageSize} onChange={(e) => setBaggageSize(e.target.value)}>
                 <option value="" disabled hidden>Taille du bagage</option>

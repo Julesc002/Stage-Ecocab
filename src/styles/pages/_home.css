@@ -4,3 +4,10 @@
     margin: 2%;
     margin-left: 3%;
 }
+
+.homeMain_homeArticle_helpVideoAndContactUs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2%;
+}

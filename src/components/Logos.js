@@ -13,15 +13,15 @@ const Logos = () => {
     return (
         <>
             <div className='homeCardLogo'>
-                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageCashFirstCard}`} alt="" />
+                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageCashFirstCard}`} alt={nameImageCashFirstCard} />
                 <p className='homeCardLogo_logoP'> {pFirstCard} </p>
             </div>
             <div className='homeCardLogo'>
-                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageIdCardSecondCard}`} alt="" />
+                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageIdCardSecondCard}`} alt={nameImageIdCardSecondCard} />
                 <p className='homeCardLogo_logoP'> {pSecondCard} </p>
             </div>
             <div className='homeCardLogo'>
-                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageValidationThirdCard}`} alt="" />
+                <img className='homeCardLogo_logoImage' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageValidationThirdCard}`} alt={nameImageValidationThirdCard} />
                 <p className='homeCardLogo_logoP'> {pThirdCard} </p>
             </div>
         </>

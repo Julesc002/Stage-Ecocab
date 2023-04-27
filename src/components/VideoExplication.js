@@ -1,10 +1,12 @@
 import React from 'react';
-import videoPlaceholder from './videoPlaceholder.svg';
 
 const VideoExplication = () => {
+
+    const nameImageVideoPlaceholder = "videoPlaceholder.svg";
+
     return (
         <>
-            <img className='videoPlaceholder' src={videoPlaceholder} alt='video explication placeholder'></img>
+            <img className='videoPlaceholder' src={`${process.env.PUBLIC_URL}/assets/images/${nameImageVideoPlaceholder}`} alt='Video explication placeholder' />
         </>
     );
 };
