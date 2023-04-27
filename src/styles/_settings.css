@@ -1,15 +1,19 @@
 /* Variables */
 
+:root {
+    --linksHoverColor: #8080D7;
+}
 
 
 
-
-
-*, ::before, ::after{
+*,
+::before,
+::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     list-style-type: none;
+    background-color: #010922;
     /* box-shadow: 0 0 0 3px red inset; */
 }
 
@@ -18,7 +22,6 @@
     src: url('/public/fonts/Outfit-VariableFont_wght.ttf');
 }
 
-body{
-    font-family:'Outfit', sans-serif;
+body {
+    font-family: 'Outfit', sans-serif;
 }
-

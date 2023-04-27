@@ -11,7 +11,9 @@ const Nav = () => {
 
     return (
         <nav className={`navigationMenu ${showLinks ? 'showNavigationMenu' : 'hideNavigationMenu'}`}>
-            <h1 className='navigationMenu_titleApp'> ECoCab </h1>
+            <NavLink to="/">
+                <h1 className='navigationMenu_titleApp'> ECoCab </h1>
+            </NavLink>
             <ul className='navigationMenu_links'>
                 <NavLink to="/HowItWorks">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown1'> Comment ça marche </li>
