@@ -1,0 +1,76 @@
+.FormFindRoutes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.FormFindRoutes_inputTextStart,
+.FormFindRoutes_inputTextDestination,
+.FormFindRoutes_inputDateTime,
+.FormFindRoutes_inputNumberOfPeople,
+.FormFindRoutes_inputTextFlightNumber,
+.FormFindRoutes_selectBaggageSize,
+.FormFindRoutes_selectBaggageSize_value {
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: calc(25% - 20px);
+}
+
+.FormFindRoutes_inputTextStart,
+.FormFindRoutes_inputTextDestination,
+.FormFindRoutes_inputDateTime,
+.FormFindRoutes_inputNumberOfPeople {
+    width: calc(25% - 20px);
+}
+
+.FormFindRoutes_inputTextFlightNumber,
+.FormFindRoutes_selectBaggageSize {
+    width: calc(50% - 20px);
+}
+
+.FormFindRoutes_selectBaggageSize {
+    margin-top: 10px;
+}
+
+.FormFindRoutes_submitButton {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background-color: var(--buttonsColor);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+
+    .FormFindRoutes_inputTextStart,
+    .FormFindRoutes_inputTextDestination,
+    .FormFindRoutes_inputDateTime,
+    .FormFindRoutes_inputNumberOfPeople,
+    .FormFindRoutes_inputTextFlightNumber,
+    .FormFindRoutes_selectBaggageSize {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 639px) {
+
+    .FormFindRoutes_inputTextStart,
+    .FormFindRoutes_inputTextDestination,
+    .FormFindRoutes_inputDateTime,
+    .FormFindRoutes_inputNumberOfPeople,
+    .FormFindRoutes_inputTextFlightNumber,
+    .FormFindRoutes_selectBaggageSize {
+        width: calc(100% - 20px);
+    }
+}
