@@ -15,16 +15,16 @@ const Nav = () => {
                 <h1 className='navigationMenu_titleApp'> ECoCab </h1>
             </NavLink>
             <ul className='navigationMenu_links'>
-                <NavLink to="/HowItWorks">
+                <NavLink to="/CommentCaMarche">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown1'> Comment ça marche </li>
                 </NavLink>
-                <NavLink to="/SearchRides">
+                <NavLink to="/RechercherUnTrajet">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown2'> Rechercher un trajet </li>
                 </NavLink>
-                <NavLink to="/PostARide">
+                <NavLink to="/PosterUnTrajet">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown3'> Poster un trajet </li>
                 </NavLink>
-                <NavLink to="/Account">
+                <NavLink to="/Compte">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown4'> Compte </li>
                 </NavLink>
             </ul>

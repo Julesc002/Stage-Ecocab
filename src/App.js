@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import PageDeTest from './pages/PageDeTest';
 import Layout from './components/Layout';
+import PosterUnTrajet from './pages/PosterUnTrajet';
 
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/CommentCaMarche' element={<PageDeTest />} />
         <Route path='/RechercherUnTrajet' />
-        <Route path='/PosterUnTrajet' />
+        <Route path='/PosterUnTrajet' element={<PosterUnTrajet />}/>
         <Route path='/Compte' />
       </Routes>
     </Layout>
