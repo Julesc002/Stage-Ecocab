@@ -23,9 +23,9 @@ const FormFindRoutes = () => {
 
             <select className="FormFindRoutes_selectBaggageSize" value={baggageSize} onChange={(e) => setBaggageSize(e.target.value)}>
                 <option value="" disabled hidden>Taille du bagage</option>
-                <option className="FormFindRoutes_selectBaggageSize_value" value="Sac à dos">Petit</option>
-                <option className="FormFindRoutes_selectBaggageSize_value" value="Cabine">Moyen</option>
-                <option className="FormFindRoutes_selectBaggageSize_value" value="Soute">Grand</option>
+                <option className="FormFindRoutes_selectBaggageSize_value" value="Sac à dos"> Sac à dos </option>
+                <option className="FormFindRoutes_selectBaggageSize_value" value="Cabine"> Cabine </option>
+                <option className="FormFindRoutes_selectBaggageSize_value" value="Soute"> Soute </option>
             </select>
 
             <button className="FormFindRoutes_submitButton" type="submit"> Recherchez </button>

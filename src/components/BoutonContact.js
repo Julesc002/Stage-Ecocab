@@ -1,9 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const BoutonContact = () => {
     return (
         <>
-            <button className='boutonContact'>Contactez-nous</button>
+            <NavLink to="/ContactezNous">
+                <button className='boutonContact'>Contactez-nous</button>
+            </NavLink>
         </>
     );
 };
