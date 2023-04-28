@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const FormCreationTrajet = () => {
+    const [numberOfPeople, setNumberOfPeople] = useState(1);
+
     return (
         <div>
             <div className='form'>
@@ -11,7 +13,7 @@ const FormCreationTrajet = () => {
                         <input className='form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires' type='text' placeholder="N°VOL ?"/>
                         <input className='form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires' type='text' placeholder="Terminal ?"/>
                     </div>
-                    <input type='number' placeholder="1"/>
+                    <input className='form_conteneurPartieSecondaire_inputNumber' type='number' min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)}/>
                 </div>
                 <p className='form_texte'>Economise jusqu'à 30€</p>
                 <button className='form_boutonCreer'>Créer ton trajet gratuitement !</button>
