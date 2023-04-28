@@ -9,14 +9,14 @@
     border-radius: 10px;
     margin-left: 30%;
     margin-top: 5%;
-    margin-bottom: 2.5%;
+    margin-bottom: 5%;
 }
 
 .form_inputsMajeurs {
     text-align: center;
-    padding-top: 1%;
+    padding-top: 2%;
     margin: 0.4%;
-    padding-bottom: 1%;
+    padding-bottom: 2%;
     width: 200px;
     background-color: white;
     color: black;
@@ -71,19 +71,14 @@
 }
 
 .form_boutonCreer {
-    background-color: #AAD9D9;
+    background-color: var(--buttonsColor);
     color: black;
     border-radius: 15px;
     padding: 5% 15%;
     border: 1px solid black;
     margin: 0.4%;
     position: relative;
-    top: 20px;
-}
-
-.form_boutonCreer:hover {
-    transition: 0.5s;
-    background-color: var(--buttonsHoverColor);
+    top: 10px;
 }
 
 @media (max-width: 1000px) {
