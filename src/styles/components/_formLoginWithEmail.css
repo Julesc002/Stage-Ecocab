@@ -1,0 +1,98 @@
+/* Container principal */
+.loginFormContainer {
+    width: 400px;
+    height: auto;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 5%;
+}
+
+/* Titre principal */
+.loginFormContainer_mainTitleForm {
+    margin: 0;
+    font-size: 24px;
+    background-color: white;
+    color: black;
+}
+
+/* Formulaire de connexion */
+.loginFormContainer_loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+}
+
+/* Label pour les champs du formulaire */
+.loginFormContainer_loginForm_label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    background-color: white;
+}
+
+/* Champs de texte pour l'identifiant et le mot de passe */
+.loginFormContainer_loginForm_inputText,
+.loginFormContainer_loginForm_inputPassword {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 1px;
+    border: 1px solid black;
+}
+
+/* Lien "Mot de passe oublié" */
+.loginFormContainer_loginForm_link {
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: right;
+    background-color: white;
+    color: #4c9aff;
+    text-align: center;
+}
+
+/* Bouton de connexion */
+.loginFormContainer_loginForm_submitButton {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: var(--buttonsColor);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Section "Pas encore de compte ?" */
+.loginFormContainer_noAccountSection {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre de la section "Pas encore de compte ?" */
+.loginFormContainer_noAccountSection_noAccountTitle {
+    font-size: 16px;
+    margin-top: 30px;
+    background-color: white;
+    color: black;
+}
+
+/* Lien "Créer un compte" */
+.loginFormContainer_noAccountSection_registerLink {
+    color: #4c9aff;
+    margin-top: 10px;
+    background-color: white;
+}
