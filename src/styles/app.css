@@ -6,6 +6,9 @@
 @import url("./pages/_posterUnTrajet.css");
 @import url("./pages/_mentionLegales.css");
 @import url("./pages/_pageRechercherUnTrajet.css");
+@import url("./pages/_loginWithEmail.css");
+@import url("./pages/_createAccount.css");
+@import url("./pages/_howDoesThisWork.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");
@@ -17,4 +20,8 @@
 @import url("./components/_boutonContact.css");
 @import url("./components/_videoExplication.css");
 @import url("./components/_formCreationTrajet.css");
+
 @import url("./components/_trajet.css");
+@import url("./components/_formLoginWithEmail.css");
+@import url("./components/_formCreateAccount.css");
+@import url("./components/_howDoesThisWork.css");

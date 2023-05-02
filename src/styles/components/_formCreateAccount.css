@@ -1,0 +1,106 @@
+/* Container principal */
+.createAccountFormContainer {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 5%;
+}
+
+/* Titre du formulaire */
+.createAccountFormContainer_mainTitleForm {
+    margin: 0;
+    font-size: 24px;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Formulaire de connexion */
+.createAccountFormContainer_loginForm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Libellé du champ */
+.createAccountFormContainer_loginForm_label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* Champ de saisie de texte */
+.createAccountFormContainer_loginForm_inputText,
+.createAccountFormContainer_loginForm_inputPassword,
+.createAccountFormContainer_loginForm_inputDate,
+.createAccountFormContainer_loginForm_inputTel {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+/* Conteneur de la case à cocher */
+.createAccountFormContainer_loginForm_checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+/* Texte de la case à cocher */
+.createAccountFormContainer_loginForm_checkboxContainer_checkBoxText {
+    background-color: #fff;
+}
+
+/* Lien de la case à cocher */
+.createAccountFormContainer_loginForm_checkboxContainer_checkBoxText_checkBoxLink {
+    background-color: #fff;
+}
+
+/* Bouton d'inscription */
+.createAccountFormContainer_loginForm_submitButton {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: var(--buttonsColor);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Section "Déjà membre" */
+.createAccountFormContainer_alreadyAccountSection {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Texte "Déjà membre" */
+.createAccountFormContainer_alreadyAccountSection_alreadyMember {
+    font-size: 16px;
+    margin-top: 30px;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Lien de connexion */
+.createAccountFormContainer_alreadyAccountSection_connectionLink {
+    color: #4c9aff;
+    margin-top: 10px;
+    background-color: #fff;
+}

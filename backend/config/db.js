@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
     try {
         mongoose.set('strictQuery', false);
-        
-        mongoose.connect(process.env.MONGO_URI).then(() => {
+
+        mongoose.connect("mongodb+srv://ecocab:ecocabpassword@ecocab.72lwa6n.mongodb.net/test").then(() => {
             console.log('MongoDB connect');
         }).catch((err) => {
             console.error("MongoDb connection error : " + err);
