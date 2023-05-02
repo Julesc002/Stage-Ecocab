@@ -4,6 +4,8 @@
 /* Import Pages*/
 @import url("./pages/_home.css");
 @import url("./pages/_posterUnTrajet.css");
+@import url("./pages/_mentionLegales.css");
+@import url("./pages/_pageRechercherUnTrajet.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");
@@ -15,3 +17,4 @@
 @import url("./components/_boutonContact.css");
 @import url("./components/_videoExplication.css");
 @import url("./components/_formCreationTrajet.css");
+@import url("./components/_trajet.css");

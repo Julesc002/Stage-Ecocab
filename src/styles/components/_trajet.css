@@ -1,0 +1,80 @@
+.containerTrajet {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 30%;
+    justify-content: space-between;
+  }
+  
+  .containerTrajet_sectionLieuEtHeure {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    flex: 1;
+  }
+  
+  .containerTrajet_sectionLieuEtHeure_ligne {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 10%;
+    align-self: flex-start;
+  }
+  
+  .containerTrajet_sectionLieuEtHeure_ligneBas {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 10%;
+    align-self: flex-start;
+  }
+  
+  .containerTrajet_sectionLieuEtHeure_ligne_text {
+    background-color: white;
+    color: black;
+  }
+  
+  .containerTrajet_sectionMillieu {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    margin-left: auto;
+  }
+  
+  .containerTrajet_sectionMillieu_icone {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    align-self: flex-end;
+  }
+  
+  .containerTrajet_sectionMillieu_text {
+    background-color: white;
+    color: black;
+    align-self: flex-end;
+  }
+  
+  .containerTrajet_sectionDroite {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .containerTrajet_sectionDroite_text {
+    background-color: white;
+    color: black;
+    margin: 2%;
+    align-self: center;
+  }
+  

@@ -1,0 +1,32 @@
+.containerMention {
+    background-color: white;
+    margin: 5%;
+    padding: 2%;
+    border-radius: 15px;
+}
+
+.containerMention_containerMainTitle {
+    background-color: white;
+}
+
+.containerMention_containerMainTitle_mainTitle {
+    background-color: white;
+    color: black;
+    text-decoration: underline;
+    margin-bottom: 2%;
+}
+
+.containerMention_containerContent {
+    background-color: white;
+}
+
+.containerMention_containerContent_titles {
+    background-color: white;
+    color: black;
+}
+
+.containerMention_containerContent_texts {
+    background-color: white;
+    color: black;
+    margin-bottom: 2%;
+}

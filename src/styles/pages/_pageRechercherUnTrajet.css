@@ -1,0 +1,57 @@
+/* le css de la barre de recherche viens du _form-find-routes */
+
+.containerTrierAndTrajets {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerTrierAndTrajets_trier {
+    margin-left: 5%;
+    padding: 1%;
+    padding-bottom: 2%;
+    width: 350px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.containerTrierAndTrajets_trier_title {
+    background-color: white;
+    color: black;
+    margin: 5%;
+}
+
+.containerTrierAndTrajets_trier_ligne {
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+}
+
+.containerTrierAndTrajets_trier_ligne {
+    background-color: white;
+}
+
+.containerTrierAndTrajets_trier_ligne_checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+    outline: none;
+    transition: 0.2s;
+    margin: 5%;
+    margin-right: 0%;
+}
+  
+.containerTrierAndTrajets_trier_ligne_checkbox:checked {
+    background-color: #8080D7;
+}
+ 
+.containerTrierAndTrajets_trier_ligne_text {
+    background-color: white;
+    color: black;
+    margin: 5%;
+    white-space: nowrap;
+}

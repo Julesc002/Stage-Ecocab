@@ -7,7 +7,7 @@ const Footer = () => {
             <h1 className='footerContainer_mainTitle'>ECoCab</h1>
             <nav className='footerContainer_links'>
                 <ul className='footerContainer_links_firstList'>
-                    <NavLink to="/"><li>Mention légales</li></NavLink>
+                    <NavLink to="/MentionLegales"><li>Mention légales</li></NavLink>
                     <NavLink to="/"><li>CGV</li></NavLink>
                 </ul>
                 <div className='a'>
