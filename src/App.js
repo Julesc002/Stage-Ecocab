@@ -9,6 +9,7 @@ import PageRechercherUnTrajet from './pages/PageRechercherUnTrajet';
 import LoginWithEmail from './pages/LoginWithEmail';
 import CreateAccount from './pages/CreateAccount';
 import HowDoesThisWork from './pages/HowDoesThisWork';
+import TravelDetails from './pages/TravelDetails';
 
 
 const App = () => {
@@ -18,11 +19,12 @@ const App = () => {
         {/* Pas encore d'attribut element={ nom de page } dans toutes les routes */}
         <Route path='/' element={<Home />} />
         <Route path='/CommentCaMarche' element={<HowDoesThisWork />} />
-        <Route path='/RechercherUnTrajet' element={<PageRechercherUnTrajet />}/>
+        <Route path='/RechercherUnTrajet' element={<PageRechercherUnTrajet />} />
         <Route path='/PosterUnTrajet' element={<PosterUnTrajet />} />
         <Route path='/Compte' element={<LoginWithEmail />} />
         <Route path='/Inscription' element={<CreateAccount />} />
         <Route path='/mentionLegales' element={<MentionsLegales />} />
+        <Route path='/Details' element={<TravelDetails />} />
       </Routes>
     </Layout>
   );

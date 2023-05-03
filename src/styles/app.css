@@ -9,6 +9,7 @@
 @import url("./pages/_loginWithEmail.css");
 @import url("./pages/_createAccount.css");
 @import url("./pages/_howDoesThisWork.css");
+@import url("./pages/_travelDetails.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");
@@ -25,3 +26,4 @@
 @import url("./components/_formLoginWithEmail.css");
 @import url("./components/_formCreateAccount.css");
 @import url("./components/_howDoesThisWork.css");
+@import url("./components/_travelInfos.css");
