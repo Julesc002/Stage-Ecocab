@@ -1,0 +1,105 @@
+.travelInfosContainer {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.travelInfosContainer_startTravel {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.travelInfosContainer_startTravel_travelTimeAndName {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.travelInfosContainer_middleArrowAndPrice {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.travelInfosContainer_middleArrowAndPrice_arrowIcon {
+    background-color: white;
+    width: auto;
+    height: 30%;
+    margin-right: 10px;
+}
+
+.travelInfosContainer_middleArrowAndPrice_priceValue {
+    background-color: white;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.travelInfosContainer_endTravel {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.travelInfosContainer_endTravel_travelTimeAndName {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.travelInfosContainer_travellers {
+    background-color: white;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.travelInfosContainer_travellers_traveller {
+    color: black;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos {
+    background-color: white;
+    font-size: 16px;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos_manIco {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+.travelInfosContainer_reservationButton {
+    align-self: center;
+    background-color: var(--buttonsColor);
+    color: black;
+    border-radius: 15px;
+    padding: 20px 70px;
+    border: 1px solid black;
+    margin: 0.4%;
+    position: relative;
+    top: 50px;
+    font-weight: bold;
+}
+
+.travelInfosContainer_reservationButton:hover {
+    cursor: pointer;
+}

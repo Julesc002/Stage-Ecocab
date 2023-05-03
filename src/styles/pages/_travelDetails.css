@@ -1,0 +1,23 @@
+.travelDetailsArticle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.travelDetailsArticle section {
+    width: 100%;
+    max-width: 800px;
+    margin: 1%;
+}
+
+.travelDetailsArticle_contactAndExplication {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.travelDetailsArticle p {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 20px;
+}

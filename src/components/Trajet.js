@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Trajet = () => {
+
     return (
         <Link to="/Details" className='containerTrajet'>
             <div className='containerTrajet_sectionHeure'>
@@ -21,7 +22,7 @@ const Trajet = () => {
                 </div>
             </div>
             <div className='containerTrajet_sectionMillieu'>
-                <img className='containerTrajet_sectionMillieu_icone' src={`${process.env.PUBLIC_URL}/assets/images/manIco.svg`} alt='icone Monsieur'/>
+                <img className='containerTrajet_sectionMillieu_icone' src={`${process.env.PUBLIC_URL}/assets/images/manIco.svg`} alt='icone Monsieur' />
                 <p className='containerTrajet_sectionMillieu_text'>2</p>
             </div>
             <div className='containerTrajet_sectionDroite'>
