@@ -3,15 +3,17 @@
 .containerTrierAndTrajets {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .containerTrierAndTrajets_trier {
-    margin-left: 5%;
     padding: 1%;
     padding-bottom: 2%;
     width: 350px;
     background-color: white;
     border-radius: 20px;
+    margin: 1%;
 }
 
 .containerTrierAndTrajets_trier_title {
@@ -54,4 +56,29 @@
     color: black;
     margin: 5%;
     white-space: nowrap;
+}
+
+.containerButtonAndVideo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerButtonAndVideo_text {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+@media (max-width: 850px) {
+    .containerTrierAndTrajets {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 570px) {
+    .containerButtonAndVideo_text {
+        margin: 2%;
+        text-align: center;
+    }
 }
