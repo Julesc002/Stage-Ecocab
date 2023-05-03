@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import Trajet from '../components/Trajet';
+import ListeTrajets from '../components/ListeTrajets';
+import VideoExplication from '../components/VideoExplication';
+import { NavLink } from 'react-router-dom';
 
 const PageRechercherUnTrajet = () => {
     const [start, setStart] = useState("Départ");
@@ -39,7 +41,14 @@ const PageRechercherUnTrajet = () => {
                         <p className='containerTrierAndTrajets_trier_ligne_text'>Plus proche du point d'arrivée</p>
                     </div>
                 </div>
-                <Trajet />
+                <ListeTrajets />
+            </div>
+            <div className='containerButtonAndVideo'>
+                <p className='containerButtonAndVideo_text'>*Les prix sont propotionnels au nombre de passagers déjà inscrit sur le trajet .</p>
+                <NavLink to="/ContactezNous">
+                    <button className='boutonContact'>Tu ne vois pas ton trajet ? <br></br> Organise le !</button>
+                </NavLink>
+                <VideoExplication />
             </div>
         </article>
     );

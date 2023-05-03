@@ -3,82 +3,143 @@
   border-radius: 20px;
   display: flex;
   flex-direction: row;
-  height: 100%;
-  width: 30%;
   justify-content: space-between;
+  margin: 2%;
+  margin-left: 5%;
   text-decoration: none;
+  width: clamp(300px, 50vw, 500px);
 }
 
 .containerTrajet:hover {
   cursor: pointer;
 }
-
-.containerTrajet_sectionLieuEtHeure {
+  
+  .containerTrajet_sectionHeure {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    margin: 3%;
+    justify-content: space-between;
+    flex-grow: 1;
+    max-width: 40px;
+  }
+  
+  .containerTrajet_sectionHeure_ligne {
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+  margin-bottom: 15%;
+  align-self: flex-start;
+  }
+  
+  .containerTrajet_sectionHeure_ligneBas {
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+  align-self: flex-start;
+  }
+  
+  .containerTrajet_sectionHeure_ligne_text {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  }
+  
+  .containerTrajet_sectionLieu {
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  flex: 1;
-}
-
-.containerTrajet_sectionLieuEtHeure_ligne {
+  margin: 2%;
+  justify-content: space-between;
+  flex-grow: 1;
+  }
+  
+  .containerTrajet_sectionLieu_ligne {
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
-  margin: 10%;
+  margin: 2%;
+  margin-bottom: 15%;
   align-self: flex-start;
-}
-
-.containerTrajet_sectionLieuEtHeure_ligneBas {
+  flex-grow: 1;
+  }
+  
+  .containerTrajet_sectionLieu_ligneBas {
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
-  margin: 10%;
+  margin: 2%;
   align-self: flex-start;
-}
-
-.containerTrajet_sectionLieuEtHeure_ligne_text {
+  }
+  
+  .containerTrajet_sectionLieu_ligne_text {
   background-color: white;
   color: black;
-}
-
-.containerTrajet_sectionMillieu {
+  }
+  
+  .containerTrajet_sectionMillieu {
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   margin: 2%;
   margin-left: auto;
-}
-
-.containerTrajet_sectionMillieu_icone {
+  }
+  
+  .containerTrajet_sectionMillieu_icone {
   width: 20px;
   height: 20px;
   background-color: white;
   align-self: flex-end;
-}
-
-.containerTrajet_sectionMillieu_text {
+  }
+  
+  .containerTrajet_sectionMillieu_text {
   background-color: white;
   color: black;
   align-self: flex-end;
-}
-
-.containerTrajet_sectionDroite {
+  border-radius: 20px;
+  }
+  
+  .containerTrajet_sectionDroite {
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  margin: 2%;
+  }
 
-.containerTrajet_sectionDroite_text {
+  .containerTrajet_sectionDroite_textPrice {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    margin: 2%;
+    align-self: flex-start;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .containerTrajet_sectionDroite_text {
   background-color: white;
   color: black;
+  border-radius: 20px;
   margin: 2%;
-  align-self: center;
+  align-self: flex-start;
+  }
+
+  @media (max-width: 850px) {
+    .containerTrajet {
+      margin-left: 0%;
+    }
 }
