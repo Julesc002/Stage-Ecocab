@@ -5,6 +5,8 @@ const TravelInfos = () => {
     const downArrow = "downArrowIco.svg";
     const manIco = "manIco.svg";
 
+    const reservationButton = "Réserve ta place !"
+
     const startTravelName = "Orly";
     const startTravelTime = "12h";
 
@@ -50,6 +52,7 @@ const TravelInfos = () => {
                     </div>
                 ))}
             </div>
+            <button className='travelInfosContainer_reservationButton'> {reservationButton} </button>
         </div>
     );
 };
