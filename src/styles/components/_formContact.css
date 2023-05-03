@@ -1,0 +1,73 @@
+/* fond blanc avec bords arrondis */
+.formContact {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.formContact_formTitle {
+    background-color: white;
+    color: black;
+    margin-bottom: 2%;
+}
+
+/* labels au-dessus et sur la gauche */
+.formContact label {
+    background-color: white;
+    color: black;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Nom et Prénom un en dessous de l'autre */
+.formContact_upperFormPart_inputText {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.formContact_mailFormPart {
+    background-color: white;
+}
+
+/* styles pour la partie email */
+.formContact_inputEmail,
+.formContact_mailFormPart_formLabel,
+.formContact_mailFormPart_inputText,
+.formContact_mailFormPart_textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+}
+
+/* styles pour les labels dans la partie email */
+.formContact_mailFormPart_formLabel {
+    margin-top: 20px;
+}
+
+/* styles pour la partie message */
+.formContact_mailFormPart_textarea {
+    height: 150px;
+    resize: none;
+}
+
+.formContact_inputSubmit {
+    align-self: center;
+    background-color: var(--buttonsColor);
+    color: black;
+    border-radius: 15px;
+    padding: 20px 70px;
+    border: 1px solid black;
+    margin: 0.4%;
+    position: relative;
+    top: 50px;
+    font-weight: bold;
+}

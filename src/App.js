@@ -10,6 +10,7 @@ import LoginWithEmail from './pages/LoginWithEmail';
 import CreateAccount from './pages/CreateAccount';
 import HowDoesThisWork from './pages/HowDoesThisWork';
 import TravelDetails from './pages/TravelDetails';
+import Contact from './pages/Contact';
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/Inscription' element={<CreateAccount />} />
         <Route path='/mentionLegales' element={<MentionsLegales />} />
         <Route path='/Details' element={<TravelDetails />} />
+        <Route path='/Contact' element={<Contact />} />
       </Routes>
     </Layout>
   );
