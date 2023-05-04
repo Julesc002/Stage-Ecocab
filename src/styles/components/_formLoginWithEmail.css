@@ -1,80 +1,72 @@
 /* Container principal */
 .loginFormContainer {
-    width: 400px;
+    width: 25em;
     height: auto;
-    margin: 0 auto;
+    max-width: 90%;
     background-color: #fff;
     border-radius: 10px;
-    padding: 30px;
+    padding: 1.5em;
     margin: 5%;
 }
 
-/* Titre principal */
+
 .loginFormContainer_mainTitleForm {
     margin: 0;
-    font-size: 24px;
+    font-size: 1.5rem;
     background-color: white;
     color: black;
 }
 
-/* Formulaire de connexion */
 .loginFormContainer_loginForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 1.25em;
     background-color: white;
     color: black;
 }
 
-/* Label pour les champs du formulaire */
 .loginFormContainer_loginForm_label {
     display: block;
     text-align: left;
-    margin-bottom: 5px;
-    font-size: 14px;
+    margin-bottom: 0.3125em;
+    font-size: 0.875rem;
     background-color: white;
 }
 
-/* Champs de texte pour l'identifiant et le mot de passe */
 .loginFormContainer_loginForm_inputText,
 .loginFormContainer_loginForm_inputPassword {
     width: 100%;
-    margin-bottom: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: none;
-    font-size: 16px;
-    background-color: white;
-    border-radius: 1px;
-    border: 1px solid black;
+    padding: 0.625em;
+    margin-bottom: 0.625em;
+    background-color: #fff;
+    color: #000;
+    border-radius: 0.3125em;
+    border: 1px solid #ccc;
 }
 
-/* Lien "Mot de passe oublié" */
 .loginFormContainer_loginForm_link {
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 0.75rem;
+    margin-top: 0.625em;
     text-align: right;
     background-color: white;
     color: #4c9aff;
     text-align: center;
 }
 
-/* Bouton de connexion */
 .loginFormContainer_loginForm_submitButton {
     display: block;
     margin: 0 auto;
-    width: 50%;
-    margin-top: 30px;
-    padding: 15px;
+    width: 9.375em;
+    margin-top: 1.875em;
+    padding: 0.9375em;
     background-color: var(--buttonsColor);
     color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125em;
     cursor: pointer;
 }
 
-/* Section "Pas encore de compte ?" */
 .loginFormContainer_noAccountSection {
     background-color: white;
     display: flex;
@@ -82,17 +74,15 @@
     align-items: center;
 }
 
-/* Titre de la section "Pas encore de compte ?" */
 .loginFormContainer_noAccountSection_noAccountTitle {
-    font-size: 16px;
-    margin-top: 30px;
+    font-size: 1rem;
+    margin-top: 1.875em;
     background-color: white;
     color: black;
 }
 
-/* Lien "Créer un compte" */
 .loginFormContainer_noAccountSection_registerLink {
     color: #4c9aff;
-    margin-top: 10px;
+    margin-top: 0.625em;
     background-color: white;
 }

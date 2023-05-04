@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 const BoutonContact = () => {
     return (
         <>
-            <NavLink to="/ContactezNous">
-                <button className='boutonContact'>Contactez-nous</button>
+            <NavLink to="/Contact">
+                <button className='boutonContact'> Contactez-nous </button>
             </NavLink>
         </>
     );
