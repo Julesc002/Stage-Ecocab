@@ -74,6 +74,27 @@
     .containerTrierAndTrajets {
         flex-direction: column;
     }
+
+    .containerTrierAndTrajets_trier {
+        width: 250px;
+        margin-bottom: 5%;
+    }
+
+    .containerTrierAndTrajets_trier_title {
+        background-color: white;
+        color: black;
+        margin: 2%;
+    }
+
+    .containerTrierAndTrajets_trier_ligne_checkbox {
+        margin: 2%;
+    }
+
+    .containerTrierAndTrajets_trier_ligne_text {
+        white-space: normal;
+        margin: 2%;
+    }
+   
 }
 
 @media (max-width: 570px) {

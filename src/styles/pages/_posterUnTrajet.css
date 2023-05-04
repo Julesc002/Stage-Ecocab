@@ -1,15 +1,13 @@
-.conteneurGlobal_conteneurboutonEtPlaceholder {
+.conteneurGlobal {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-@media (max-width: 1000px) {
-    .conteneurGlobal {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.conteneurGlobal_conteneurboutonEtPlaceholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

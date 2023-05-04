@@ -5,11 +5,10 @@
     align-items: center;
     width: 400px;
     height: 200px;
-    padding: 1%;
+    padding: 5%;
     border-radius: 10px;
-    margin-left: 30%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 20%;
+    margin-bottom: 20%;
 }
 
 .form_inputsMajeurs {
@@ -81,18 +80,27 @@
     top: 10px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
     .form {
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 400px;
-        height: 200px;
-        padding: 1%;
-        border-radius: 10px;
-        margin-left: 0%;
-        margin-top: 12.5%;
-        margin-bottom: 10%;
+        width: 300px;
+        height: 150px;
+    }
+
+    .form_inputsMajeurs {
+        width: 150px;
+    }
+
+    .form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires {
+        width: 100px;
+        height: 20px;
+    }
+
+    .form_conteneurPartieSecondaire_inputNumber {
+        width: 30px;
+        height: 20px;
+    }
+
+    .form_boutonCreer {
+        top: 0px;
     }
 }
