@@ -58,6 +58,7 @@
         padding: 2rem;
         visibility: hidden;
         transition: all 0.8s ease-out;
+        z-index: 1;
     }
 
     .showNavigationMenu .navigationMenu_links {
@@ -76,6 +77,7 @@
         display: block;
         top: 1rem;
         right: 1rem;
+        z-index: 2;
     }
 
     .navigationMenu_burgerButton:hover {

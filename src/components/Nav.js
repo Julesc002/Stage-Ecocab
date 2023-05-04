@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
@@ -8,6 +8,24 @@ const Nav = () => {
     const handleShowLinks = () => {
         setShowLinks(!showLinks);
     }
+
+    useEffect(() => {
+        // Fonction pour changer la propriété CSS 'overflow' du body en fonction de l'état du menu burger
+        const handleOverflow = () => {
+            document.body.style.overflow = showLinks ? 'hidden' : 'unset';
+        };
+
+        handleOverflow();
+
+        // Ajouter un écouteur d'événement pour les changements d'état du menu burger
+        window.addEventListener('resize', handleOverflow);
+
+        // Nettoyer l'écouteur d'événement lorsque le composant est démonté
+        return () => {
+            window.removeEventListener('resize', handleOverflow);
+            document.body.style.overflow = 'unset';
+        };
+    }, [showLinks]);
 
     return (
         <nav className={`navigationMenu ${showLinks ? 'showNavigationMenu' : 'hideNavigationMenu'}`}>
