@@ -12,7 +12,6 @@ import HowDoesThisWork from './pages/HowDoesThisWork';
 import TravelDetails from './pages/TravelDetails';
 import Contact from './pages/Contact';
 
-
 const App = () => {
   return (
     <Layout>
