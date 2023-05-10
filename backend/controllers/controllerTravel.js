@@ -32,3 +32,15 @@ exports.getOneTravel = (req, res) => {
             return res.status(400).json({ error });
         });
 };
+
+// PARTIE DELETE
+
+exports.deleteOneTravel = (req, res) => {
+    const id = req.params.id;
+    Travel.findOneAndDelete({ _id: id })
+        .then((travel) => {
+            return res.status(200).json({ travel });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
+};

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const FormCreationTrajet = () => {
 
@@ -34,7 +35,23 @@ const FormCreationTrajet = () => {
             missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
             setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
         } else {
-            // Effectuer l'action souhaitée
+            if (departureTime >= arrivalTime) {
+                setErrorMessage("L'heure de départ doit être inférieure à l'heure d'arrivée");
+            } else {
+                const newTravel = {
+                    heureDepart: new Date(`1970-01-01T${departureTime}:00.000+01:00`),
+                    heureArrivee: new Date(`1970-01-01T${arrivalTime}:00.000+01:00`),
+                    lieuDepart: start,
+                    lieuArrivee: destination,
+                    nombreDePassagers: numberOfPeople,
+                    numeroDeVol: flightNumber,
+                    idCompte: "A changer plus tard"
+                }
+                console.log(newTravel);
+                axios.post("http://localhost:5000/travel", newTravel)
+                    .then((res) => { console.log(res) })
+                    .catch((error) => { console.log(error) });
+            }
         }
     }
 

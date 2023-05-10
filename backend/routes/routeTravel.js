@@ -7,4 +7,6 @@ router.post('/', TravelCtrl.createTravel);
 router.get('/:id', TravelCtrl.getOneTravel);
 router.get('/', TravelCtrl.getAllTravels);
 
+router.delete('/:id', TravelCtrl.deleteOneTravel);
+
 module.exports = router;
