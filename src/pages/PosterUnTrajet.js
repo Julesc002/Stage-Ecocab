@@ -6,11 +6,13 @@ import FormCreationTrajet from '../components/FormCreationTrajet';
 const PosterUnTrajet = () => {
     return (
         <article className='conteneurGlobal'>
-            <FormCreationTrajet />
-            <div className='conteneurGlobal_conteneurboutonEtPlaceholder'>
+            <section className='conteneurGlobal_formContainer'>
+                <FormCreationTrajet />
+            </section>
+            <section className='conteneurGlobal_conteneurboutonEtPlaceholder'>
                 <BoutonContact />
                 <VideoExplication />
-            </div>
+            </section>
         </article>
     );
 };

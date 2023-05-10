@@ -5,6 +5,13 @@
     align-items: center;
 }
 
+.conteneurGlobal_formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .conteneurGlobal_conteneurboutonEtPlaceholder {
     display: flex;
     flex-direction: column;

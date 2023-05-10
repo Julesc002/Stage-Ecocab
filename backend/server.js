@@ -3,7 +3,6 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
 const port = 5000;
 
-
 // Connexion à la DB 
 connectDB();
 
@@ -18,7 +17,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use("/post", require("./routes/post.routes"));
 app.use("/travel", require("./routes/routeTravel"));
-
+app.use("/user", require("./routes/routeUser"));
 
 
 // Lancer le serveur
