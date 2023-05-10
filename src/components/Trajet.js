@@ -9,7 +9,7 @@ const Trajet = (props) => {
     const heureArrivee = `${dateArrivee.getHours().toString().padStart(2, '0')}h${dateArrivee.getMinutes().toString().padStart(2, '0')}`;
     
     return (
-        <Link to="/Details" className='containerTrajet'>
+        <Link to={`/Details/${props.id}`} className='containerTrajet'>
             <div className='containerTrajet_sectionHeure'>
                 <div className='containerTrajet_sectionHeure_ligne'>
                     <p className='containerTrajet_sectionHeure_ligne_text'>{heureDepart}</p>

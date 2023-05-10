@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const TravelInfos = () => {
+const TravelInfos = (props) => {
 
     const downArrow = "downArrowIco.svg";
     const manIco = "manIco.svg";
 
     const reservationButton = "Réserve ta place !"
 
-    const startTravelName = "Orly";
-    const startTravelTime = "12h";
+    const [travel, setTravel] = useState([]);
 
-    const endTravelName = "République";
-    const endTravelTime = "12h35";
+    useEffect(() => {
+        axios.get('http://localhost:5000/travel/' + props.id)
+            .then(response => {
+                setTravel(response.data.travel);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
+    const startTravelName = travel.lieuDepart;
+    const dateDepart = new Date(travel.heureDepart);
+    const startTravelTime = `${dateDepart.getHours().toString().padStart(2, '0')}h${dateDepart.getMinutes().toString().padStart(2, '0')}`;
+
+    const endTravelName = travel.lieuArrivee;
+    const dateArrivee = new Date(travel.heureArrivee);
+    const endTravelTime = `${dateArrivee.getHours().toString().padStart(2, '0')}h${dateArrivee.getMinutes().toString().padStart(2, '0')}`;
 
     const price = "18";
     const travellers =
