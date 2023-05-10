@@ -24,7 +24,7 @@ const App = () => {
         <Route path='/Compte' element={<LoginWithEmail />} />
         <Route path='/Inscription' element={<CreateAccount />} />
         <Route path='/mentionLegales' element={<MentionsLegales />} />
-        <Route path='/Details' element={<TravelDetails />} />
+        <Route path='/Details/:id' element={<TravelDetails />} />
         <Route path='/Contact' element={<Contact />} />
       </Routes>
     </Layout>
