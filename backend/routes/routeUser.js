@@ -4,7 +4,7 @@ const userCtrl = require("../controllers/controllerUser");
 
 router.post('/', userCtrl.createUser);
 
-router.get('/', userCtrl.getOneUser);
+router.get('/', userCtrl.getOneUserWithEmailAndPassword);
 
 router.delete('/:id', userCtrl.deleteOneUser);
 

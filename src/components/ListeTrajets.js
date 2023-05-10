@@ -1,12 +1,13 @@
 import Trajet from './Trajet';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_TRAVEL_URL } from '../config';
 
 const ListeTrajets = () => {
     const [travels, setTravels] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/travel/')
+        axios.get(`${API_TRAVEL_URL}`)
             .then(response => {
                 setTravels(response.data.travels);
             })
@@ -32,7 +33,7 @@ const ListeTrajets = () => {
                 );
             })}
         </div>
-    );    
+    );
 };
 
 export default ListeTrajets;

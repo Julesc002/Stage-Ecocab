@@ -7,7 +7,8 @@ const travel = mongoose.Schema({
     lieuArrivee: String,
     nombreDePassagers: Number,
     numeroDeVol: String,
-    idCompte: String
+    idCompte: String,
+    idVoyageurs: [String]
 })
 
 module.exports = mongoose.model('Travel', travel);

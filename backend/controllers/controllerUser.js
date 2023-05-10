@@ -1,13 +1,40 @@
-const user = require('../models/modelUser');
+const User = require('../models/modelUser');
 
+// Partie POST
+
+// Pas terminé, attention ne pas stocker les mots de passe en brut
 exports.createUser = (req, res) => {
-    // Vérifier la présence de tous les éléments et créer l'utilisateur si tout est présent
+    const newUser = new User(req.body);
+    newUser.save()
+        .then((user) => {
+            return res.status(201).json({ user });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
 }
 
-exports.getOneUser = (req, res) => {
-    // Faire passer l'adresse email et le mot de passe dans le body pour ensuite faire la recherche
+// Partie GET
+
+// Pas terminé, attention ne pas stocker les mots de passe en brut
+exports.getOneUserWithEmailAndPassword = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    User.find({ email: email, password: password })
+        .then((user) => {
+            return res.status(200).json({ user });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
 }
+
+// Partie DELETE
 
 exports.deleteOneUser = (req, res) => {
-    // Supprimer l'utilisateur passé dans le body de la requête si il existe
+    const id = req.params.id;
+    User.findOneAndDelete({ _id: id })
+        .then((user) => {
+            return res.status(200).json({ user });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
 }

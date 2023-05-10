@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_TRAVEL_URL } from '../config';
 
 const FormCreationTrajet = () => {
 
@@ -45,10 +46,11 @@ const FormCreationTrajet = () => {
                     lieuArrivee: destination,
                     nombreDePassagers: numberOfPeople,
                     numeroDeVol: flightNumber,
-                    idCompte: "A changer plus tard"
+                    idCompte: "A changer plus tard",
+                    idVoyageurs: null
                 }
                 console.log(newTravel);
-                axios.post("http://localhost:5000/travel", newTravel)
+                axios.post(`${API_TRAVEL_URL}`, newTravel)
                     .then((res) => { console.log(res) })
                     .catch((error) => { console.log(error) });
             }
@@ -71,6 +73,7 @@ const FormCreationTrajet = () => {
                 </div>
                 <p className='form_texte'> Economise jusqu'à 30€ </p>
                 <input className='form_boutonCreer' type="submit" value="Créer ton trajet gratuitement !" />
+                <p></p>
                 {errorMessage !== '' ? <p className='errorMessage'> {errorMessage} </p> : null}
             </form>
         </div>
