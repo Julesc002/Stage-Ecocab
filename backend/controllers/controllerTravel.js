@@ -3,10 +3,10 @@ const Travel = require('../models/modelTravel');
 // PARTIE POST 
 
 exports.createTravel = (req, res) => {
-    const Travel = new Travel(req.body);
-    Travel.save()
-        .then((Travel) => {
-            return res.status(201).json({ Travel });
+    const newTravel = new Travel(req.body);
+    newTravel.save()
+        .then((travel) => {
+            return res.status(201).json({ travel });
         }).catch((error) => {
             return res.status(400).json({ error });
         });
@@ -16,8 +16,8 @@ exports.createTravel = (req, res) => {
 
 exports.getAllTravels = (req, res) => {
     Travel.find()
-        .then((Travel) => {
-            return res.status(200).json({ Travel });
+        .then((travels) => {
+            return res.status(200).json({ travels });
         }).catch((error) => {
             return res.status(400).json({ error });
         });
@@ -26,8 +26,8 @@ exports.getAllTravels = (req, res) => {
 exports.getOneTravel = (req, res) => {
     const id = req.params.id;
     Travel.findOne({ _id: id })
-        .then((Travel) => {
-            return res.status(200).json({ Travel });
+        .then((travel) => {
+            return res.status(200).json({ travel });
         }).catch((error) => {
             return res.status(400).json({ error });
         });
