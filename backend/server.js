@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 app.use("/post", require("./routes/post.routes"));
+app.use("/travel", require("./routes/routeTravel"));
 
 
 
