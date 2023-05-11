@@ -18,7 +18,7 @@ const TravelInfos = (props) => {
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+    }, [props.id]);
 
     const startTravelName = travel.lieuDepart;
     const dateDepart = new Date(travel.heureDepart);
