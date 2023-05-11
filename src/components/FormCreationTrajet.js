@@ -40,7 +40,7 @@ const FormCreationTrajet = () => {
         } else {
 
             const startDate = new Date(departureDate);
-            const startTime = new Date(`1970-01-01T${departureTime}:00.000+01:00`);
+            const startTime = new Date(`1970-01-01T${departureTime}:00.000+00:00`);
             const startYear = startDate.getFullYear();
             const startMonth = startDate.getMonth();
             const startDay = startDate.getDate();
@@ -49,7 +49,7 @@ const FormCreationTrajet = () => {
             const dateHourStart = new Date(startYear, startMonth, startDay, startHours, startMin);
 
             const endDate = new Date(arrivalDate);
-            const endTime = new Date(`1970-01-01T${arrivalTime}:00.000+01:00`);
+            const endTime = new Date(`1970-01-01T${arrivalTime}:00.000+00:00`);
             const arrivalYear = endDate.getFullYear();
             const arrivalMonth = endDate.getMonth();
             const arrivalDay = endDate.getDate();
