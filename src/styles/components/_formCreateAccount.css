@@ -68,6 +68,13 @@
     background-color: #fff;
 }
 
+/* Message d'erreur */
+.createAccountFormContainer_loginForm_errorMessage {
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
 /* Bouton d'inscription */
 .createAccountFormContainer_loginForm_submitButton {
     display: block;
