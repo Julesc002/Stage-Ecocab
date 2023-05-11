@@ -1,118 +1,137 @@
-.form {
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.formContainer_form {
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
-    height: 275px;
+    width: 600px;
+    height: 350px;
     padding: 5%;
     border-radius: 10px;
-    margin-top: 20%;
-    margin-bottom: 30%;
+    margin-top: 15%;
+    margin-bottom: 7%;
 }
 
-.form_inputsMajeurs {
-    text-align: center;
-    padding-top: 2%;
-    margin: 0.4%;
-    padding-bottom: 2%;
-    width: 200px;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    border: 1px solid black;
-}
-
-.form_conteneurPartieSecondaire {
-    margin-top: 2%;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-}
-
-.form_conteneurPartieSecondaire_conteneurInputs {
-    background-color: white;
+.formContainer_form_firstPart {
     display: flex;
     flex-direction: column;
 }
 
-.form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires {
+.formContainer_form_firstPart_inputsStartTravelContainer,
+.formContainer_form_firstPart_inputsEndTravelContainer {
+    background-color: white;
+    color: black;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     text-align: center;
-    padding-top: 2%;
-    margin: 2%;
-    padding-bottom: 2%;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 130px;
-    height: 30px;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    border: 1px solid black;
 }
 
-.form_conteneurPartieSecondaire_inputNumber {
+.formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate {
+    margin-left: 3%;
+    width: 47%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.formContainer_form_inputFlightNumber {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     text-align: center;
-    padding-top: 1%;
-    margin: 2%;
-    margin-left: 25px;
-    padding-bottom: 1%;
-    width: 45px;
-    height: 20px;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    align-self: top;
 }
 
-.form_texte {
+.formContainer_form_maxNumberOfTravelerContainer {
     background-color: white;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form_boutonCreer {
+.formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerLabel {
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+
+.formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerInput {
+    width: 30%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.formContainer_form_text {
+    background-color: white;
+    color: black;
+    margin-top: 2%;
+}
+
+.formContainer_form_submitButton {
     background-color: var(--buttonsColor);
     color: black;
     border-radius: 15px;
     padding: 5% 15%;
     border: 1px solid black;
-    margin: 0.4%;
     position: relative;
     top: 35px;
     cursor: pointer;
 }
 
-.errorMessage {
-    margin-top: 12%;
+.formContainer_errorMessage {
     text-align: center;
-    color: white;
+    font-size: large;
+    margin-bottom: 5%;
 }
 
-@media (max-width: 500px) {
-    .form {
-        width: 300px;
-        height: 200px;
+@media only screen and (max-width: 670px) {
+    .formContainer_form {
+        width: 400px;
+        height: auto;
     }
 
-    .form_inputsMajeurs {
-        width: 150px;
+    .formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace,
+    .formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace {
+        width: 45%;
     }
 
-    .form_conteneurPartieSecondaire_conteneurInputs_inputsSecondaires {
-        width: 100px;
-        height: 20px;
+    .formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate,
+    .formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate {
+        width: 50%;
     }
 
-    .form_conteneurPartieSecondaire_inputNumber {
-        width: 30px;
-        height: 20px;
+    .formContainer_form_submitButton {
+        top: 45px;
     }
 
-    .form_boutonCreer {
-        top: 10px;
-    }
-
-    .errorMessage {
+    .formContainer_errorMessage {
         font-size: small;
     }
 }
