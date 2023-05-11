@@ -1,25 +1,45 @@
-import React, { useState } from 'react';
-import ListeTrajets from '../components/ListeTrajets';
 import VideoExplication from '../components/VideoExplication';
 import { NavLink } from 'react-router-dom';
+import Trajet from '../components/Trajet';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_TRAVEL_URL } from '../config';
 
 const PageRechercherUnTrajet = () => {
-    const [start, setStart] = useState("Départ");
-    const [destination, setDestination] = useState("Destination");
-    const [dateAndTime, setDateAndTime] = useState("Date et heure");
-    const [numberOfPeople, setNumberOfPeople] = useState(1);
+    const [start, setStart] = useState("");
+    const [destination, setDestination] = useState("");
+    const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+    const [numberOfPeople, setNumberOfPeople] = useState("");
+    const [travels, setTravels] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${API_TRAVEL_URL}`)
+            .then(response => {
+                setTravels(response.data.travels);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
     };
 
+    const filteredTravels = travels.filter(travel =>
+        (start === "" || travel.lieuDepart.toLowerCase().includes(start.toLowerCase())) &&
+        (destination === "" || travel.lieuArrivee.toLowerCase().includes(destination.toLowerCase())) &&
+        (numberOfPeople === "" || travel.nombreDePassagers >= parseInt(numberOfPeople)) &&
+        (date === "" || new Date(travel.heureDepart).toISOString().slice(0, 10) === date)
+    );
+
     return (
         <article>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
-                <input className="FormFindRoutes_inputTextStart" type="text" placeholder={start} onChange={(e) => setStart(e.target.value)} />
-                <input className="FormFindRoutes_inputTextDestination" type="text" placeholder={destination} onChange={(e) => setDestination(e.target.value)} />
-                <input className="FormFindRoutes_inputDateTime" type="datetime-local" placeholder={dateAndTime} onChange={(e) => setDateAndTime(e.target.value)} />
-                <input className="FormFindRoutes_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
+                <input className="FormFindRoutes_inputTextStart" type="text" value={start} placeholder='Départ' onChange={(e) => setStart(e.target.value)} />
+                <input className="FormFindRoutes_inputTextDestination" type="text" value={destination} placeholder='Destination' onChange={(e) => setDestination(e.target.value)} />
+                <input className="FormFindRoutes_inputDateTime" type="date" defaultValue={date} onChange={(e) => setDate(e.target.value)} />
+                <input className="FormFindRoutes_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} placeholder='Nombre de voyageurs' onChange={(e) => setNumberOfPeople(e.target.value)} />
             </form>
             <div className='containerTrierAndTrajets'>
                 <div className='containerTrierAndTrajets_trier'>
@@ -41,7 +61,22 @@ const PageRechercherUnTrajet = () => {
                         <p className='containerTrierAndTrajets_trier_ligne_text'>Plus proche du point d'arrivée</p>
                     </div>
                 </div>
-                <ListeTrajets />
+                <div className='containerTrajets'>
+                    {filteredTravels.map(travel => {
+                        return (
+                            <Trajet
+                                id={travel._id}
+                                heureDepart={travel.heureDepart}
+                                heureArrivee={travel.heureArrivee}
+                                lieuDepart={travel.lieuDepart}
+                                lieuArrivee={travel.lieuArrivee}
+                                nombreDePassagers={travel.nombreDePassagers}
+                                numeroDeVol={travel.numeroDeVol}
+                                idCompte={travel.idCompte}
+                            />
+                        );
+                    })}
+                </div>
             </div>
             <div className='containerButtonAndVideo'>
                 <p className='containerButtonAndVideo_text'>*Les prix sont propotionnels au nombre de passagers déjà inscrit sur le trajet .</p>
