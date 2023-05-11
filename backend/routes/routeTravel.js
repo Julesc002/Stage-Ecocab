@@ -8,5 +8,6 @@ router.get('/:id', TravelCtrl.getOneTravel);
 router.get('/', TravelCtrl.getAllTravels);
 
 router.delete('/:id', TravelCtrl.deleteOneTravel);
+router.delete('/', TravelCtrl.deleteAllTravels);
 
 module.exports = router;

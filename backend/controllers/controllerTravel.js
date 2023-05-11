@@ -44,3 +44,13 @@ exports.deleteOneTravel = (req, res) => {
             return res.status(400).json({ error });
         });
 };
+
+exports.deleteAllTravels = (req, res) => {
+    Travel.deleteMany({})
+        .then(() => {
+            return res.status(200).json({ message: 'All travels have been deleted successfully.' });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
