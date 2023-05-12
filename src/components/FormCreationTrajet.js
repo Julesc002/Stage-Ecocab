@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_TRAVEL_URL } from '../config';
+import { NavLink } from 'react-router-dom';
+import Trajet from './Trajet';
 
 const FormCreationTrajet = () => {
 
@@ -13,7 +15,12 @@ const FormCreationTrajet = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [flightNumber, setFlightNumber] = useState("");
 
+    const [dateHourStart, setDateHourStart] = useState("");
+    const [dateHourArrival, setDateHourArrival] = useState("");
+
     const [errorMessage, setErrorMessage] = useState("");
+
+    const [travelPosted, setTravelPosted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -39,12 +46,15 @@ const FormCreationTrajet = () => {
             setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
         } else {
 
-            const dateHourStart = new Date(`${departureDate}T${departureTime}:00.000+02:00`);
-            const dateHourArrival = new Date(`${arrivalDate}T${arrivalTime}:00.000+02:00`);
+            const dateHourForStart = new Date(`${departureDate}T${departureTime}:00.000+02:00`);
+            const dateHourForArrival = new Date(`${arrivalDate}T${arrivalTime}:00.000+02:00`)
+
+            setDateHourStart(dateHourForStart);
+            setDateHourArrival(dateHourForArrival);
 
             const newTravel = {
-                heureDepart: dateHourStart,
-                heureArrivee: dateHourArrival,
+                heureDepart: dateHourForStart,
+                heureArrivee: dateHourForArrival,
                 lieuDepart: start,
                 lieuArrivee: destination,
                 nombreDePassagers: numberOfPeople,
@@ -53,49 +63,72 @@ const FormCreationTrajet = () => {
                 idVoyageurs: []
             }
             axios.post(`${API_TRAVEL_URL}`, newTravel)
-                .then((res) => { console.log(res) })
+                .then(() => { setTravelPosted(true) })
                 .catch((error) => { console.log(error) });
         }
     }
-
-    return (
-        <div className='formContainer'>
-            <form className='formContainer_form' onSubmit={handleSubmit}>
-
-                <div className='formContainer_form_firstPart'>
-                    <div className='formContainer_form_firstPart_inputsStartTravelContainer'>
-                        <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onChange={(e) => setStart(e.target.value)} />
-                        <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate' type='datetime-local'
-                            onChange={(e) => {
-                                const [dateValue, timeValue] = e.target.value.split('T');
-                                setDepartureDate(dateValue);
-                                setDepartureTime(timeValue);
-                            }} />
-                    </div>
-                    <div className='formContainer_form_firstPart_inputsEndTravelContainer'>
-                        <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' placeholder="Arrivée ?" onChange={(e) => setDestination(e.target.value)} />
-                        <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate' type='datetime-local'
-                            onChange={(e) => {
-                                const [dateValue, timeValue] = e.target.value.split('T');
-                                setArrivalDate(dateValue);
-                                setArrivalTime(timeValue);
-                            }} />
-                    </div>
+    if (travelPosted) {
+        return (
+            <div className='commitMessageContainer'>
+                <h1 className='commitMessageContainer_title'> Merci d'avoir partagé votre trajet </h1>
+                <h2 className='commitMessageContainer_title'> Votre trajet a été enregistré </h2>
+                <div className='commitMessageContainer_infoTravel'>
+                    {/* A faire : récupérer l'id du trajet depuis la BDD pour pourvoir cliquer sur la card Trajet */}
+                    <Trajet
+                        heureDepart={dateHourStart}
+                        heureArrivee={dateHourArrival}
+                        lieuDepart={start}
+                        lieuArrivee={destination}
+                        nombreDePassagers={numberOfPeople}
+                        numeroDeVol={flightNumber}
+                        idCompte={""}
+                    />
                 </div>
+                <NavLink to="/RechercherUnTrajet">
+                    <button className='commitMessageContainer_button'> Accéder à la liste des trajets </button>
+                </NavLink>
+            </div>
+        );
+    } else {
+        return (
+            <div className='formContainer'>
+                <form className='formContainer_form' onSubmit={handleSubmit}>
 
-                <input className='formContainer_form_inputFlightNumber' type='text' placeholder="N°VOL ?" onChange={(e) => setFlightNumber(e.target.value)} />
+                    <div className='formContainer_form_firstPart'>
+                        <div className='formContainer_form_firstPart_inputsStartTravelContainer'>
+                            <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onChange={(e) => setStart(e.target.value)} />
+                            <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate' type='datetime-local'
+                                onChange={(e) => {
+                                    const [dateValue, timeValue] = e.target.value.split('T');
+                                    setDepartureDate(dateValue);
+                                    setDepartureTime(timeValue);
+                                }} />
+                        </div>
+                        <div className='formContainer_form_firstPart_inputsEndTravelContainer'>
+                            <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' placeholder="Arrivée ?" onChange={(e) => setDestination(e.target.value)} />
+                            <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate' type='datetime-local'
+                                onChange={(e) => {
+                                    const [dateValue, timeValue] = e.target.value.split('T');
+                                    setArrivalDate(dateValue);
+                                    setArrivalTime(timeValue);
+                                }} />
+                        </div>
+                    </div>
 
-                <div className='formContainer_form_maxNumberOfTravelerContainer'>
-                    <label className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerLabel'> Nombre maximum de voyageurs </label>
-                    <input className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerInput' type='number' min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
-                </div>
+                    <input className='formContainer_form_inputFlightNumber' type='text' placeholder="N°VOL ?" onChange={(e) => setFlightNumber(e.target.value)} />
 
-                <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
-                <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
-            </form>
-            {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
-        </div>
-    );
+                    <div className='formContainer_form_maxNumberOfTravelerContainer'>
+                        <label className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerLabel'> Nombre maximum de voyageurs </label>
+                        <input className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerInput' type='number' min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
+                    </div>
+
+                    <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
+                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
+                </form>
+                {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
+            </div>
+        );
+    }
 };
 
 export default FormCreationTrajet;
