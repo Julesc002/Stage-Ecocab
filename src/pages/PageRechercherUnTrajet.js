@@ -105,20 +105,24 @@ const PageRechercherUnTrajet = () => {
                     </div>
                 </div>
                 <div className='containerTrajets'>
-                    {filteredTravels.map(travel => {
-                        return (
-                            <Trajet
-                                id={travel._id}
-                                heureDepart={travel.heureDepart}
-                                heureArrivee={travel.heureArrivee}
-                                lieuDepart={travel.lieuDepart}
-                                lieuArrivee={travel.lieuArrivee}
-                                nombreDePassagers={travel.nombreDePassagers}
-                                numeroDeVol={travel.numeroDeVol}
-                                idCompte={travel.idCompte}
-                            />
-                        );
-                    })}
+                    {filteredTravels.length === 0 ? (
+                        <p className='containerTrajets_textNoTravels'>Aucun trajet ne correspond à votre recherche.</p>
+                    ) : (
+                        filteredTravels.map(travel => {
+                            return (
+                                <Trajet
+                                    id={travel._id}
+                                    heureDepart={travel.heureDepart}
+                                    heureArrivee={travel.heureArrivee}
+                                    lieuDepart={travel.lieuDepart}
+                                    lieuArrivee={travel.lieuArrivee}
+                                    nombreDePassagers={travel.nombreDePassagers}
+                                    numeroDeVol={travel.numeroDeVol}
+                                    idCompte={travel.idCompte}
+                                />
+                            );
+                        })
+                    )}
                 </div>
             </div>
             <div className='containerButtonAndVideo'>
