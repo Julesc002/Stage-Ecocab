@@ -21,6 +21,7 @@
     flex-direction: column;
     align-self: stretch;
     margin: 3%;
+    /*padding-right: 50px;*/
     justify-content: space-between;
     flex-grow: 1;
     max-width: 40px;
@@ -141,5 +142,9 @@
   @media (max-width: 850px) {
     .containerTrajet {
       margin-left: 0%;
+    }
+
+    .containerTrajets_textNoTravels {
+      margin-bottom: 10%;
     }
 }
