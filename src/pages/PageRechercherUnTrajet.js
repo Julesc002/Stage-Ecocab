@@ -15,9 +15,10 @@ const PageRechercherUnTrajet = () => {
     const [travels, setTravels] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-
+    
     useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+      
         if (searchParams.get('depart')) {
           setStart(searchParams.get('depart'));
         }
@@ -31,9 +32,10 @@ const PageRechercherUnTrajet = () => {
           setNumberOfPeople(searchParams.get('nbPers'));
         }
         if (searchParams.get('numVol')) {
-            setFlightNumber(searchParams.get('numVol'));
-          }
-      }, []);
+          setFlightNumber(searchParams.get('numVol'));
+        }
+      }, [location.search]);
+      
       
 
     const handleCheckboxClick = (option) => {
