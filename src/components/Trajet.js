@@ -30,7 +30,7 @@ const Trajet = (props) => {
             </div>
             <div className='containerTrajet_sectionMillieu'>
                 <img className='containerTrajet_sectionMillieu_icone' src={`${process.env.PUBLIC_URL}/assets/images/manIco.svg`} alt='icone Monsieur' />
-                <p className='containerTrajet_sectionMillieu_text'>{props.nombreDePassagers}</p>
+                <p className='containerTrajet_sectionMillieu_text'>1/{props.nombreDePassagers}</p>
             </div>
             <div className='containerTrajet_sectionDroite'>
                 <p className='containerTrajet_sectionDroite_textPrice'>18€*</p>
