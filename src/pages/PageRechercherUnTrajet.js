@@ -38,9 +38,9 @@ const PageRechercherUnTrajet = () => {
 
     const handleCheckboxClick = (option) => {
         if (selectedOption === option) {
-        setSelectedOption(null);
+            setSelectedOption(null);
         } else {
-        setSelectedOption(option);
+            setSelectedOption(option);
         }
     };
 
@@ -78,7 +78,7 @@ const PageRechercherUnTrajet = () => {
             return 0;
         }
     });
-    
+
 
     return (
         <article>
@@ -152,7 +152,7 @@ const PageRechercherUnTrajet = () => {
             </div>
             <div className='containerButtonAndVideo'>
                 <p className='containerButtonAndVideo_text'>*Les prix sont propotionnels au nombre de passagers déjà inscrit sur le trajet .</p>
-                <NavLink to="/ContactezNous">
+                <NavLink to="/PosterUnTrajet">
                     <button className='boutonContact'>Tu ne vois pas ton trajet ? <br></br> Organise le !</button>
                 </NavLink>
                 <VideoExplication />
