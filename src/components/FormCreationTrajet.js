@@ -14,13 +14,14 @@ const FormCreationTrajet = () => {
     const [arrivalTime, setArrivalTime] = useState("");
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [flightNumber, setFlightNumber] = useState("");
+    const [baggageSize, setBaggageSize] = useState("");
 
     const [dateHourStart, setDateHourStart] = useState("");
     const [dateHourArrival, setDateHourArrival] = useState("");
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [travelPosted, setTravelPosted] = useState(false);
+    const [travelPosted, setTravelPosted] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,6 +42,9 @@ const FormCreationTrajet = () => {
         if (!flightNumber) {
             missingFields += "Numéro de vol, ";
         }
+        if (!baggageSize) {
+            missingFields += "Taille du bagage, ";
+        }
         if (missingFields) {
             missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
             setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
@@ -59,6 +63,7 @@ const FormCreationTrajet = () => {
                 lieuArrivee: destination,
                 nombreDePassagers: numberOfPeople,
                 numeroDeVol: flightNumber,
+                tailleBagage: baggageSize,
                 idCompte: "A changer plus tard",
                 idVoyageurs: []
             }
@@ -81,11 +86,12 @@ const FormCreationTrajet = () => {
                         lieuArrivee={destination}
                         nombreDePassagers={numberOfPeople}
                         numeroDeVol={flightNumber}
+                        tailleBagage={baggageSize}
                         idCompte={""}
                     />
                 </div>
-                <NavLink to="/RechercherUnTrajet">
-                    <button className='commitMessageContainer_button'> Accéder à la liste des trajets </button>
+                <NavLink to="/RechercherUnTrajet" className="commitMessageContainer_navLink">
+                    <button className='commitMessageContainer_navLink_button'> Accéder à la liste des trajets </button>
                 </NavLink>
             </div>
         );
@@ -121,6 +127,13 @@ const FormCreationTrajet = () => {
                         <label className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerLabel'> Nombre maximum de voyageurs </label>
                         <input className='formContainer_form_maxNumberOfTravelerContainer_maxNbTravelerInput' type='number' min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
                     </div>
+
+                    <select className="formContainer_form_selectBaggageSize" value={baggageSize} onChange={(e) => setBaggageSize(e.target.value)}>
+                        <option value="" disabled hidden>Taille du bagage</option>
+                        <option className="formContainer_form_selectBaggageSize_value" value="Sac à dos"> Sac à dos </option>
+                        <option className="formContainer_form_selectBaggageSize_value" value="Cabine"> Cabine </option>
+                        <option className="formContainer_form_selectBaggageSize_value" value="Soute"> Soute </option>
+                    </select>
 
                     <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
                     <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
