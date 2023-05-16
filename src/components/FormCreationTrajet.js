@@ -21,7 +21,7 @@ const FormCreationTrajet = () => {
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [travelPosted, setTravelPosted] = useState(true);
+    const [travelPosted, setTravelPosted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
