@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const FormLoginWithEmail = () => {
+
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+
     return (
         <div className='loginFormContainer'>
             <h1 className='loginFormContainer_mainTitleForm'> Je me connecte </h1>

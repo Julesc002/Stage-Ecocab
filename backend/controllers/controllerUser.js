@@ -4,22 +4,44 @@ const User = require('../models/modelUser');
 
 // Pas terminé, attention ne pas stocker les mots de passe en brut
 exports.createUser = (req, res) => {
-    const newUser = new User(req.body);
-    newUser.save()
-        .then((user) => {
-            return res.status(201).json({ user });
-        }).catch((error) => {
+    const { email } = req.body;
+
+    // Vérifier si l'utilisateur existe déjà
+    User.findOne({ email: email })
+        .then((existingUser) => {
+            if (existingUser) {
+                // Utilisateur existant trouvé, renvoyer un code d'erreur
+                return res.status(409).json({ error: "Cet utilisateur existe déjà." });
+            }
+            // L'utilisateur n'existe pas encore, procéder à la création
+            const newUser = new User(req.body);
+            newUser.save()
+                .then((user) => {
+                    return res.status(201).json({ user });
+                })
+                .catch((error) => {
+                    return res.status(400).json({ error });
+                });
+        })
+        .catch((error) => {
             return res.status(400).json({ error });
         });
 }
 
 // Partie GET
 
-// Pas terminé, attention ne pas stocker les mots de passe en brut
-exports.getOneUserWithEmailAndPassword = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    User.find({ email: email, password: password })
+exports.getAllUsers = (req, res) => {
+    User.find()
+        .then((user) => {
+            return res.status(200).json({ user });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
+}
+
+exports.getOneUserWithEmail = (req, res) => {
+    const email = req.query.email;
+    User.findOne({ email: email })
         .then((user) => {
             return res.status(200).json({ user });
         }).catch((error) => {
@@ -28,6 +50,16 @@ exports.getOneUserWithEmailAndPassword = (req, res) => {
 }
 
 // Partie DELETE
+
+exports.deleteAllUsers = (req, res) => {
+    User.deleteMany({})
+        .then(() => {
+            return res.status(200).json({ message: 'All users have been deleted successfully.' });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+}
 
 exports.deleteOneUser = (req, res) => {
     const id = req.params.id;
