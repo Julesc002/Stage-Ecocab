@@ -10,7 +10,7 @@ const PageRechercherUnTrajet = () => {
     const [start, setStart] = useState("");
     const [destination, setDestination] = useState("");
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-    const [numberOfPeople, setNumberOfPeople] = useState("");
+    const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [flightNumber, setFlightNumber] = useState("");
     const [travels, setTravels] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -85,12 +85,21 @@ const PageRechercherUnTrajet = () => {
     return (
         <article>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
-                <input className="FormFindRoutes_inputTextStart" type="text" value={start} placeholder='Départ' onChange={(e) => setStart(e.target.value)} />
-                <input className="FormFindRoutes_inputTextDestination" type="text" value={destination} placeholder='Destination' onChange={(e) => setDestination(e.target.value)} />
-                <input className="FormFindRoutes_inputDateTime" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                <input className="FormFindRoutes_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} placeholder='Nombre de voyageurs' onChange={(e) => setNumberOfPeople(e.target.value)} />
-                <input className="FormFindRoutes_inputTextFlightNumber" type="text" placeholder="N° de vol (Optionnel)" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
-            </form>
+            <div className="FormFindRoutes_Recherche">
+                <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onChange={(e) => { setStart(e.target.value);}} />
+            </div>
+            <div className="FormFindRoutes_Recherche">
+                <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
+            </div>
+            <div className="FormFindRoutes_Recherche">
+                <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} />
+            </div>
+            <div className="FormFindRoutes_Recherche">
+                <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
+            </div>
+            <div className="FormFindRoutes_Recherche2">
+                <input className="FormFindRoutes_Recherche2_inputTextFlightNumber" type="text" placeholder="N° de vol (Optionnel)" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
+            </div></form>
             <div className='containerTrierAndTrajets'>
                 <div className='containerTrierAndTrajets_trier'>
                     <p className='containerTrierAndTrajets_trier_title'>Trier par :</p>
