@@ -9,35 +9,64 @@
     padding: 20px;
 }
 
-.FormFindRoutes_inputTextStart,
-.FormFindRoutes_inputTextDestination,
-.FormFindRoutes_inputDateTime,
-.FormFindRoutes_inputNumberOfPeople,
-.FormFindRoutes_inputTextFlightNumber,
-.FormFindRoutes_selectBaggageSize,
-.FormFindRoutes_selectBaggageSize_value {
+.FormFindRoutes_Recherche, .FormFindRoutes_Recherche2 {
+    background: rgba(0, 0, 0, 0);
+}
+
+.FormFindRoutes_Recherche {
+    width: calc(25% - 20px);
+}
+
+.FormFindRoutes_Recherche_inputTextStart,
+.FormFindRoutes_Recherche_containerResultats_Resultats,
+.FormFindRoutes_Recherche_inputTextDestination,
+.FormFindRoutes_Recherche_inputDateTime,
+.FormFindRoutes_Recherche_inputNumberOfPeople,
+.FormFindRoutes_Recherche2_inputTextFlightNumber,
+.FormFindRoutes_Recherche2_selectBaggageSize,
+.FormFindRoutes_Recherche2_selectBaggageSize_value {
     padding: 10px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
     background-color: #fff;
     color: #000;
     border-radius: 5px;
     border: 1px solid #ccc;
-    width: calc(25% - 20px);
+    width: calc(100% - 20px);
 }
 
-.FormFindRoutes_inputTextStart,
-.FormFindRoutes_inputTextDestination,
-.FormFindRoutes_inputDateTime,
-.FormFindRoutes_inputNumberOfPeople {
-    width: calc(25% - 20px);
+.FormFindRoutes_Recherche_containerResultats {
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
 }
 
-.FormFindRoutes_inputTextFlightNumber,
-.FormFindRoutes_selectBaggageSize {
-    width: calc(50% - 20px);
+.FormFindRoutes_Recherche_containerResultats:empty {
+    border: none;
 }
 
-.FormFindRoutes_selectBaggageSize {
+.FormFindRoutes_Recherche_containerResultats_Resultats {
+    margin: 0%;
+    width: 100%;
+    border: #fff;
+}
+
+.FormFindRoutes_Recherche_containerResultats_Resultats:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    transition: 0.5s;
+}
+
+.FormFindRoutes_Recherche2 {
+    width: calc(50% - 40px);
+}
+
+.FormFindRoutes_Recherche2_selectBaggageSize {
     margin-top: 10px;
 }
 
@@ -53,24 +82,40 @@
 
 @media screen and (max-width: 800px) {
 
-    .FormFindRoutes_inputTextStart,
-    .FormFindRoutes_inputTextDestination,
-    .FormFindRoutes_inputDateTime,
-    .FormFindRoutes_inputNumberOfPeople,
-    .FormFindRoutes_inputTextFlightNumber,
-    .FormFindRoutes_selectBaggageSize {
+    .FormFindRoutes_Recherche {
         width: calc(50% - 20px);
+    }
+
+    .FormFindRoutes_Recherche2 {
+        width: calc(50% - 20px);
+    }
+
+    .FormFindRoutes_Recherche_inputTextStart,
+    .FormFindRoutes_Recherche_inputTextDestination,
+    .FormFindRoutes_Recherche_inputDateTime,
+    .FormFindRoutes_Recherche_inputNumberOfPeople,
+    .FormFindRoutes_Recherche2_inputTextFlightNumber,
+    .FormFindRoutes_Recherche2_selectBaggageSize {
+        width: calc(100% - 20px);
     }
 }
 
 @media (max-width: 639px) {
 
-    .FormFindRoutes_inputTextStart,
-    .FormFindRoutes_inputTextDestination,
-    .FormFindRoutes_inputDateTime,
-    .FormFindRoutes_inputNumberOfPeople,
-    .FormFindRoutes_inputTextFlightNumber,
-    .FormFindRoutes_selectBaggageSize {
+    .FormFindRoutes_Recherche {
+        width: calc(100% - 20px);
+    }
+
+    .FormFindRoutes_Recherche2 {
+        width: calc(100% - 20px);
+    }
+
+    .FormFindRoutes_Recherche_inputTextStart,
+    .FormFindRoutes_Recherche_inputTextDestination,
+    .FormFindRoutes_Recherche_inputDateTime,
+    .FormFindRoutes_Recherche_inputNumberOfPeople,
+    .FormFindRoutes_Recherche2_inputTextFlightNumber,
+    .FormFindRoutes_Recherche2_selectBaggageSize {
         width: calc(100% - 20px);
     }
 }
