@@ -45,6 +45,12 @@
     border: 1px solid #ccc;
 }
 
+.loginFormContainer_loginForm_errorMessage {
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
 .loginFormContainer_loginForm_link {
     font-size: 0.75rem;
     margin-top: 0.625em;

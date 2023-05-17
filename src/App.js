@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
@@ -14,16 +14,23 @@ import Contact from './pages/Contact';
 import Account from './pages/Account';
 
 const App = () => {
+
+  const [isConnected, setIsConnected] = useState(localStorage.getItem('isConnected') === 'true');
+
+  // Pour s'assurer que l'utilisateur reste connecté après rechargement de la page
+  useEffect(() => {
+    const storedIsConnected = localStorage.getItem('isConnected') === 'true';
+    setIsConnected(storedIsConnected);
+  }, []);
+
   return (
     <Layout>
       <Routes>
-        {/* Pas encore d'attribut element={ nom de page } dans toutes les routes */}
         <Route path='/' element={<Home />} />
         <Route path='/CommentCaMarche' element={<HowDoesThisWork />} />
         <Route path='/RechercherUnTrajet' element={<PageRechercherUnTrajet />} />
         <Route path='/PosterUnTrajet' element={<PosterUnTrajet />} />
-        <Route path='/Compte' element={<LoginWithEmail />} />
-        {/* <Route path='/Compte' element={<Account />} /> */}
+        {isConnected ? <Route path='/Compte' element={<Account />} /> : <Route path='/Compte' element={<LoginWithEmail />} />}
         <Route path='/Inscription' element={<CreateAccount />} />
         <Route path='/mentionLegales' element={<MentionsLegales />} />
         <Route path='/Details/:id' element={<TravelDetails />} />

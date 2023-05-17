@@ -64,7 +64,7 @@ const FormCreationTrajet = () => {
                 nombreDePassagers: numberOfPeople,
                 numeroDeVol: flightNumber,
                 tailleBagage: baggageSize,
-                idCompte: "A changer plus tard",
+                idCompte: localStorage.getItem('user'),
                 idVoyageurs: []
             }
             axios.post(`${API_TRAVEL_URL}`, newTravel)
