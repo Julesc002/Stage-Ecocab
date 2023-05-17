@@ -11,6 +11,7 @@
 @import url("./pages/_howDoesThisWork.css");
 @import url("./pages/_travelDetails.css");
 @import url("./pages/_contact.css");
+@import url("./pages/_account.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");
@@ -30,3 +31,4 @@
 @import url("./components/_formContact.css");
 @import url("./components/_listeTrajets.css");
 @import url("./components/_travelInfos.css");
+@import url("./components/_accountConnectedMenu.css");

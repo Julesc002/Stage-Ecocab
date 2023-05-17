@@ -11,6 +11,7 @@ import CreateAccount from './pages/CreateAccount';
 import HowDoesThisWork from './pages/HowDoesThisWork';
 import TravelDetails from './pages/TravelDetails';
 import Contact from './pages/Contact';
+import Account from './pages/Account';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/RechercherUnTrajet' element={<PageRechercherUnTrajet />} />
         <Route path='/PosterUnTrajet' element={<PosterUnTrajet />} />
         <Route path='/Compte' element={<LoginWithEmail />} />
+        {/* <Route path='/Compte' element={<Account />} /> */}
         <Route path='/Inscription' element={<CreateAccount />} />
         <Route path='/mentionLegales' element={<MentionsLegales />} />
         <Route path='/Details/:id' element={<TravelDetails />} />

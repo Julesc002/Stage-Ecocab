@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { API_USER_URL } from '../config';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +16,7 @@ const FormCreateAccount = () => {
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage("");
         let missingFields = "";
@@ -47,7 +49,23 @@ const FormCreateAccount = () => {
         } else if (!generalConditions) {
             setErrorMessage("Veuillez valider les conditions générales d'utilisation");
         } else {
-            // Faire les traitements
+
+            const newUser = {
+                email: email,
+                lastName: lastName,
+                firstName: firstName,
+                password: password,
+                birthDate: birthDate,
+                phoneNumber: phoneNumber
+            };
+
+            axios.post(`${API_USER_URL}`, newUser)
+                .then((res) => { console.log(res) })
+                .catch((error) => {
+                    console.log(error);
+                    setErrorMessage("Cette adresse email est déjà associée à un compte");
+                });
+
         }
     }
 
@@ -56,7 +74,7 @@ const FormCreateAccount = () => {
             <h1 className='createAccountFormContainer_mainTitleForm'> Inscription </h1>
             <form className='loginFormContainer_loginForm' onSubmit={handleSubmit}>
                 <label htmlFor='email' className='createAccountFormContainer_loginForm_label'> Email </label>
-                <input type="text" id='email' value={email} className='createAccountFormContainer_loginForm_inputText' onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" id='email' value={email} className='createAccountFormContainer_loginForm_inputText' onChange={(e) => setEmail(e.target.value)} />
 
                 <label htmlFor='lastName' className='createAccountFormContainer_loginForm_label'> Nom </label>
                 <input type="text" id='lastName' value={lastName} className='createAccountFormContainer_loginForm_inputText' onChange={(e) => setLastName(e.target.value)} />
