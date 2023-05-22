@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_USER_URL } from '../config';
 import { Link } from 'react-router-dom';
 
 const Trajet = (props) => {
@@ -9,6 +11,18 @@ const Trajet = (props) => {
     const dateArrivee = new Date(props.heureArrivee);
     const heureArrivee = `${dateArrivee.getHours().toString().padStart(2, '0')}h${dateArrivee.getMinutes().toString().padStart(2, '0')}`;
     /*const jourArrivee = dateArrivee.getDate() + "/" + dateArrivee.getMonth() + "/" + dateArrivee.getFullYear();*/
+
+    const [account, setAccount] = useState();
+
+    useEffect(() => {
+        axios.get(`${API_USER_URL}/` + props.idCompte)
+            .then(response => {
+                setAccount(response.data.user);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, [props.idCompte]);
     
     return (
         <Link to={`/Details/${props.id}`} className='containerTrajet'>
@@ -34,8 +48,12 @@ const Trajet = (props) => {
             </div>
             <div className='containerTrajet_sectionDroite'>
                 <p className='containerTrajet_sectionDroite_textPrice'>18€*</p>
-                <p className='containerTrajet_sectionDroite_text'>Personne</p>
-                <p className='containerTrajet_sectionDroite_text'>{props.numeroDeVol}</p>
+                {account && (
+                    <>
+                        <p className='containerTrajet_sectionDroite_text'>{account.firstName} {account.lastName}</p>
+                        <p className='containerTrajet_sectionDroite_text'>{props.numeroDeVol}</p>
+                    </>
+                )}
             </div>
         </Link>
     );

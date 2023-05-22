@@ -25,51 +25,55 @@ const FormCreationTrajet = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrorMessage("");
-        let missingFields = "";
-        if (!start) {
-            missingFields += "Départ, ";
-        }
-        if (!departureTime) {
-            missingFields += "Heure de départ, ";
-        }
-        if (!destination) {
-            missingFields += "Destination, ";
-        }
-        if (!arrivalTime) {
-            missingFields += "Heure d'arrivée, ";
-        }
-        if (!flightNumber) {
-            missingFields += "Numéro de vol, ";
-        }
-        if (!baggageSize) {
-            missingFields += "Taille du bagage, ";
-        }
-        if (missingFields) {
-            missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
-            setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
+        if(!localStorage.getItem('isConnected')) {
+            setErrorMessage("Vous devez être connecté pour créer un trajet");
         } else {
-
-            const dateHourForStart = new Date(`${departureDate}T${departureTime}:00.000+02:00`);
-            const dateHourForArrival = new Date(`${arrivalDate}T${arrivalTime}:00.000+02:00`)
-
-            setDateHourStart(dateHourForStart);
-            setDateHourArrival(dateHourForArrival);
-
-            const newTravel = {
-                heureDepart: dateHourForStart,
-                heureArrivee: dateHourForArrival,
-                lieuDepart: start,
-                lieuArrivee: destination,
-                nombreDePassagers: numberOfPeople,
-                numeroDeVol: flightNumber,
-                tailleBagage: baggageSize,
-                idCompte: localStorage.getItem('user'),
-                idVoyageurs: []
+            setErrorMessage("");
+            let missingFields = "";
+            if (!start) {
+                missingFields += "Départ, ";
             }
-            axios.post(`${API_TRAVEL_URL}`, newTravel)
-                .then(() => { setTravelPosted(true) })
-                .catch((error) => { console.log(error) });
+            if (!departureTime) {
+                missingFields += "Heure de départ, ";
+            }
+            if (!destination) {
+                missingFields += "Destination, ";
+            }
+            if (!arrivalTime) {
+                missingFields += "Heure d'arrivée, ";
+            }
+            if (!flightNumber) {
+                missingFields += "Numéro de vol, ";
+            }
+            if (!baggageSize) {
+                missingFields += "Taille du bagage, ";
+            }
+            if (missingFields) {
+                missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
+                setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
+            } else {
+
+                const dateHourForStart = new Date(`${departureDate}T${departureTime}:00.000+02:00`);
+                const dateHourForArrival = new Date(`${arrivalDate}T${arrivalTime}:00.000+02:00`)
+
+                setDateHourStart(dateHourForStart);
+                setDateHourArrival(dateHourForArrival);
+
+                const newTravel = {
+                    heureDepart: dateHourForStart,
+                    heureArrivee: dateHourForArrival,
+                    lieuDepart: start,
+                    lieuArrivee: destination,
+                    nombreDePassagers: numberOfPeople,
+                    numeroDeVol: flightNumber,
+                    tailleBagage: baggageSize,
+                    idCompte: localStorage.getItem('user'),
+                    idVoyageurs: []
+                }
+                axios.post(`${API_TRAVEL_URL}`, newTravel)
+                    .then(() => { setTravelPosted(true) })
+                    .catch((error) => { console.log(error) });
+            }
         }
     }
     if (travelPosted) {
