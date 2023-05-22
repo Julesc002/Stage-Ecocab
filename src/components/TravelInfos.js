@@ -24,7 +24,7 @@ const TravelInfos = (props) => {
     }, [props.id]);
 
     useEffect(() => {
-        axios.get(`${API_USER_URL}/` + travel.idCompte)
+        axios.get(`${API_USER_URL}/id/` + travel.idCompte)
             .then(response => {
                 setAccount(response.data.user);
             })

@@ -12,6 +12,13 @@ const Nav = () => {
         setShowLinks(!showLinks);
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('isConnected');
+        localStorage.removeItem('user');
+        // Recharger la page
+        window.location.reload();
+    }
+
     useEffect(() => {
         // Fonction pour changer la propriété CSS 'overflow' du body en fonction de l'état du menu burger
         const handleOverflow = () => {
@@ -70,7 +77,7 @@ const Nav = () => {
                                     <li className="navigationMenu_links_subemenuContainer_submenu_item">Historique des paiements</li>
                                 </NavLink>
                                 <NavLink to="/Deconnexion">
-                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Déconnexion</li>
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item" onClick={handleLogout}>Déconnexion</li>
                                 </NavLink>
                             </ul>
                         )}

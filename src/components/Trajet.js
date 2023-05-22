@@ -15,7 +15,7 @@ const Trajet = (props) => {
     const [account, setAccount] = useState();
 
     useEffect(() => {
-        axios.get(`${API_USER_URL}/` + props.idCompte)
+        axios.get(`${API_USER_URL}/id/` + props.idCompte)
             .then(response => {
                 setAccount(response.data.user);
             })
