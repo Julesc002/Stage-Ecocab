@@ -130,15 +130,6 @@ const PageRechercherUnTrajet = () => {
                         />
                         <p className='containerTrierAndTrajets_trier_ligne_text'>N de vol</p>
                     </div>
-                    <div className='containerTrierAndTrajets_trier_ligne'>
-                        <input
-                            type='checkbox'
-                            className='containerTrierAndTrajets_trier_ligne_checkbox'
-                            checked={selectedOption === 'plusProcheArrivee'}
-                            onClick={() => handleCheckboxClick('plusProcheArrivee')}
-                        />
-                        <p className='containerTrierAndTrajets_trier_ligne_text'>Plus proche du point d'arrivée</p>
-                    </div>
                 </div>
                 <div className='containerTrajets'>
                     {filteredTravels.length === 0 ? (

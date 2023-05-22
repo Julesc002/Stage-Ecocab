@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_USER_URL,  API_TRAVEL_URL} from '../config';
 
 const TravelInfos = (props) => {
 
@@ -10,8 +11,10 @@ const TravelInfos = (props) => {
 
     const [travel, setTravel] = useState([]);
 
+    const [account, setAccount] = useState([]);
+
     useEffect(() => {
-        axios.get('http://localhost:5000/travel/' + props.id)
+        axios.get(`${API_TRAVEL_URL}/` + props.id)
             .then(response => {
                 setTravel(response.data.travel);
             })
@@ -19,6 +22,16 @@ const TravelInfos = (props) => {
                 console.log(error);
             });
     }, [props.id]);
+
+    useEffect(() => {
+        axios.get(`${API_USER_URL}/id/` + travel.idCompte)
+            .then(response => {
+                setAccount(response.data.user);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, [travel]);
 
     const startTravelName = travel.lieuDepart;
     const dateDepart = new Date(travel.heureDepart);
@@ -32,7 +45,7 @@ const TravelInfos = (props) => {
     const travellers =
         [
             {
-                name: "Romain",
+                name: account.firstName + " " + account.lastName,
                 role: "Organisateur",
                 flightNumber: ". Vol 1234 (Arrivée 11h50)"
             },
