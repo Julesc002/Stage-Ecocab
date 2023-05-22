@@ -15,7 +15,9 @@
 }
 
 .navigationMenu_titleApp {
-    margin-left: 50%;
+    position: fixed;
+    margin-left: 3%;
+    margin-top: -20px;
     font-size: clamp(16px, 2vw, 24px);
 }
 
@@ -44,10 +46,32 @@
     display: none;
 }
 
+/* Sous-menu */
+
+.navigationMenu_links_subemenuContainer {
+    margin-left: -7%;
+}
+
+.navigationMenu_links_subemenuContainer_arrow {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.navigationMenu_links_subemenuContainer_submenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-right: 5%;
+    border: 1px solid;
+}
+
+.navigationMenu_links_subemenuContainer_submenu_item {
+    margin: 5%;
+}
 
 /* Partie Téléphone */
 
-@media screen and (max-width:970px) {
+@media screen and (max-width:980px) {
     .navigationMenu_links {
         flex-direction: column;
         justify-content: center;

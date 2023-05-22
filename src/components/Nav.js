@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
 
+    const isConnected = localStorage.getItem('isConnected') === 'true';
+
     const [showLinks, setShowLinks] = useState(false);
+    const [showSubmenu, setShowSubmenu] = useState(false);
 
     const handleShowLinks = () => {
         setShowLinks(!showLinks);
@@ -27,6 +30,10 @@ const Nav = () => {
         };
     }, [showLinks]);
 
+    const handleShowSubmenu = () => {
+        setShowSubmenu(!showSubmenu);
+    };
+
     return (
         <nav className={`navigationMenu ${showLinks ? 'showNavigationMenu' : 'hideNavigationMenu'}`}>
             <NavLink to="/">
@@ -45,6 +52,30 @@ const Nav = () => {
                 <NavLink to="/Compte">
                     <li className='navigationMenu_links_item navigationMenu_links_slideInDown4'> Compte </li>
                 </NavLink>
+                {isConnected ? (
+                    <div className='navigationMenu_links_subemenuContainer'>
+                        <span className="navigationMenu_links_subemenuContainer_arrow" onClick={handleShowSubmenu}> &#9662; </span>
+                        {showSubmenu && (
+                            <ul className="navigationMenu_links_subemenuContainer_submenu">
+                                <NavLink to="/Compte">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Profil</li>
+                                </NavLink>
+                                <NavLink to="/VosTrajets">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Vos trajets</li>
+                                </NavLink>
+                                <NavLink to="/Messages">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Messages</li>
+                                </NavLink>
+                                <NavLink to="/HistoriquePaiements">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Historique des paiements</li>
+                                </NavLink>
+                                <NavLink to="/Deconnexion">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Déconnexion</li>
+                                </NavLink>
+                            </ul>
+                        )}
+                    </div>
+                ) : null}
             </ul>
             <button className='navigationMenu_burgerButton' onClick={handleShowLinks}>
                 <span className='navigationMenu_burgerButton_burgerLine' />
