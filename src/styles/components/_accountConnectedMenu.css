@@ -15,8 +15,7 @@
     margin-bottom: 5%;
 }
 
-.accountMenu_infoBtn,
-.accountMenu_changePwd {
+.accountMenu_infoBtn {
     background-color: var(--buttonsColor);
     width: 75%;
     padding: 10px;
