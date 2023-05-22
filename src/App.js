@@ -35,6 +35,14 @@ const App = () => {
         <Route path='/mentionLegales' element={<MentionsLegales />} />
         <Route path='/Details/:id' element={<TravelDetails />} />
         <Route path='/Contact' element={<Contact />} />
+        {isConnected && (
+          <>
+            <Route path='/MesTrajets' />
+            <Route path='/Messages' />
+            <Route path='/Profil' />
+            <Route path='/HistoriqueDesPaiements' />
+          </>
+        )}
       </Routes>
     </Layout>
   );

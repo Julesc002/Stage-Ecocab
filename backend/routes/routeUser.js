@@ -6,6 +6,7 @@ router.post('/', userCtrl.createUser);
 
 router.get('/', userCtrl.getAllUsers);
 router.get('/email', userCtrl.getOneUserWithEmail);
+router.get('/:id', userCtrl.getOneUser);
 
 router.delete('/', userCtrl.deleteAllUsers);
 router.delete('/:id', userCtrl.deleteOneUser);

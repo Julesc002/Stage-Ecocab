@@ -49,6 +49,16 @@ exports.getOneUserWithEmail = (req, res) => {
         });
 }
 
+exports.getOneUser = (req, res) => {
+    const id = req.body.id;
+    User.findOne({ _id: id })
+        .then((user) => {
+            return res.status(200).json({ user });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
+}
+
 // Partie DELETE
 
 exports.deleteAllUsers = (req, res) => {
