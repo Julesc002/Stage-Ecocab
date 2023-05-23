@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { API_USER_URL } from '../config';
+import axios from 'axios';
 
 const AccountDetails = () => {
 
-    // localStorage.getItem('user')
+    const [user, setUser] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+
+    useEffect(() => {
+        axios.get(`${API_USER_URL}/id/` + localStorage.getItem('user'))
+            .then(response => {
+                setUser(response.data.user);
+                const date = new Date(user.birthDate);
+                setBirthDate(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    });
 
 
     return (
@@ -14,20 +29,20 @@ const AccountDetails = () => {
                 <div className='accountDetailsContainer_accountInformationsSection_container'>
                     <div className='accountDetailsContainer_accountInformationsSection_container_firstLastNames'>
                         <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle'> Prénom </label>
-                        <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent'> Jean-Jacques </label>
+                        <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent'> {user.firstName} </label>
 
                         <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle lastNameTitle'> Nom </label>
-                        <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent lastNameContent'> Rieuneau </label>
+                        <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent lastNameContent'> {user.lastName} </label>
                     </div>
 
                     <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Email </label>
-                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> clement.rieuneau@gmail.com </label>
+                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> {user.email} </label>
 
-                    <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Date de naissance </label>
-                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> 12/09/2003 </label>
+                    <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Date de naissance (Jour / Mois / Année) </label>
+                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> {birthDate} </label>
 
                     <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Numéro de téléphone </label>
-                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> 07 13 11 07 93 </label>
+                    <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> {user.phoneNumber} </label>
 
                 </div>
             </section>
