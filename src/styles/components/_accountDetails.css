@@ -1,0 +1,126 @@
+.accountDetailsContainer {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.accountDetailsContainer_mainTitle {
+    background-color: white;
+    color: black;
+}
+
+.accountDetailsContainer_separator {
+    background-color: black;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    height: 2px;
+    width: 60px;
+}
+
+
+/* Section Informations personnelles du compte */
+
+.accountDetailsContainer_accountInformationsSection {
+    background-color: white;
+    padding: 1%;
+}
+
+.accountDetailsContainer_accountInformationsSection_mainTitle,
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames,
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle,
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent,
+.accountDetailsContainer_accountInformationsSection_container_labelTitle,
+.accountDetailsContainer_accountInformationsSection_container_labelContent {
+    background-color: white;
+    color: black;
+}
+
+.accountDetailsContainer_accountInformationsSection_mainTitle {
+    margin-bottom: 30px;
+}
+
+.accountDetailsContainer_accountInformationsSection_container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    width: 103%;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle {
+    position: relative;
+    top: -20px;
+}
+
+.lastNameTitle {
+    right: 20px;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent {
+    position: relative;
+    right: 50px;
+    width: 103%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle,
+.accountDetailsContainer_accountInformationsSection_container_labelTitle {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_labelContent {
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/* Section Boutons de modifications */
+
+.accountDetailsContainer_modifSection {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    text-align: center;
+}
+
+.accountDetailsContainer_modifSection_modifButton,
+.accountDetailsContainer_modifSection_deleteButton {
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--buttonsColor);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.accountDetailsContainer_modifSection_deleteButton {
+    background-color: salmon;
+}

@@ -15,7 +15,7 @@
     margin-bottom: 5%;
 }
 
-.accountMenu_infoBtn {
+.accountMenu_infoBtnContainer {
     background-color: var(--buttonsColor);
     width: 75%;
     padding: 10px;
@@ -23,6 +23,12 @@
     border: 1px solid black;
     margin-bottom: 5%;
     cursor: pointer;
+    text-align: center;
+}
+
+.accountMenu_infoBtnContainer_infoBtn {
+    background-color: var(--buttonsColor);
+    border: none;
 }
 
 .accountMenu_logout {
