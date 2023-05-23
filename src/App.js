@@ -12,6 +12,7 @@ import HowDoesThisWork from './pages/HowDoesThisWork';
 import TravelDetails from './pages/TravelDetails';
 import Contact from './pages/Contact';
 import Account from './pages/Account';
+import Profile from './pages/Profile';
 
 const App = () => {
 
@@ -39,7 +40,7 @@ const App = () => {
           <>
             <Route path='/MesTrajets' />
             <Route path='/Messages' />
-            <Route path='/Profil' />
+            <Route path='/Profil' element={<Profile />} />
             <Route path='/HistoriqueDesPaiements' />
           </>
         )}
