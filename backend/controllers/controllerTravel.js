@@ -33,6 +33,19 @@ exports.getOneTravel = (req, res) => {
         });
 };
 
+// PARTIE PUT
+
+exports.addOneUser = (req, res) => {
+    const idTravel = req.params.idTravel;
+    const idUser = req.params.idUser;
+    Travel.findOneAndUpdate({ _id: idTravel }, { $push: { idVoyageurs: idUser } }, { new: true })
+        .then((travel) => {
+            return res.status(200).json({ travel });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
+
 // PARTIE DELETE
 
 exports.deleteOneTravel = (req, res) => {
