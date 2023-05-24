@@ -11,5 +11,6 @@ router.get('/email', userCtrl.getOneUserWithEmail);
 router.delete('/', userCtrl.deleteAllUsers);
 router.delete('/:id', userCtrl.deleteOneUser);
 
+router.put('/:id', userCtrl.updateOneUser);
 
 module.exports = router;

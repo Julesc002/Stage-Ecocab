@@ -1,0 +1,41 @@
+.deleteAccountConfirmationPopUp {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.deleteAccountConfirmationPopUp_mainTitle,
+.deleteAccountConfirmationPopUp_p {
+    background-color: white;
+    color: black;
+    margin-top: 1%;
+}
+
+.deleteAccountConfirmationPopUp_buttons {
+    margin-top: 2%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.deleteAccountConfirmationPopUp_buttons_deleteBtn,
+.deleteAccountConfirmationPopUp_buttons_cancelBtn {
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--buttonsColor);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deleteAccountConfirmationPopUp_buttons_deleteBtn {
+    background-color: salmon;
+}
