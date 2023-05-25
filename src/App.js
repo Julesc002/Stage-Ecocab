@@ -13,6 +13,7 @@ import TravelDetails from './pages/TravelDetails';
 import Contact from './pages/Contact';
 import Account from './pages/Account';
 import Profile from './pages/Profile';
+import MesTrajets from './pages/MesTrajets';
 
 const App = () => {
 
@@ -38,7 +39,7 @@ const App = () => {
         <Route path='/Contact' element={<Contact />} />
         {isConnected && (
           <>
-            <Route path='/MesTrajets' />
+            <Route path='/MesTrajets' element={<MesTrajets />} />
             <Route path='/Messages' />
             <Route path='/Profil' element={<Profile />} />
             <Route path='/HistoriqueDesPaiements' />

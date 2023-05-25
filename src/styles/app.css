@@ -13,6 +13,7 @@
 @import url("./pages/_contact.css");
 @import url("./pages/_account.css");
 @import url("./pages/_profile.css");
+@import url("./pages/_mesTrajets.css");
 
 /* Import Components*/
 @import url("./components/_nav.css");

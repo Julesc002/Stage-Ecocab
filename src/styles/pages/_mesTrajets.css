@@ -1,0 +1,26 @@
+.mesTrajets {
+    display: flex;
+    flex-direction: column;
+}
+
+.mesTrajets_containerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mesTrajets_containerButtons_buttons {
+    background-color: white;
+    margin: 1%;
+    padding: 0.5%;
+    padding-left: 2%;
+    padding-right: 8%;
+    text-align: left;
+}
+
+.mesTrajets_containerTrajets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

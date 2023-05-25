@@ -33,6 +33,17 @@ exports.getOneTravel = (req, res) => {
         });
 };
 
+exports.getAllTravelsById = (req, res) => {
+    const id = req.params.id;
+    Travel.find({ $or: [{ idCompte: id }, { idVoyageurs: id }] })
+      .then((travels) => {
+        return res.status(200).json({ travels });
+      }).catch((error) => {
+        return res.status(400).json({ error });
+      });
+};
+  
+
 // PARTIE PUT
 
 exports.addOneUser = (req, res) => {

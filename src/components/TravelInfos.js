@@ -26,6 +26,7 @@ const TravelInfos = (props) => {
   const startTravelName = travel.lieuDepart;
   const dateDepart = new Date(travel.heureDepart);
   const startTravelTime = `${dateDepart.getHours().toString().padStart(2, '0')}h${dateDepart.getMinutes().toString().padStart(2, '0')}`;
+  const jourDepart = dateDepart.getDate() + "/" + dateDepart.getMonth() + "/" + dateDepart.getFullYear();
 
   const endTravelName = travel.lieuArrivee;
   const dateArrivee = new Date(travel.heureArrivee);
@@ -45,7 +46,7 @@ const TravelInfos = (props) => {
         }
       }
   
-      if (travel && travel.idVoyageurs && travel.idVoyageurs.length > 0) {
+      if (travel && travel.idVoyageurs) { 
         try {
           const promises = travel.idVoyageurs.map(userId =>
             axios.get(`${API_USER_URL}/id/${userId}`)
@@ -110,7 +111,7 @@ const TravelInfos = (props) => {
     <>
       <div className="travelInfosContainer">
         <div className="travelInfosContainer_startTravel">
-          <div className="travelInfosContainer_startTravel_travelTimeAndName"> {startTravelTime} {startTravelName} </div>
+          <div className="travelInfosContainer_startTravel_travelTimeAndName"> {startTravelTime} {startTravelName} - {jourDepart} </div>
         </div>
         <div className="travelInfosContainer_middleArrowAndPrice">
           <img className='travelInfosContainer_middleArrowAndPrice_arrowIcon' src={`${process.env.PUBLIC_URL}/assets/images/${downArrow}`} alt="Fleche vers le bas" />
@@ -131,6 +132,7 @@ const TravelInfos = (props) => {
             </div>
           ))}
         </div>
+        <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
         <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>
       </div>
       <p className='errorMsg'>{errorMsg}</p>

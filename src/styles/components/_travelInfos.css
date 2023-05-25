@@ -95,7 +95,6 @@
     border-radius: 15px;
     padding: 20px 70px;
     border: 1px solid black;
-    margin: 0.4%;
     position: relative;
     top: 50px;
     font-weight: bold;
@@ -103,6 +102,11 @@
 
 .travelInfosContainer_reservationButton:hover {
     cursor: pointer;
+}
+
+.travelInfosContainer_msgBagage {
+    background-color: white;
+    color: black;
 }
 
 .errorMsg {
