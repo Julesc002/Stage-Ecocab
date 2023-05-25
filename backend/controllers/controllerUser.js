@@ -80,3 +80,17 @@ exports.deleteOneUser = (req, res) => {
             return res.status(400).json({ error });
         });
 }
+
+// Partie PUT
+
+exports.updateOneUser = (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    User.findOneAndUpdate({ _id: id }, body, { new: true })
+        .then((user) => {
+            return res.status(200).json({ user });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error })
+        })
+}

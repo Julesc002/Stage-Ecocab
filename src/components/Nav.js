@@ -65,10 +65,10 @@ const Nav = () => {
                         {showSubmenu && (
                             <ul className="navigationMenu_links_subemenuContainer_submenu">
                                 <NavLink to="/Compte">
-                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Profil</li>
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item"> Profil </li>
                                 </NavLink>
-                                <NavLink to="/VosTrajets">
-                                    <li className="navigationMenu_links_subemenuContainer_submenu_item">Vos trajets</li>
+                                <NavLink to="/MesTrajets">
+                                    <li className="navigationMenu_links_subemenuContainer_submenu_item"> Mes trajets </li>
                                 </NavLink>
                                 <NavLink to="/Messages">
                                     <li className="navigationMenu_links_subemenuContainer_submenu_item">Messages</li>

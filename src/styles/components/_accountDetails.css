@@ -35,7 +35,8 @@
 .accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle,
 .accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent,
 .accountDetailsContainer_accountInformationsSection_container_labelTitle,
-.accountDetailsContainer_accountInformationsSection_container_labelContent {
+.accountDetailsContainer_accountInformationsSection_container_labelContent,
+.accountDetailsContainer_accountInformationsSection_container_errorMsg {
     background-color: white;
     color: black;
 }
@@ -97,6 +98,25 @@
     border: 1px solid #ccc;
 }
 
+.accountDetailsContainer_accountInformationsSection_container_belowForm {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    text-align: center;
+}
+
+.accountDetailsContainer_accountInformationsSection_container_belowForm_submitBtn,
+.accountDetailsContainer_accountInformationsSection_container_belowForm_cancelBtn {
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--buttonsColor);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Section Boutons de modifications */
 
