@@ -26,7 +26,7 @@ const TravelInfos = (props) => {
   const startTravelName = travel.lieuDepart;
   const dateDepart = new Date(travel.heureDepart);
   const startTravelTime = `${dateDepart.getHours().toString().padStart(2, '0')}h${dateDepart.getMinutes().toString().padStart(2, '0')}`;
-  const jourDepart = dateDepart.getDate() + "/" + dateDepart.getMonth() + "/" + dateDepart.getFullYear();
+  const jourDepart = `${dateDepart.getDate()}/${(dateDepart.getMonth() + 1)}/${dateDepart.getFullYear()}`;
 
   const endTravelName = travel.lieuArrivee;
   const dateArrivee = new Date(travel.heureArrivee);

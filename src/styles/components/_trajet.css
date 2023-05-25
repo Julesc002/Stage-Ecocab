@@ -51,6 +51,12 @@
   color: black;
   border-radius: 20px;
   }
+
+  .containerTrajet_sectionHeure_Date {
+    background-color: white;
+    color: black;
+    z-index: 1;
+  }
   
   .containerTrajet_sectionLieu {
   background-color: white;
