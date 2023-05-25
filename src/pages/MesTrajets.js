@@ -7,16 +7,22 @@ const MesTrajets = () => {
     const [travels, setTravels] = useState([]);
     const currentDate = new Date().toISOString();
     const [displayTrajetsAVenir, setDisplayTrajetsAVenir] = useState(true);
+    const [button1Clicked, setButton1Clicked] = useState(true);
+    const [button2Clicked, setButton2Clicked] = useState(false);
 
     const majDisplayTrajetsAVenir = () => {
         if (!displayTrajetsAVenir) {
             setDisplayTrajetsAVenir(true);
+            setButton1Clicked(true);
+            setButton2Clicked(false);
         }
     }
 
     const majDisplayTrajetsPassés = () => {
         if (displayTrajetsAVenir) {
             setDisplayTrajetsAVenir(false);
+            setButton1Clicked(false);
+            setButton2Clicked(true);
         }
     }
 
@@ -35,8 +41,18 @@ const MesTrajets = () => {
     return (
         <div className='mesTrajets'>
             <div className='mesTrajets_containerButtons'>
-                <button className='mesTrajets_containerButtons_buttons' onClick={majDisplayTrajetsAVenir}>A venir</button>
-                <button className='mesTrajets_containerButtons_buttons' onClick={majDisplayTrajetsPassés}>Passés</button>
+                <button
+                    className={`mesTrajets_containerButtons_buttons ${button1Clicked ? 'mesTrajets_containerButtons_buttonClicked' : ''}`}
+                    onClick={majDisplayTrajetsAVenir}
+                >
+                    A venir
+                </button>
+                <button
+                    className={`mesTrajets_containerButtons_buttons ${button2Clicked ? 'mesTrajets_containerButtons_buttonClicked' : ''}`}
+                    onClick={majDisplayTrajetsPassés}
+                >
+                    Passés
+                </button>
             </div>
             <div className='mesTrajets_containerTrajets'>
                 {displayTrajetsAVenir ?
@@ -52,6 +68,7 @@ const MesTrajets = () => {
                                 numeroDeVol={travel.numeroDeVol}
                                 idCompte={travel.idCompte}
                                 nbVoyageurs={travel.idVoyageurs.length}
+                                affichageDate={true}
                             />
                         );
                     })
@@ -68,6 +85,7 @@ const MesTrajets = () => {
                             numeroDeVol={travel.numeroDeVol}
                             idCompte={travel.idCompte}
                             nbVoyageurs={travel.idVoyageurs.length}
+                            affichageDate={true}
                         />
                     );
                 })

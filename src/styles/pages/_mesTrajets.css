@@ -16,6 +16,11 @@
     padding-left: 2%;
     padding-right: 8%;
     text-align: left;
+    border-style: none;
+}
+
+.mesTrajets_containerButtons_buttonClicked {
+    background-color: grey;
 }
 
 .mesTrajets_containerTrajets {

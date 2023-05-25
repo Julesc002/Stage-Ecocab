@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Trajet = (props) => {
     const dateDepart = new Date(props.heureDepart);
     const heureDepart = `${dateDepart.getHours().toString().padStart(2, '0')}h${dateDepart.getMinutes().toString().padStart(2, '0')}`;
-    /*const jourDepart = dateDepart.getDate() + "/" + dateDepart.getMonth() + "/" + dateDepart.getFullYear();*/
+    const jourDepart = `${dateDepart.getDate()}/${(dateDepart.getMonth() + 1)}/${dateDepart.getFullYear()}`;
 
     const dateArrivee = new Date(props.heureArrivee);
     const heureArrivee = `${dateArrivee.getHours().toString().padStart(2, '0')}h${dateArrivee.getMinutes().toString().padStart(2, '0')}`;
@@ -30,6 +30,7 @@ const Trajet = (props) => {
                 <div className='containerTrajet_sectionHeure_ligne'>
                     <p className='containerTrajet_sectionHeure_ligne_text'>{heureDepart} {/*jourDepart*/}</p>
                 </div>
+                <p className='containerTrajet_sectionHeure_Date'>{props.affichageDate ? jourDepart : ''}</p>
                 <div className='containerTrajet_sectionHeure_ligneBas'>
                     <p className='containerTrajet_sectionHeure_ligne_text'>{heureArrivee} {/*jourArrivee*/}</p>
                 </div>
