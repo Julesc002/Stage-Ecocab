@@ -8,9 +8,26 @@ const Nav = () => {
     const [showLinks, setShowLinks] = useState(false);
     const [showSubmenu, setShowSubmenu] = useState(false);
 
+    // Fermer le sous menu si l'utilisateur scroll dans la page
+    window.addEventListener('scroll', function () {
+        if (showSubmenu) {
+            setShowSubmenu(false);
+        }
+    });
+
+
     const handleShowLinks = () => {
         setShowLinks(!showLinks);
     }
+
+    const handleClick = () => {
+        const navigationMenu = document.querySelector('.navigationMenu');
+        const showNavigationMenu = navigationMenu.classList.contains('showNavigationMenu');
+
+        if (showNavigationMenu) {
+            setShowLinks(!showLinks);
+        }
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('isConnected');
@@ -48,18 +65,18 @@ const Nav = () => {
             </NavLink>
             <ul className='navigationMenu_links'>
                 <NavLink to="/CommentCaMarche">
-                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown1'> Comment ça marche </li>
+                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown1' onClick={handleClick}> Comment ça marche </li>
                 </NavLink>
                 <NavLink to="/RechercherUnTrajet">
-                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown2'> Rechercher un trajet </li>
+                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown2' onClick={handleClick}> Rechercher un trajet </li>
                 </NavLink>
                 <NavLink to="/PosterUnTrajet">
-                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown3'> Poster un trajet </li>
+                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown3' onClick={handleClick}> Poster un trajet </li>
                 </NavLink>
                 <NavLink to="/Compte">
-                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown4'> Compte </li>
+                    <li className='navigationMenu_links_item navigationMenu_links_slideInDown4' onClick={handleClick}> Compte </li>
                 </NavLink>
-                {isConnected ? (
+                {isConnected && !showLinks ? (
                     <div className='navigationMenu_links_subemenuContainer'>
                         <span className="navigationMenu_links_subemenuContainer_arrow" onClick={handleShowSubmenu}> &#9662; </span>
                         {showSubmenu && (
@@ -87,7 +104,7 @@ const Nav = () => {
             <button className='navigationMenu_burgerButton' onClick={handleShowLinks}>
                 <span className='navigationMenu_burgerButton_burgerLine' />
             </button>
-        </nav>
+        </nav >
     );
 };
 

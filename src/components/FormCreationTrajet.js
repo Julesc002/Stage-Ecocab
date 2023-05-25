@@ -25,7 +25,7 @@ const FormCreationTrajet = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!localStorage.getItem('isConnected')) {
+        if (!localStorage.getItem('isConnected')) {
             setErrorMessage("Vous devez être connecté pour créer un trajet");
         } else {
             setErrorMessage("");
@@ -82,7 +82,6 @@ const FormCreationTrajet = () => {
                 <h1 className='commitMessageContainer_title'> Merci d'avoir partagé votre trajet </h1>
                 <h2 className='commitMessageContainer_title'> Votre trajet a été enregistré </h2>
                 <div className='commitMessageContainer_infoTravel'>
-                    {/* A faire : récupérer l'id du trajet depuis la BDD pour pourvoir cliquer sur la card Trajet */}
                     <Trajet
                         heureDepart={dateHourStart}
                         heureArrivee={dateHourArrival}
@@ -91,7 +90,8 @@ const FormCreationTrajet = () => {
                         nombreDePassagers={numberOfPeople}
                         numeroDeVol={flightNumber}
                         tailleBagage={baggageSize}
-                        idCompte={""}
+                        idCompte={localStorage.getItem('user')}
+                        nbVoyageurs={0}
                     />
                 </div>
                 <NavLink to="/RechercherUnTrajet" className="commitMessageContainer_navLink">

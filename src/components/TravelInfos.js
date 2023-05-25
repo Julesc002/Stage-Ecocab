@@ -6,11 +6,25 @@ const TravelInfos = (props) => {
 
   const downArrow = "downArrowIco.svg";
   const manIco = "manIco.svg";
-
   const reservationButton = "Réserve ta place !"
 
-  const [travel, setTravel] = useState([]);
+  // Créez un objet Date représentant la date actuelle
+  const currentDate = new Date();
 
+  // Obtenez les composants de la date
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const day = String(currentDate.getDate()).padStart(2, '0');
+  const hours = String(currentDate.getHours()).padStart(2, '0');
+  const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+  const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+  const milliseconds = String(currentDate.getMilliseconds()).padStart(3, '0');
+
+  // Créez la chaîne de date au format souhaité
+  const today = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
+
+
+  const [travel, setTravel] = useState([]);
   const [account, setAccount] = useState([]);
 
   useEffect(() => {
@@ -45,16 +59,16 @@ const TravelInfos = (props) => {
           console.log(error);
         }
       }
-  
-      if (travel && travel.idVoyageurs) { 
+
+      if (travel && travel.idVoyageurs) {
         try {
           const promises = travel.idVoyageurs.map(userId =>
             axios.get(`${API_USER_URL}/id/${userId}`)
           );
-  
+
           const responses = await Promise.all(promises);
           const fetchedUsers = responses.map(response => response.data.user);
-  
+
           const updatedTravellers = [
             {
               name: `${account.firstName ? account.firstName + " " : ''}${account.lastName ? account.lastName : ''}`,
@@ -67,16 +81,16 @@ const TravelInfos = (props) => {
               flightNumber: ""
             }))
           ];
-  
+
           setTravellers(updatedTravellers);
         } catch (error) {
           console.error(error);
         }
       }
     };
-  
+
     fetchUsers();
-  }, [travel, account]);  
+  }, [travel, account]);
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -84,26 +98,24 @@ const TravelInfos = (props) => {
     e.preventDefault();
     if (travel.idVoyageurs.length + 1 === travel.nombreDePassagers) {
       setErrorMsg('Ce trajet est complet');
+    } else if (!localStorage.getItem('isConnected')) {
+      setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
+    } else if (localStorage.getItem('user') === travel.idCompte || travel.idVoyageurs.includes(localStorage.getItem('user'))) {
+      setErrorMsg('Vous êtes déjà inscrit à ce trajet');
+    } else if (travel.heureDepart < today) {
+      setErrorMsg('Le trajet sélectionné est en cours ou terminé')
     } else {
-      if (!localStorage.getItem('isConnected')) {
-        setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
-      } else {
-        if (localStorage.getItem('user') === travel.idCompte || travel.idVoyageurs.includes(localStorage.getItem('user'))) {
-          setErrorMsg('Vous êtes déjà inscrit à ce trajet');
-        } else {
-          setErrorMsg('');
+      setErrorMsg('');
 
-          axios.put(`${API_TRAVEL_URL}/` + props.id + '/user/' + localStorage.getItem('user'))
-            .then(response => {
-              console.log(response.data.user);
-            })
-            .catch(error => {
-              console.log(error);
-            });
+      axios.put(`${API_TRAVEL_URL}/` + props.id + '/user/' + localStorage.getItem('user'))
+        .then(response => {
+          console.log(response.data.user);
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
-          window.location.reload();
-        }
-      }
+      window.location.reload();
     }
   };
 
