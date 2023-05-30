@@ -89,11 +89,7 @@ const TravelInfos = (props) => {
       setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
     } else if (localStorage.getItem('user') === travel.idCompte || travel.idVoyageurs.includes(localStorage.getItem('user'))) {
       setErrorMsg('Vous êtes déjà inscrit à ce trajet');
-<<<<<<< HEAD
     } else if (dateDepart < currentDate) {
-=======
-    } else if (travel.heureDepart < currentDate) {
->>>>>>> 995d8c2254f53ef3d4d0ce4c1b2e5ee812472200
       setErrorMsg('Le trajet sélectionné est en cours ou terminé')
     } else {
       setErrorMsg('');
