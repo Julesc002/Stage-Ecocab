@@ -9,7 +9,8 @@ const travel = mongoose.Schema({
     numeroDeVol: String,
     tailleBagage: String,
     idCompte: String,
-    idVoyageurs: [String]
+    idVoyageurs: [String],
+    coordinates : [Number]
 })
 
 module.exports = mongoose.model('Travel', travel);

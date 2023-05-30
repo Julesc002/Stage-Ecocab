@@ -12,6 +12,7 @@ const PageRechercherUnTrajet = () => {
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [flightNumber, setFlightNumber] = useState("");
+    const [baggageSize, setBaggageSize] = useState("");
     const [travels, setTravels] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const location = useLocation();
@@ -85,21 +86,31 @@ const PageRechercherUnTrajet = () => {
     return (
         <article>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
-            <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onChange={(e) => { setStart(e.target.value);}} />
-            </div>
-            <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
-            </div>
-            <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} />
-            </div>
-            <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
-            </div>
-            <div className="FormFindRoutes_Recherche2">
-                <input className="FormFindRoutes_Recherche2_inputTextFlightNumber" type="text" placeholder="N° de vol (Optionnel)" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
-            </div></form>
+                <div className="FormFindRoutes_Recherche">
+                    <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onChange={(e) => { setStart(e.target.value);}} />
+                </div>
+                <div className="FormFindRoutes_Recherche">
+                    <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
+                </div>
+                <div className="FormFindRoutes_Recherche">
+                    <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} />
+                </div>
+                <div className="FormFindRoutes_Recherche">
+                    <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
+                </div>
+                <div className="FormFindRoutes_Recherche2">
+                    <input className="FormFindRoutes_Recherche2_inputTextFlightNumber" type="text" placeholder="N° de vol (Optionnel)" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
+                </div>
+                <div className="FormFindRoutes_Recherche2">
+                    <select className="FormFindRoutes_Recherche2_selectBaggageSize" value={baggageSize} onChange={(e) => setBaggageSize(e.target.value)}>
+                        <option value="" disabled hidden>Taille du bagage</option>
+                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Sac à dos"> Sac à dos </option>
+                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Cabine"> Cabine </option>
+                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Soute"> Soute </option>
+                    </select>
+                </div>
+                <button className="FormFindRoutes_submitButton" type="submit"> Recherchez </button>
+            </form>
             <div className='containerTrierAndTrajets'>
                 <div className='containerTrierAndTrajets_trier'>
                     <p className='containerTrierAndTrajets_trier_title'>Trier par :</p>
