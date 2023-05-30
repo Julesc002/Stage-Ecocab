@@ -33,6 +33,7 @@ const FormCreationTrajet = () => {
     const handleStartChange = (e) => {
         setData([]);
         const inputValue = e.target.value;
+        setStart(inputValue);
         if (inputValue.length >= 2) {
             axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
                 .then((res) => setData(res.data.features))
@@ -168,14 +169,14 @@ const FormCreationTrajet = () => {
                     <div className='formContainer_form_firstPart'>
                         <div className='formContainer_form_firstPart_inputsStartTravelContainer'>
                             {startOrDestination === 'start' ?
-                                <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} /> :
-
-                                <div className=''>
-                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setDisplayResults(!displayResults)} onChange={(e) => handleStartChange(e)} />
-                                    {displayResults && data.map((place, index) => (
-                                        <p key={index} className=''> {place.properties.label} </p>
-                                    ))}
-                                </div>
+                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} /> 
+                                :
+                                    <div className=''>
+                                        <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => {setDisplayResults(false);}, 100)} onChange={(e) => handleStartChange(e)} />
+                                        {displayResults && data.map((place, index) => (
+                                            <p key={index} className='' onClick={() => setStart(place.properties.label)}> {place.properties.label} </p>
+                                        ))}
+                                    </div>
                             }
 
                             <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate' type='datetime-local'
