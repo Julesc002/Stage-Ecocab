@@ -1,3 +1,39 @@
+/* Partie Selection d'option */
+
+.optionsContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    padding: 5%;
+    border-radius: 10px;
+    margin-bottom: 17%;
+}
+
+.optionsContainer_travelOptionTitle {
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin: 1.7%;
+}
+
+.optionsContainer_travelOptionButton {
+    background-color: var(--buttonsColor);
+    color: black;
+    width: 75%;
+    height: auto;
+    border-radius: 15px;
+    padding: 5% 15%;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+/* Partie Formulaire */
+
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -12,7 +48,7 @@
     flex-direction: column;
     align-items: center;
     width: 600px;
-    height: 400px;
+    height: 500px;
     padding: 5%;
     border-radius: 10px;
     margin-bottom: 17%;
@@ -45,8 +81,8 @@
 }
 
 .formContainer_form_firstPart {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    text-align: center;
 }
 
 .formContainer_form_firstPart_inputsStartTravelContainer,
@@ -57,7 +93,7 @@
 
 .formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace,
 .formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #fff;
@@ -78,6 +114,36 @@
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer {
+    background-color: white;
+    text-align: center;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer_result {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result:hover,
+.formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer_result:hover {
+    background-color: var(--buttonsColor);
+}
+
 
 .formContainer_form_inputFlightNumber {
     width: 60%;
@@ -152,6 +218,10 @@
     cursor: pointer;
 }
 
+.formContainer_form_submitButton[disabled] {
+    background-color: grey;
+}
+
 .formContainer_errorMessage {
     text-align: center;
     font-size: large;
@@ -160,6 +230,12 @@
 }
 
 @media only screen and (max-width: 670px) {
+
+    .optionsContainer {
+        width: 400px;
+        height: 300px;
+    }
+
     .formContainer_form {
         width: 400px;
         height: auto;

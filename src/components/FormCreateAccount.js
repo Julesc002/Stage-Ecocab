@@ -60,7 +60,10 @@ const FormCreateAccount = () => {
             };
 
             axios.post(`${API_USER_URL}`, newUser)
-                .then((res) => { console.log(res) })
+                .then((res) => {
+                    console.log(res);
+                    window.location.href = "/Compte";
+                })
                 .catch((error) => {
                     console.log(error);
                     setErrorMessage("Cette adresse email est déjà associée à un compte");
