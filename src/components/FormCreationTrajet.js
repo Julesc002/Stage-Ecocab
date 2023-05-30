@@ -35,6 +35,7 @@ const FormCreationTrajet = () => {
         setData([]);
         const inputValue = e.target.value;
         setStart(inputValue);
+        setCoordinates([]);
         if (inputValue.length >= 2) {
             axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
                 .then((res) => setData(res.data.features))
@@ -99,7 +100,8 @@ const FormCreationTrajet = () => {
                     numeroDeVol: flightNumber,
                     tailleBagage: baggageSize,
                     idCompte: localStorage.getItem('user'),
-                    idVoyageurs: []
+                    idVoyageurs: [],
+                    coordinates: coordinates
                 }
                 axios.post(`${API_TRAVEL_URL}`, newTravel)
                     .then(() => { setTravelPosted(true) })
@@ -238,8 +240,8 @@ const FormCreationTrajet = () => {
                     </select>
 
                     <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
-                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
-                </form >
+                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" disabled={coordinates.length === 0} />
+                </form>
                 {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
             </div >
         );
