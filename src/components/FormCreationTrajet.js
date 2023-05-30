@@ -18,6 +18,7 @@ const FormCreationTrajet = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(2);
     const [flightNumber, setFlightNumber] = useState("");
     const [baggageSize, setBaggageSize] = useState("");
+    const [coordinates, setCoordinates] = useState([]);
 
     const [dateHourStart, setDateHourStart] = useState("");
     const [dateHourArrival, setDateHourArrival] = useState("");
@@ -34,6 +35,7 @@ const FormCreationTrajet = () => {
         setData([]);
         const inputValue = e.target.value;
         setStart(inputValue);
+        setCoordinates([]);
         if (inputValue.length >= 2) {
             axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
                 .then((res) => setData(res.data.features))
@@ -86,7 +88,8 @@ const FormCreationTrajet = () => {
                     numeroDeVol: flightNumber,
                     tailleBagage: baggageSize,
                     idCompte: localStorage.getItem('user'),
-                    idVoyageurs: []
+                    idVoyageurs: [],
+                    coordinates: coordinates
                 }
                 axios.post(`${API_TRAVEL_URL}`, newTravel)
                     .then(() => { setTravelPosted(true) })
@@ -175,7 +178,7 @@ const FormCreationTrajet = () => {
                                     <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => {setDisplayResults(false);}, 100)} onChange={(e) => handleStartChange(e)} />
                                     <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => setStart(place.properties.label)}> {place.properties.label} </p>
+                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => {setStart(place.properties.label); setCoordinates(place.geometry.coordinates)}}> {place.properties.label} </p>
                                         ))}
                                     </div>
                                 </div>
@@ -214,7 +217,7 @@ const FormCreationTrajet = () => {
                     </select>
 
                     <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
-                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
+                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" disabled={coordinates.length === 0}/>
                 </form>
                 {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
             </div>

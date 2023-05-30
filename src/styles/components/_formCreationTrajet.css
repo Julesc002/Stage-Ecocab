@@ -211,6 +211,10 @@
     cursor: pointer;
 }
 
+.formContainer_form_submitButton[disabled] {
+    background-color: grey;
+}
+
 .formContainer_errorMessage {
     text-align: center;
     font-size: large;
