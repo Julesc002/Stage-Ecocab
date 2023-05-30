@@ -23,7 +23,7 @@ const FormCreationTrajet = () => {
     const [dateHourArrival, setDateHourArrival] = useState("");
 
     const [displayResults, setDisplayResults] = useState(false); // Variable pour savoir si l'application affiche ou non une recherche
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]); // Variable contenant les résultats de la requête API du gouvernement
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -168,13 +168,15 @@ const FormCreationTrajet = () => {
                     <div className='formContainer_form_firstPart'>
                         <div className='formContainer_form_firstPart_inputsStartTravelContainer'>
                             {startOrDestination === 'start' ?
-                                <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} /> :
-
-                                <div className=''>
-                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setDisplayResults(!displayResults)} onChange={(e) => handleStartChange(e)} />
-                                    {displayResults && data.map((place, index) => (
-                                        <p key={index} className=''> {place.properties.label} </p>
-                                    ))}
+                                <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} />
+                                :
+                                <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer'>
+                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setDisplayResults(false)} onChange={(e) => handleStartChange(e)} />
+                                    <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer'>
+                                        {displayResults && data.map((place, index) => (
+                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result'> {place.properties.label} </p>
+                                        ))}
+                                    </div>
                                 </div>
                             }
 

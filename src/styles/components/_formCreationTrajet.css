@@ -79,8 +79,8 @@
 }
 
 .formContainer_form_firstPart {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    text-align: center;
 }
 
 .formContainer_form_firstPart_inputsStartTravelContainer,
@@ -91,7 +91,7 @@
 
 .formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace,
 .formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #fff;
@@ -112,6 +112,26 @@
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer {
+    background-color: white;
+    text-align: center;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+}
+
+.formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
 
 .formContainer_form_inputFlightNumber {
     width: 60%;
