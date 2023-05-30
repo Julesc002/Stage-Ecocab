@@ -191,7 +191,7 @@ const FormCreationTrajet = () => {
                                             <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                                         ))}
                                     </div>
-                                </div>
+                                </div >
                             }
 
                             <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartDate' type='datetime-local'
@@ -200,7 +200,7 @@ const FormCreationTrajet = () => {
                                     setDepartureDate(dateValue);
                                     setDepartureTime(timeValue);
                                 }} />
-                        </div>
+                        </div >
                         <div className='formContainer_form_firstPart_inputsEndTravelContainer'>
                             {startOrDestination === 'destination' ?
                                 <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' value={destination} />
@@ -221,7 +221,7 @@ const FormCreationTrajet = () => {
                                     setArrivalTime(timeValue);
                                 }} />
                         </div>
-                    </div>
+                    </div >
 
                     <input className='formContainer_form_inputFlightNumber' type='text' placeholder="N°VOL ?" onChange={(e) => setFlightNumber(e.target.value)} />
 
@@ -239,9 +239,9 @@ const FormCreationTrajet = () => {
 
                     <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
                     <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" />
-                </form>
+                </form >
                 {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
-            </div>
+            </div >
         );
     }
 };
