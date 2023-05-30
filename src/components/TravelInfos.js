@@ -11,19 +11,6 @@ const TravelInfos = (props) => {
   // Créez un objet Date représentant la date actuelle
   const currentDate = new Date();
 
-  // Obtenez les composants de la date
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const hours = String(currentDate.getHours()).padStart(2, '0');
-  const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-  const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-  const milliseconds = String(currentDate.getMilliseconds()).padStart(3, '0');
-
-  // Créez la chaîne de date au format souhaité
-  const today = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
-
-
   const [travel, setTravel] = useState([]);
   const [account, setAccount] = useState([]);
 
@@ -102,7 +89,7 @@ const TravelInfos = (props) => {
       setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
     } else if (localStorage.getItem('user') === travel.idCompte || travel.idVoyageurs.includes(localStorage.getItem('user'))) {
       setErrorMsg('Vous êtes déjà inscrit à ce trajet');
-    } else if (travel.heureDepart < today) {
+    } else if (dateDepart < currentDate) {
       setErrorMsg('Le trajet sélectionné est en cours ou terminé')
     } else {
       setErrorMsg('');
