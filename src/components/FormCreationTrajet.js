@@ -18,6 +18,7 @@ const FormCreationTrajet = () => {
     const [numberOfPeople, setNumberOfPeople] = useState(2);
     const [flightNumber, setFlightNumber] = useState("");
     const [baggageSize, setBaggageSize] = useState("");
+    const [coordinates, setCoordinates] = useState([]);
 
     const [dateHourStart, setDateHourStart] = useState("");
     const [dateHourArrival, setDateHourArrival] = useState("");
@@ -30,9 +31,22 @@ const FormCreationTrajet = () => {
     const [travelPosted, setTravelPosted] = useState(false);
 
 
-    const handleStartChange = (e) => {
+    const handleStart = (e) => {
         setData([]);
         const inputValue = e.target.value;
+        setStart(inputValue);
+        if (inputValue.length >= 2) {
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+                .then((res) => setData(res.data.features))
+                .catch((error) => console.log(error))
+        }
+    }
+
+    const handleDestinationChange = (e) => {
+        setData([]);
+        setCoordinates([]);
+        const inputValue = e.target.value;
+        setDestination(inputValue);
         if (inputValue.length >= 2) {
             axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
                 .then((res) => setData(res.data.features))
@@ -171,10 +185,10 @@ const FormCreationTrajet = () => {
                                 <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} />
                                 :
                                 <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer'>
-                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setDisplayResults(false)} onChange={(e) => handleStartChange(e)} />
+                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleStart(e)} />
                                     <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result'> {place.properties.label} </p>
+                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                                         ))}
                                     </div>
                                 </div>
@@ -188,7 +202,18 @@ const FormCreationTrajet = () => {
                                 }} />
                         </div>
                         <div className='formContainer_form_firstPart_inputsEndTravelContainer'>
-                            {startOrDestination === 'destination' ? <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' value={destination} /> : <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' placeholder="Arrivée ?" onChange={(e) => setDestination(e.target.value)} />}
+                            {startOrDestination === 'destination' ?
+                                <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' value={destination} />
+                                :
+                                <div className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer'>
+                                    <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' placeholder="Arrivée ?" value={destination} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleDestinationChange(e)} />
+                                    <div className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer'>
+                                        {displayResults && data.map((place, index) => (
+                                            <p key={index} className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                        ))}
+                                    </div>
+                                </div>
+                            }
                             <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate' type='datetime-local'
                                 onChange={(e) => {
                                     const [dateValue, timeValue] = e.target.value.split('T');
