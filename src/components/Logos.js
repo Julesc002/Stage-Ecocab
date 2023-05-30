@@ -6,7 +6,7 @@ const Logos = () => {
     const nameImageIdCardSecondCard = "id-card.svg";
     const nameImageValidationThirdCard = "validation.svg";
 
-    const pFirstCard = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo cupiditate aliquid ipsum numquam maxime harum laborum ut sunt minima rerum quaerat facilis, iusto error autem voluptatibus? Eum ea fugiat eius?";
+    const pFirstCard = "Avec Ecocab, réduis tes frais de transport à l’aéroport en partageant ton taxi/VTC avec d’autres voyageurs ! \n Economise jusqu'à 30€ sur tes trajets !";
     const pSecondCard = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo cupiditate aliquid ipsum numquam maxime harum laborum ut sunt minima rerum quaerat facilis, iusto error autem voluptatibus? Eum ea fugiat eius?";
     const pThirdCard = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo cupiditate aliquid ipsum numquam maxime harum laborum ut sunt minima rerum quaerat facilis, iusto error autem voluptatibus? Eum ea fugiat eius?";
 
