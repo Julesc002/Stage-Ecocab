@@ -37,6 +37,15 @@
     width: calc(100% - 20px);
 }
 
+.FormFindRoutes_Recherche_inputTextStart[disabled],
+.FormFindRoutes_Recherche_inputTextDestination[disabled],
+.FormFindRoutes_Recherche_inputDateTime[disabled],
+.FormFindRoutes_Recherche_inputNumberOfPeople[disabled],
+.FormFindRoutes_Recherche2_inputTextFlightNumber[disabled],
+.FormFindRoutes_Recherche2_selectBaggageSize[disabled] {
+    opacity: 0.5;
+}
+
 .FormFindRoutes_Recherche_containerResultats {
     position: absolute;
     background-color: white;
@@ -79,6 +88,10 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.FormFindRoutes_submitButton[disabled] {
+    background-color: grey;
 }
 
 @media screen and (max-width: 800px) {
