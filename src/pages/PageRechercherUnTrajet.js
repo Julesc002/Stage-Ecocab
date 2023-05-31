@@ -36,6 +36,21 @@ const PageRechercherUnTrajet = () => {
         if (searchParams.get('date')) {
             setDate(searchParams.get('date'));
         }
+        if (searchParams.get('airport')) {
+            if (searchParams.get('airport') === 'start') {
+                setStartOrDestination('start');
+                setDataStart(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+                setDataDestination([]);
+            } else {
+                setStartOrDestination('destination');
+                setDataDestination(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+                setDataStart([]);
+            }
+            setAirportSelected(true)
+        }
+        if (searchParams.get('coordinates')) {
+            setCoordinates(searchParams.get('coordinates'));
+        }
     }, [location.search]);
 
 
