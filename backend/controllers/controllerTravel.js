@@ -14,13 +14,30 @@ exports.createTravel = (req, res) => {
 
 // PARTIE GET
 
-exports.getAllTravels = (req, res) => {
-    Travel.find()
-        .then((travels) => {
-            return res.status(200).json({ travels });
-        }).catch((error) => {
-            return res.status(400).json({ error });
-        });
+exports.getNearestTravels = (req, res) => {
+    const travelSearched = req.query;
+
+    const heureDepart = new Date(travelSearched.heureDepart); // Convertir la date de recherche en objet Date
+    heureDepart.setHours(0, 0, 0, 0); // Réinitialiser les heures, minutes, secondes et millisecondes à zéro
+
+    const heureMaxDepart = new Date(travelSearched.heureDepart); // Convertir la date de recherche en objet Date
+    heureMaxDepart.setHours(23, 59, 59, 999); // Définir l'heure maximale à 23h59:59.999
+
+    if (travelSearched.whereIsAirport === 'start') {
+        Travel.find({ heureDepart: { $gte: heureDepart, $lte: heureMaxDepart }, lieuDepart: travelSearched.lieuDepart })
+            .then((travels) => {
+                return res.status(200).json({ travels });
+            }).catch((error) => {
+                return res.status(400).json({ error });
+            });
+    } else {
+        Travel.find({ heureDepart: { $gte: heureDepart, $lte: heureMaxDepart }, lieuArrivee: travelSearched.lieuArrivee })
+            .then((travels) => {
+                return res.status(200).json({ travels });
+            }).catch((error) => {
+                return res.status(400).json({ error });
+            });
+    }
 };
 
 exports.getOneTravel = (req, res) => {
@@ -36,13 +53,13 @@ exports.getOneTravel = (req, res) => {
 exports.getAllTravelsById = (req, res) => {
     const id = req.params.id;
     Travel.find({ $or: [{ idCompte: id }, { idVoyageurs: id }] })
-      .then((travels) => {
-        return res.status(200).json({ travels });
-      }).catch((error) => {
-        return res.status(400).json({ error });
-      });
+        .then((travels) => {
+            return res.status(200).json({ travels });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
 };
-  
+
 
 // PARTIE PUT
 

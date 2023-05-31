@@ -5,7 +5,7 @@ const TravelCtrl = require("../controllers/controllerTravel");
 router.post('/', TravelCtrl.createTravel);
 
 router.get('/:id', TravelCtrl.getOneTravel);
-router.get('/', TravelCtrl.getAllTravels);
+router.get('/', TravelCtrl.getNearestTravels);
 router.get('/user/:id', TravelCtrl.getAllTravelsById);
 
 router.put('/:idTravel/user/:idUser', TravelCtrl.addOneUser);
