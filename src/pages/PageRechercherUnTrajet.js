@@ -128,8 +128,8 @@ const PageRechercherUnTrajet = () => {
         <article>
             <section className='optionSection'>
                 <div className='optionSection_optionButtonsContainer'>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('start'); setAirportSelected(false)}} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('destination'); setAirportSelected(false)}} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('start'); setAirportSelected(false); setCoordinates([])}} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('destination'); setAirportSelected(false); setCoordinates([])}} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
                 </div>
             </section>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
