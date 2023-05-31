@@ -7,13 +7,15 @@ const FormFindRoutes = () => {
 
     const [start, setStart] = useState("");
     const [destination, setDestination] = useState("");
-    const [dateAndTime, setDateAndTime] = useState("");
+    const [dateAndTime, setDateAndTime] = useState(new Date().toISOString().slice(0, 10));
     const [numberOfPeople, setNumberOfPeople] = useState(1);
     const [flightNumber, setFlightNumber] = useState("");
     const [baggageSize, setBaggageSize] = useState("");
     const [data, setData] = useState([]);
     const [recherche, setRecherche] = useState(Array.from({ length: 3 }, () => ""));
     const [displayResults, setDisplayResults] = useState(Array.from({ length: 3 }, () => false));
+    const [dataAPI, setDataAPI] = useState([]);
+    const [coordinates, setCoordinates] = useState([]);
 
     const majRecherche = (e, i) => {
         const updatedRecherche = [...recherche];
@@ -47,15 +49,6 @@ const FormFindRoutes = () => {
             .then((res) => setData(res.data.travels));
     }, []);
 
-
-    const lieuxDepartFiltres = data.filter(function (travel) {
-        return travel.lieuDepart.toLowerCase().startsWith(recherche[0].toLowerCase());
-    });
-
-    const lieuxArriveeFiltres = data.filter(function (travel) {
-        return travel.lieuArrivee.toLowerCase().startsWith(recherche[1].toLowerCase());
-    });
-
     const numVolFiltres = data.filter(function (travel) {
         return travel.numeroDeVol.toLowerCase().startsWith(recherche[2].toLowerCase());
     });
@@ -65,21 +58,45 @@ const FormFindRoutes = () => {
         navigate('/RechercherUnTrajet?depart=' + start + '&destination=' + destination + '&date=' + dateAndTime + '&nbPers=' + numberOfPeople + '&numVol=' + flightNumber);
     };
 
+    const handleStartChange = (e) => {
+        setDataAPI([]);
+        const inputValue = e.target.value;
+        setStart(inputValue);
+        setCoordinates([]);
+        if (inputValue.length >= 2) {
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+                .then((res) => setDataAPI(res.data.features))
+                .catch((error) => console.log(error))
+        }
+    }
+
+    const handleDestinationChange = (e) => {
+        setDataAPI([]);
+        const inputValue = e.target.value;
+        setDestination(inputValue);
+        setCoordinates([]);
+        if (inputValue.length >= 2) {
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+                .then((res) => setDataAPI(res.data.features))
+                .catch((error) => console.log(error))
+        }
+    }
+
     return (
         <form className='FormFindRoutes' onSubmit={handleSubmit}>
             <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} onChange={(e) => { setStart(e.target.value); majRecherche(e, 0); }} />
+                <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} onChange={(e) => { handleStartChange(e); majRecherche(e, 0); }} />
                 <div className="FormFindRoutes_Recherche_containerResultats">
-                    {recherche[0] !== "" && displayResults[0] && lieuxDepartFiltres.map(function (travel) {
-                        return <p className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => setStart(travel.lieuDepart)}>{travel.lieuDepart}</p>;
+                    {displayResults[0] && dataAPI.map((place, index) => {
+                        return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                     })}
                 </div>
             </div>
             <div className="FormFindRoutes_Recherche">
-                <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} onChange={(e) => { setDestination(e.target.value); majRecherche(e, 1); }} />
+                <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} onChange={(e) => { handleDestinationChange(e);; majRecherche(e, 1); }} />
                 <div className="FormFindRoutes_Recherche_containerResultats">
-                    {recherche[1] !== "" && displayResults[1] && lieuxArriveeFiltres.map(function (travel) {
-                        return <p className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => setDestination(travel.lieuArrivee)}>{travel.lieuArrivee}</p>;
+                    {displayResults[1] && dataAPI.map((place, index) => {
+                        return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                     })}
                 </div>
             </div>
