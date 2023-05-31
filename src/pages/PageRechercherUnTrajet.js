@@ -22,7 +22,8 @@ const PageRechercherUnTrajet = () => {
     const [displayResultsStart, setDisplayResultsStart] = useState(false);
     const [displayResultsDestination, setDisplayResultsDestination] = useState(false);
     const [dataStart, setDataStart] = useState([]);
-    const [dataDestination, setDataDestination] = useState([])
+    const [dataDestination, setDataDestination] = useState([]);
+    const [airportSelected, setAirportSelected] = useState(false);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -127,8 +128,8 @@ const PageRechercherUnTrajet = () => {
         <article>
             <section className='optionSection'>
                 <div className='optionSection_optionButtonsContainer'>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => handleSetAirport('start')}> Je pars d'un aéroport </button>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => handleSetAirport('destination')}> Je me rends à un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('start'); setAirportSelected(false)}} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('destination'); setAirportSelected(false)}} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
                 </div>
             </section>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
@@ -139,7 +140,7 @@ const PageRechercherUnTrajet = () => {
                         <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => setDisplayResultsStart(!displayResultsStart)} onBlur={() => setTimeout(() => { setDisplayResultsStart(false); }, 100)} disabled={startOrDestination.length === 0} />
                         <div className='FormFindRoutes_Recherche_containerResultats'>
                             {displayResultsStart && dataStart.map((place, index) => (
-                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(dataStart[index]); }}> {place} </p>
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(dataStart[index]); setAirportSelected(true)}}> {place} </p>
                             ))}
                         </div>
                     </div>
@@ -160,7 +161,7 @@ const PageRechercherUnTrajet = () => {
                         <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => setDisplayResultsDestination(!displayResultsDestination)} onBlur={() => setTimeout(() => { setDisplayResultsDestination(false); }, 100)} disabled={startOrDestination.length === 0} />
                         <div className='FormFindRoutes_Recherche_containerResultats'>
                             {displayResultsDestination && dataDestination.map((place, index) => (
-                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(dataDestination[index]); }}> {place} </p>
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(dataDestination[index]); setAirportSelected(true)}}> {place} </p>
                             ))}
                         </div>
                     </div>
@@ -169,7 +170,7 @@ const PageRechercherUnTrajet = () => {
                         <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => setDisplayResultsDestination(!displayResultsDestination)} onBlur={() => setTimeout(() => { setDisplayResultsDestination(false); }, 100)} onChange={(e) => handleDestinationChange(e)} disabled={startOrDestination.length === 0} />
                         <div className='FormFindRoutes_Recherche_containerResultats'>
                             {displayResultsDestination && dataDestination.map((place, index) => (
-                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                             ))}
                         </div>
                     </div>
@@ -183,7 +184,7 @@ const PageRechercherUnTrajet = () => {
                 <div className="FormFindRoutes_Recherche">
                     <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
-                <button className="FormFindRoutes_submitButton" type="submit"> Recherchez </button>
+                <button className="FormFindRoutes_submitButton" type="submit" disabled={coordinates.length === 0 || !airportSelected || date.length === 0}> Recherchez </button>
             </form>
             <div className='containerTrierAndTrajets'>
                 <div className='containerTrierAndTrajets_trier'>

@@ -29,6 +29,10 @@
     margin-right: 15px;
 }
 
+.optionSection_optionButtonsContainer_button[disabled] {
+    background-color: grey;
+}
+
 .containerTrierAndTrajets {
     display: flex;
     flex-direction: row;
