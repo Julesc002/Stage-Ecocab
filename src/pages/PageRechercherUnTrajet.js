@@ -169,7 +169,7 @@ const PageRechercherUnTrajet = () => {
                         <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => setDisplayResultsDestination(!displayResultsDestination)} onBlur={() => setTimeout(() => { setDisplayResultsDestination(false); }, 100)} onChange={(e) => handleDestinationChange(e)} disabled={startOrDestination.length === 0} />
                         <div className='FormFindRoutes_Recherche_containerResultats'>
                             {displayResultsDestination && dataDestination.map((place, index) => (
-                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                             ))}
                         </div>
                     </div>

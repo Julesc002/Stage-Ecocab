@@ -83,7 +83,11 @@ const FormCreationTrajet = () => {
             if (missingFields) {
                 missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
                 setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
-            } else {
+            }
+            if (numberOfPeople < 1) {
+                setErrorMessage('Merci de mettre un nombre de voyageur valide');
+            }
+            else {
 
                 const dateHourForStart = new Date(`${departureDate}T${departureTime}:00.000+02:00`);
                 const dateHourForArrival = new Date(`${arrivalDate}T${arrivalTime}:00.000+02:00`)
