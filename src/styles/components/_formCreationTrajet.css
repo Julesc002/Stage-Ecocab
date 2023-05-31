@@ -19,7 +19,8 @@
     margin: 1.7%;
 }
 
-.optionsContainer_travelOptionButton {
+.optionsContainer_travelOptionButton,
+.optionsContainer_travelOptionReturnButton {
     background-color: var(--buttonsColor);
     color: black;
     width: 75%;
@@ -32,6 +33,11 @@
     margin-top: 50px;
 }
 
+.optionsContainer_travelOptionReturnButton {
+    background-color: salmon;
+    width: 50%;
+}
+
 /* Partie Formulaire */
 
 .formContainer {
@@ -40,6 +46,18 @@
     align-items: center;
 }
 
+.formContainer_returnButton {
+    background-color: salmon;
+    text-align: center;
+    width: 50px;
+    height: auto;
+    border-radius: 15px;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+    top: 10px;
+    right: 250px;
+}
 
 .formContainer_form,
 .commitMessageContainer {
@@ -236,9 +254,17 @@
         height: 300px;
     }
 
+    .optionsContainer_travelOptionReturnButton {
+        bottom: 35px;
+    }
+
     .formContainer_form {
         width: 400px;
         height: auto;
+    }
+
+    .formContainer_returnButton {
+        right: 150px;
     }
 
     .formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace,

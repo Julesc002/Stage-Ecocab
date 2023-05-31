@@ -1,5 +1,34 @@
 /* le css de la barre de recherche viens du _form-find-routes */
 
+.optionSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -30px;
+}
+
+.optionSection_optionButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1000px;
+    padding: 2% 1%;
+}
+
+.optionSection_optionButtonsContainer_button {
+    background-color: var(--buttonsColor);
+    color: black;
+    width: 250px;
+    height: auto;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
 .containerTrierAndTrajets {
     display: flex;
     flex-direction: row;
@@ -46,11 +75,11 @@
     margin: 5%;
     margin-right: 0%;
 }
-  
+
 .containerTrierAndTrajets_trier_ligne_checkbox:checked {
     background-color: #8080D7;
 }
- 
+
 .containerTrierAndTrajets_trier_ligne_text {
     background-color: white;
     color: black;
@@ -94,12 +123,16 @@
         white-space: normal;
         margin: 2%;
     }
-   
+
 }
 
-@media (max-width: 570px) {
+@media (max-width: 630px) {
     .containerButtonAndVideo_text {
         margin: 2%;
         text-align: center;
+    }
+
+    .optionSection_optionButtonsContainer_button {
+        width: 200px;
     }
 }

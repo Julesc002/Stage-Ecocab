@@ -11,33 +11,74 @@ const PageRechercherUnTrajet = () => {
     const [destination, setDestination] = useState("");
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
     const [numberOfPeople, setNumberOfPeople] = useState(1);
-    const [flightNumber, setFlightNumber] = useState("");
-    const [baggageSize, setBaggageSize] = useState("");
     const [travels, setTravels] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
+    const [coordinates, setCoordinates] = useState([]);
     const location = useLocation();
-    
+
+
+    const [startOrDestination, setStartOrDestination] = useState(''); // On met à jour la variable sur 'start' ou 'destination' en fonction de si on part d'un aéroport ou si on souhaite aller à un aéroport
+
+    const [displayResultsStart, setDisplayResultsStart] = useState(false);
+    const [displayResultsDestination, setDisplayResultsDestination] = useState(false);
+    const [dataStart, setDataStart] = useState([]);
+    const [dataDestination, setDataDestination] = useState([])
+
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-      
+
         if (searchParams.get('depart')) {
-          setStart(searchParams.get('depart'));
+            setStart(searchParams.get('depart'));
         }
         if (searchParams.get('destination')) {
-          setDestination(searchParams.get('destination'));
+            setDestination(searchParams.get('destination'));
         }
         if (searchParams.get('date')) {
-          setDate(searchParams.get('date'));
+            setDate(searchParams.get('date'));
         }
-        if (searchParams.get('nbPers')) {
-          setNumberOfPeople(searchParams.get('nbPers'));
+    }, [location.search]);
+
+
+    const handleSetAirport = (e) => {
+        if (e === 'start') {
+            setStartOrDestination('start');
+            setDataStart(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+            setDataDestination([]);
+        } else {
+            setStartOrDestination('destination');
+            setDataDestination(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+            setDataStart([]);
         }
-        if (searchParams.get('numVol')) {
-          setFlightNumber(searchParams.get('numVol'));
+        setStart('');
+        setDestination('');
+    };
+
+
+    const handleStart = (e) => {
+        setDataStart([]);
+        setDataStart([]);
+        const inputValue = e.target.value;
+        setStart(inputValue);
+        setCoordinates([]);
+        if (inputValue.length >= 2) {
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+                .then((res) => setDataStart(res.data.features))
+                .catch((error) => console.log(error))
         }
-      }, [location.search]);
-      
-      
+    };
+
+    const handleDestinationChange = (e) => {
+        setDataDestination([]);
+        setCoordinates([]);
+        const inputValue = e.target.value;
+        setDestination(inputValue);
+        if (inputValue.length >= 2) {
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+                .then((res) => setDataDestination(res.data.features))
+                .catch((error) => console.log(error))
+        }
+    };
+
 
     const handleCheckboxClick = (option) => {
         if (selectedOption === option) {
@@ -66,7 +107,6 @@ const PageRechercherUnTrajet = () => {
         (destination === "" || travel.lieuArrivee.toLowerCase().includes(destination.toLowerCase())) &&
         (numberOfPeople === "" || travel.nombreDePassagers >= parseInt(numberOfPeople)) &&
         (date === "" || new Date(travel.heureDepart).toISOString().slice(0, 10) === date) &&
-        (flightNumber === "" || travel.numeroDeVol.toLowerCase().includes(flightNumber.toLowerCase())) &&
         (selectedOption !== 'heureDepart' || travel.heureDepart) &&
         (selectedOption !== 'heureArrivee' || travel.heureArrivee) &&
         (selectedOption !== 'numVol' || travel.numeroDeVol)
@@ -85,29 +125,63 @@ const PageRechercherUnTrajet = () => {
 
     return (
         <article>
+            <section className='optionSection'>
+                <div className='optionSection_optionButtonsContainer'>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => handleSetAirport('start')}> Je pars d'un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => handleSetAirport('destination')}> Je me rends à un aéroport </button>
+                </div>
+            </section>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
+
+
+                {startOrDestination === 'start' ?
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => setDisplayResultsStart(!displayResultsStart)} onBlur={() => setTimeout(() => { setDisplayResultsStart(false); }, 100)} disabled={startOrDestination.length === 0} />
+                        <div className='FormFindRoutes_Recherche_containerResultats'>
+                            {displayResultsStart && dataStart.map((place, index) => (
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(dataStart[index]); }}> {place} </p>
+                            ))}
+                        </div>
+                    </div>
+                    :
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => setDisplayResultsStart(!displayResultsStart)} onBlur={() => setTimeout(() => { setDisplayResultsStart(false); }, 100)} onChange={(e) => handleStart(e)} disabled={startOrDestination.length === 0} />
+                        <div className='FormFindRoutes_Recherche_containerResultats'>
+                            {displayResultsStart && dataStart.map((place, index) => (
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                            ))}
+                        </div>
+                    </div>
+                }
+
+
+                {startOrDestination === 'destination' ?
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => setDisplayResultsDestination(!displayResultsDestination)} onBlur={() => setTimeout(() => { setDisplayResultsDestination(false); }, 100)} disabled={startOrDestination.length === 0} />
+                        <div className='FormFindRoutes_Recherche_containerResultats'>
+                            {displayResultsDestination && dataDestination.map((place, index) => (
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(dataDestination[index]); }}> {place} </p>
+                            ))}
+                        </div>
+                    </div>
+                    :
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => setDisplayResultsDestination(!displayResultsDestination)} onBlur={() => setTimeout(() => { setDisplayResultsDestination(false); }, 100)} onChange={(e) => handleDestinationChange(e)} disabled={startOrDestination.length === 0} />
+                        <div className='FormFindRoutes_Recherche_containerResultats'>
+                            {displayResultsDestination && dataDestination.map((place, index) => (
+                                <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                            ))}
+                        </div>
+                    </div>
+                }
+
+
+
                 <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onChange={(e) => { setStart(e.target.value);}} />
+                    <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
                 <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
-                </div>
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} />
-                </div>
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} />
-                </div>
-                <div className="FormFindRoutes_Recherche2">
-                    <input className="FormFindRoutes_Recherche2_inputTextFlightNumber" type="text" placeholder="N° de vol (Optionnel)" value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} />
-                </div>
-                <div className="FormFindRoutes_Recherche2">
-                    <select className="FormFindRoutes_Recherche2_selectBaggageSize" value={baggageSize} onChange={(e) => setBaggageSize(e.target.value)}>
-                        <option value="" disabled hidden>Taille du bagage</option>
-                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Sac à dos"> Sac à dos </option>
-                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Cabine"> Cabine </option>
-                        <option className="FormFindRoutes_Recherche2_selectBaggageSize_value" value="Soute"> Soute </option>
-                    </select>
+                    <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
                 <button className="FormFindRoutes_submitButton" type="submit"> Recherchez </button>
             </form>

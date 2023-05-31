@@ -34,6 +34,7 @@ const Nav = () => {
         localStorage.removeItem('user');
         // Recharger la page
         window.location.reload();
+        window.location.href = "/Compte";
     }
 
     useEffect(() => {
