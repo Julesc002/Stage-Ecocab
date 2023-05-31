@@ -37,6 +37,21 @@ const PageRechercherUnTrajet = () => {
         if (searchParams.get('date')) {
             setDate(searchParams.get('date'));
         }
+        if (searchParams.get('airport')) {
+            if (searchParams.get('airport') === 'start') {
+                setStartOrDestination('start');
+                setDataStart(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+                setDataDestination([]);
+            } else {
+                setStartOrDestination('destination');
+                setDataDestination(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
+                setDataStart([]);
+            }
+            setAirportSelected(true)
+        }
+        if (searchParams.get('coordinates')) {
+            setCoordinates(searchParams.get('coordinates'));
+        }
     }, [location.search]);
 
 
@@ -56,7 +71,6 @@ const PageRechercherUnTrajet = () => {
 
 
     const handleStart = (e) => {
-        setDataStart([]);
         setDataStart([]);
         const inputValue = e.target.value;
         setStart(inputValue);
@@ -184,7 +198,7 @@ const PageRechercherUnTrajet = () => {
                 <div className="FormFindRoutes_Recherche">
                     <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
-                <button className="FormFindRoutes_submitButton" type="submit" disabled={coordinates.length === 0 || !airportSelected || date.length === 0}> Recherchez </button>
+                <button className="FormFindRoutes_submitButton" type="submit" disabled={coordinates.length === 0 || !airportSelected || date.length === 0 || numberOfPeople < 1}> Recherchez </button>
             </form>
             <div className='containerTrierAndTrajets'>
                 <div className='containerTrierAndTrajets_trier'>
