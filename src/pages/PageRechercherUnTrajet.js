@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Trajet from '../components/Trajet';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_TRAVEL_URL } from '../config';
+import { API_TRAVEL_URL, OPENROUTE_URL } from '../config';
 import { useLocation } from 'react-router-dom';
 
 const PageRechercherUnTrajet = () => {
@@ -102,16 +102,6 @@ const PageRechercherUnTrajet = () => {
         }
     };
 
-    useEffect(() => {
-        axios.get(`${API_TRAVEL_URL}`)
-            .then(response => {
-                setTravels(response.data.travels);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, []);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const travelSearched = {
@@ -120,10 +110,43 @@ const PageRechercherUnTrajet = () => {
             lieuArrivee: destination,
             whereIsAirport: startOrDestination,
             nbPersonnes: numberOfPeople
-        };
+        }
+
+        const coordinatesTravels = [coordinates];
+        const travelsRes = [];
+
         axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
-            .then((res) => setTravels(res.data.travels))
-            .catch((err) => console.log(err));
+            .then((travels) => {
+                setTravels(travels.data.travels);
+                travels.data.travels.forEach((travel) => {
+                    const { coordinates } = travel;
+                    coordinatesTravels.push(coordinates);
+                    travelsRes.push(travel);
+                })
+                axios.post(`${OPENROUTE_URL}`, {
+                    locations: coordinatesTravels,
+                    metrics: ['distance']
+                }, {
+                    headers: {
+                        'Authorization': '5b3ce3597851110001cf6248ad8405df1652406a897dfbf5f1b9beef',
+                    }
+                })
+                    .then((response) => {
+                        const distances = response.data.distances[0];
+                        distances.shift();
+                        // Créer un tableau d'objets contenant à la fois les distances et les indices des trajets
+                        const travelsWithDistances = distances.map((distance, index) => ({ distance, index }));
+                        // Trier le tableau d'objets en fonction des distances
+                        travelsWithDistances.sort((a, b) => a.distance - b.distance);
+                        // Récupérer les indices triés
+                        const sortedIndexs = travelsWithDistances.map((travelsWithDistances) => travelsWithDistances.index);
+                        // Utiliser les indices triés pour accéder aux trajets associés
+                        const sortedTravels = sortedIndexs.map((index) => travelsRes[index]);
+                        setTravels(sortedTravels);
+                    })
+                    .catch((error) => { console.log(error) })
+            })
+            .catch((err) => console.log(err))
     };
 
     const filteredTravels = travels.filter(travel =>
@@ -149,14 +172,15 @@ const PageRechercherUnTrajet = () => {
 
     return (
         <article>
+
             <section className='optionSection'>
                 <div className='optionSection_optionButtonsContainer'>
                     <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('start'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
                     <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('destination'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
                 </div>
             </section>
-            <form className='FormFindRoutes' onSubmit={handleSubmit}>
 
+            <form className='FormFindRoutes' onSubmit={handleSubmit}>
 
                 {startOrDestination === 'start' ?
                     <div className="FormFindRoutes_Recherche">
@@ -266,7 +290,7 @@ const PageRechercherUnTrajet = () => {
             <div className='containerButtonAndVideo'>
                 <p className='containerButtonAndVideo_text'>*Les prix sont propotionnels au nombre de passagers déjà inscrit sur le trajet .</p>
                 <NavLink to="/PosterUnTrajet">
-                    <button className='boutonContact'>Tu ne vois pas ton trajet ? <br></br> Organise le !</button>
+                    <button className='boutonContact'>Tu ne vois pas ton trajet ? <br /> Organise le ! </button>
                 </NavLink>
                 <VideoExplication />
             </div>
