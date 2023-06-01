@@ -17,28 +17,59 @@ exports.createTravel = (req, res) => {
 exports.getNearestTravels = (req, res) => {
     const travelSearched = req.query;
 
-    const heureDepart = new Date(travelSearched.heureDepart); // Convertir la date de recherche en objet Date
-    heureDepart.setHours(0, 0, 0, 0); // Réinitialiser les heures, minutes, secondes et millisecondes à zéro
+    const heureDepart = new Date(travelSearched.heureDepart);
+    heureDepart.setHours(0, 0, 0, 0);
 
-    const heureMaxDepart = new Date(travelSearched.heureDepart); // Convertir la date de recherche en objet Date
-    heureMaxDepart.setHours(23, 59, 59, 999); // Définir l'heure maximale à 23h59:59.999
+    const heureMaxDepart = new Date(travelSearched.heureDepart);
+    heureMaxDepart.setHours(23, 59, 59, 999);
 
     if (travelSearched.whereIsAirport === 'start') {
-        Travel.find({ heureDepart: { $gte: heureDepart, $lte: heureMaxDepart }, lieuDepart: travelSearched.lieuDepart })
-            .then((travels) => {
-                return res.status(200).json({ travels });
-            }).catch((error) => {
-                return res.status(400).json({ error });
+        Travel.find({
+            heureDepart: { $gte: heureDepart, $lte: heureMaxDepart },
+            lieuDepart: travelSearched.lieuDepart
+        })
+        .then((travels) => {
+            const promises = travels.map((travel) => {
+                return Travel.find({
+                    _id: travel._id,
+                    nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+                });
             });
+
+            return Promise.all(promises);
+        })
+        .then((results) => {
+            const filteredTravels = results.flat();
+            return res.status(200).json({ travels: filteredTravels });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
     } else {
-        Travel.find({ heureDepart: { $gte: heureDepart, $lte: heureMaxDepart }, lieuArrivee: travelSearched.lieuArrivee })
-            .then((travels) => {
-                return res.status(200).json({ travels });
-            }).catch((error) => {
-                return res.status(400).json({ error });
+        Travel.find({
+            heureDepart: { $gte: heureDepart, $lte: heureMaxDepart },
+            lieuArrivee: travelSearched.lieuArrivee
+        })
+        .then((travels) => {
+            const promises = travels.map((travel) => {
+                return Travel.find({
+                    _id: travel._id,
+                    nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+                });
             });
+
+            return Promise.all(promises);
+        })
+        .then((results) => {
+            const filteredTravels = results.flat();
+            return res.status(200).json({ travels: filteredTravels });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
     }
 };
+
 
 exports.getOneTravel = (req, res) => {
     const id = req.params.id;
