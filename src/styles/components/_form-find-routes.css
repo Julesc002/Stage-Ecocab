@@ -10,11 +10,13 @@
 }
 
 .FormFindRoutes_Recherche,
-.FormFindRoutes_Recherche2 {
+.FormFindRoutes_Recherche2,
+.FormFindRoutes_RechercheNbPers {
     background: rgba(0, 0, 0, 0);
 }
 
-.FormFindRoutes_Recherche {
+.FormFindRoutes_Recherche,
+.FormFindRoutes_RechercheNbPers {
     width: calc(25% - 20px);
 }
 
@@ -72,6 +74,16 @@
     transition: 0.5s;
 }
 
+.FormFindRoutes_Recherche_icone {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.FormFindRoutes_Recherche_icone[disabled] {
+    opacity: 0.5;
+}
+
 .FormFindRoutes_Recherche2 {
     width: calc(50% - 40px);
 }
@@ -100,6 +112,10 @@
         width: calc(50% - 20px);
     }
 
+    .FormFindRoutes_RechercheNbPers {
+        width: calc(44% - 20px);
+    }
+
     .FormFindRoutes_Recherche2 {
         width: calc(50% - 20px);
     }
@@ -118,6 +134,10 @@
 
     .FormFindRoutes_Recherche {
         width: calc(100% - 20px);
+    }
+
+    .FormFindRoutes_RechercheNbPers {
+        width: calc(93% - 20px);
     }
 
     .FormFindRoutes_Recherche2 {
