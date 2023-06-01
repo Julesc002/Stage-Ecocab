@@ -99,6 +99,7 @@ const PageRechercherUnTrajet = () => {
             setSelectedOption(null);
         } else {
             setSelectedOption(option);
+
         }
     };
 
@@ -117,7 +118,6 @@ const PageRechercherUnTrajet = () => {
 
         axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
             .then((travels) => {
-                setTravels(travels.data.travels);
                 travels.data.travels.forEach((travel) => {
                     const { coordinates } = travel;
                     coordinatesTravels.push(coordinates);
@@ -133,6 +133,7 @@ const PageRechercherUnTrajet = () => {
                 })
                     .then((response) => {
                         const distances = response.data.distances[0];
+                        // On enlève la première valeur du tableau car c'est une comparaison de la distance du point avec lui même
                         distances.shift();
                         // Créer un tableau d'objets contenant à la fois les distances et les indices des trajets
                         const travelsWithDistances = distances.map((distance, index) => ({ distance, index }));
@@ -149,25 +150,20 @@ const PageRechercherUnTrajet = () => {
             .catch((err) => console.log(err))
     };
 
-    const filteredTravels = travels.filter(travel =>
-        (start === "" || travel.lieuDepart.toLowerCase().includes(start.toLowerCase())) &&
-        (destination === "" || travel.lieuArrivee.toLowerCase().includes(destination.toLowerCase())) &&
-        (numberOfPeople === "" || travel.nombreDePassagers >= parseInt(numberOfPeople)) &&
-        (date === "" || new Date(travel.heureDepart).toISOString().slice(0, 10) === date) &&
-        (selectedOption !== 'heureDepart' || travel.heureDepart) &&
-        (selectedOption !== 'heureArrivee' || travel.heureArrivee) &&
-        (selectedOption !== 'numVol' || travel.numeroDeVol)
-    ).sort((a, b) => {
-        if (selectedOption === 'heureDepart') {
-            return new Date(a.heureDepart) - new Date(b.heureDepart);
-        } else if (selectedOption === 'heureArrivee') {
-            return new Date(a.heureArrivee) - new Date(b.heureArrivee);
-        } else if (selectedOption === 'numVol') {
-            return a.numeroDeVol.localeCompare(b.numeroDeVol);
-        } else {
-            return 0;
-        }
-    });
+    const filteredTravels = () => {
+        const sortedTravels = [...travels]; // Création d'une copie du tableau `travels`
+        return sortedTravels.sort((a, b) => {
+            if (selectedOption === 'heureDepart') {
+                return new Date(a.heureDepart) - new Date(b.heureDepart);
+            } else if (selectedOption === 'heureArrivee') {
+                return new Date(a.heureArrivee) - new Date(b.heureArrivee);
+            } else if (selectedOption === 'numVol') {
+                return a.numeroDeVol.localeCompare(b.numeroDeVol);
+            } else {
+                return 0;
+            }
+        })
+    };
 
 
     return (
@@ -265,10 +261,10 @@ const PageRechercherUnTrajet = () => {
                     </div>
                 </div>
                 <div className='containerTrajets'>
-                    {travels.length === 0 ? (
-                        <p className='containerTrajets_textNoTravels'>Aucun trajet ne correspond à votre recherche.</p>
+                    {filteredTravels().length === 0 ? (
+                        <p className='containerTrajets_textNoTravels'> Aucun trajet ne correspond à votre recherche. </p>
                     ) : (
-                        travels.map(travel => {
+                        filteredTravels().map(travel => {
                             return (
                                 <Trajet
                                     id={travel._id}
