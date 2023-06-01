@@ -204,9 +204,10 @@ const PageRechercherUnTrajet = () => {
                 <div className="FormFindRoutes_Recherche">
                     <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={date} onChange={(e) => setDate(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
-                <div className="FormFindRoutes_Recherche">
+                <div className="FormFindRoutes_RechercheNbPers">
                     <input className="FormFindRoutes_Recherche_inputNumberOfPeople" type="number" min="1" value={numberOfPeople} onChange={(e) => setNumberOfPeople(e.target.value)} disabled={startOrDestination.length === 0} />
                 </div>
+                <img className='FormFindRoutes_Recherche_icone' src={`${process.env.PUBLIC_URL}/assets/images/manIcoBis.svg`} alt='icone Monsieur' disabled={startOrDestination.length === 0} />
                 <button className="FormFindRoutes_submitButton" type="submit" disabled={coordinates.length === 0 || !airportSelected || date.length === 0 || numberOfPeople < 1}> Recherchez </button>
             </form>
             <div className='containerTrierAndTrajets'>
