@@ -115,14 +115,15 @@ const PageRechercherUnTrajet = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const travelSearched = {
-            heureDepart: date,
+            heureDepart: new Date(),
             lieuDepart: start,
             lieuArrivee: destination,
             whereIsAirport: startOrDestination,
-        }
+            nbPersonnes: numberOfPeople
+        };
         axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
+            .then((res) => setTravels(res.data.travels))
+            .catch((err) => console.log(err));
     };
 
     const filteredTravels = travels.filter(travel =>
@@ -240,10 +241,10 @@ const PageRechercherUnTrajet = () => {
                     </div>
                 </div>
                 <div className='containerTrajets'>
-                    {filteredTravels.length === 0 ? (
+                    {travels.length === 0 ? (
                         <p className='containerTrajets_textNoTravels'>Aucun trajet ne correspond à votre recherche.</p>
                     ) : (
-                        filteredTravels.map(travel => {
+                        travels.map(travel => {
                             return (
                                 <Trajet
                                     id={travel._id}
