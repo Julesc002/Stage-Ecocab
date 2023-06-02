@@ -40,9 +40,8 @@ const PageRechercherUnTrajet = () => {
       
         axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
           .then((travels) => {
-            if (travels.data.travels.length === 0) {
+            if (travels.data.length === 0) {
                 setTravels([]);
-                // Aucun résultat, on ne fait pas le post
                 return;
             }
 
@@ -70,7 +69,11 @@ const PageRechercherUnTrajet = () => {
                 // Récupérer les indices triés
                 const sortedIndexs = travelsWithDistances.map((travelsWithDistances) => travelsWithDistances.index);
                 // Utiliser les indices triés pour accéder aux trajets associés
-                const sortedTravels = sortedIndexs.map((index) => travelsRes[index]);
+                const sortedTravels = sortedIndexs.map((index) => {
+                    const travel = travelsRes[index];
+                    const distance = distances[index];
+                    return { travel, distance };
+                });
                 setTravels(sortedTravels);
               })
               .catch((error) => { console.log(error) })
@@ -163,11 +166,11 @@ const PageRechercherUnTrajet = () => {
         const sortedTravels = [...travels]; // Création d'une copie du tableau `travels`
         return sortedTravels.sort((a, b) => {
             if (selectedOption === 'heureDepart') {
-                return new Date(a.heureDepart) - new Date(b.heureDepart);
+                return new Date(a.travel.heureDepart) - new Date(b.travel.heureDepart);
             } else if (selectedOption === 'heureArrivee') {
-                return new Date(a.heureArrivee) - new Date(b.heureArrivee);
+                return new Date(a.travel.heureArrivee) - new Date(b.travel.heureArrivee);
             } else if (selectedOption === 'numVol') {
-                return a.numeroDeVol.localeCompare(b.numeroDeVol);
+                return a.travel.numeroDeVol.localeCompare(b.travel.numeroDeVol);
             } else {
                 return 0;
             }
@@ -277,15 +280,16 @@ const PageRechercherUnTrajet = () => {
                         filteredTravels().map(travel => {
                             return (
                                 <Trajet
-                                    id={travel._id}
-                                    heureDepart={travel.heureDepart}
-                                    heureArrivee={travel.heureArrivee}
-                                    lieuDepart={travel.lieuDepart}
-                                    lieuArrivee={travel.lieuArrivee}
-                                    nombreDePassagers={travel.nombreDePassagers}
-                                    numeroDeVol={travel.numeroDeVol}
-                                    idCompte={travel.idCompte}
-                                    nbVoyageurs={travel.idVoyageurs.length}
+                                    id={travel.travel._id}
+                                    heureDepart={travel.travel.heureDepart}
+                                    heureArrivee={travel.travel.heureArrivee}
+                                    lieuDepart={travel.travel.lieuDepart}
+                                    lieuArrivee={travel.travel.lieuArrivee}
+                                    nombreDePassagers={travel.travel.nombreDePassagers}
+                                    numeroDeVol={travel.travel.numeroDeVol}
+                                    idCompte={travel.travel.idCompte}
+                                    nbVoyageurs={travel.travel.idVoyageurs.length}
+                                    distance={travel.distance}
                                 />
                             );
                         })

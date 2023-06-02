@@ -14,6 +14,15 @@ exports.createTravel = (req, res) => {
 
 // PARTIE GET
 
+exports.getAllTravels = (req, res) => {
+    Travel.find()
+        .then((travel) => {
+            return res.status(200).json({ travel });
+        }).catch((error) => {
+            return res.status(400).json({ error });
+        });
+}
+
 exports.getNearestTravels = (req, res) => {
     const travelSearched = req.query;
 
@@ -28,45 +37,45 @@ exports.getNearestTravels = (req, res) => {
             heureDepart: { $gte: heureDepart, $lte: heureMaxDepart },
             lieuDepart: travelSearched.lieuDepart
         })
-        .then((travels) => {
-            const promises = travels.map((travel) => {
-                return Travel.find({
-                    _id: travel._id,
-                    nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+            .then((travels) => {
+                const promises = travels.map((travel) => {
+                    return Travel.find({
+                        _id: travel._id,
+                        nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+                    });
                 });
-            });
 
-            return Promise.all(promises);
-        })
-        .then((results) => {
-            const filteredTravels = results.flat();
-            return res.status(200).json({ travels: filteredTravels });
-        })
-        .catch((error) => {
-            return res.status(400).json({ error });
-        });
+                return Promise.all(promises);
+            })
+            .then((results) => {
+                const filteredTravels = results.flat();
+                return res.status(200).json({ travels: filteredTravels });
+            })
+            .catch((error) => {
+                return res.status(400).json({ error });
+            });
     } else {
         Travel.find({
             heureDepart: { $gte: heureDepart, $lte: heureMaxDepart },
             lieuArrivee: travelSearched.lieuArrivee
         })
-        .then((travels) => {
-            const promises = travels.map((travel) => {
-                return Travel.find({
-                    _id: travel._id,
-                    nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+            .then((travels) => {
+                const promises = travels.map((travel) => {
+                    return Travel.find({
+                        _id: travel._id,
+                        nombreDePassagers: { $gte: parseInt(travelSearched.nbPersonnes) + travel.idVoyageurs.length + 1 }
+                    });
                 });
-            });
 
-            return Promise.all(promises);
-        })
-        .then((results) => {
-            const filteredTravels = results.flat();
-            return res.status(200).json({ travels: filteredTravels });
-        })
-        .catch((error) => {
-            return res.status(400).json({ error });
-        });
+                return Promise.all(promises);
+            })
+            .then((results) => {
+                const filteredTravels = results.flat();
+                return res.status(200).json({ travels: filteredTravels });
+            })
+            .catch((error) => {
+                return res.status(400).json({ error });
+            });
     }
 };
 
