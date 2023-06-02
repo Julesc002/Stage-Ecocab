@@ -23,7 +23,7 @@ const Trajet = (props) => {
                 console.log(error);
             });
     }, [props.idCompte]);
-    
+
     return (
         <Link to={`/Details/${props.id}`} className='containerTrajet'>
             <div className='containerTrajet_sectionHeure'>
@@ -38,6 +38,30 @@ const Trajet = (props) => {
             <div className='containerTrajet_sectionLieu'>
                 <div className='containerTrajet_sectionLieu_ligne'>
                     <p className='containerTrajet_sectionLieu_ligne_text'>{props.lieuDepart}</p>
+                    {props.distance >= 0 ?
+                        props.distance < 1000 ?
+                            <>
+                                <div className="greenCircle"></div>
+                                <div className="circle"></div>
+                                <div className="circle"></div>
+                            </>
+                            :
+                            props.distance < 3000 ?
+                                <>
+                                    <div className="circle"></div>
+                                    <div className="orangeCircle"></div>
+                                    <div className="circle"></div>
+                                </>
+                                :
+                                <>
+                                    <div className="circle"></div>
+                                    <div className="circle"></div>
+                                    <div className="redCircle"></div>
+                                </>
+                        :
+                        null
+                    }
+
                 </div>
                 <div className='containerTrajet_sectionLieu_ligneBas'>
                     <p className='containerTrajet_sectionLieu_ligne_text'>{props.lieuArrivee}</p>
@@ -48,7 +72,7 @@ const Trajet = (props) => {
                 <p className='containerTrajet_sectionMillieu_text'>{props.nbVoyageurs + 1}/{props.nombreDePassagers}</p>
             </div>
             <div className='containerTrajet_sectionDroite'>
-                <p className='containerTrajet_sectionDroite_textPrice'>18€*</p>
+                <p className='containerTrajet_sectionDroite_textPrice'> 18€* </p>
                 {account && (
                     <p className='containerTrajet_sectionDroite_text'>{account.firstName} {account.lastName}</p>
                 )}
