@@ -20,7 +20,7 @@ const TravelInfos = (props) => {
   useEffect(() => {
     axios.get(`${API_TRAVEL_URL}/` + props.id)
       .then(response => {
-        setTravel(response.data.travel);
+        setTravel(response.data.travel)
       })
       .catch(error => {
         console.log(error);
@@ -36,7 +36,6 @@ const TravelInfos = (props) => {
   const dateArrivee = new Date(travel.heureArrivee);
   const endTravelTime = `${dateArrivee.getHours().toString().padStart(2, '0')}h${dateArrivee.getMinutes().toString().padStart(2, '0')}`;
 
-  const price = "18";
   const [travellers, setTravellers] = useState([]);
 
   useEffect(() => {
@@ -138,6 +137,18 @@ const TravelInfos = (props) => {
     window.location.reload();
   };
 
+  const prixTrajet = () => {
+    if (travel && travel.idVoyageurs) {
+      if (travel.lieuDepart === 'Orly Airport (ORY)' || travel.lieuArrivee === 'Orly Airport (ORY)') {
+        return (38 / (travel.idVoyageurs.length + 1)).toFixed(2);
+      } else {
+        return (59 / (travel.idVoyageurs.length + 1)).toFixed(2);
+      }
+    }
+    return "";
+  };
+  
+
   return (
     <>
       <div className="travelInfosContainer">
@@ -148,7 +159,7 @@ const TravelInfos = (props) => {
 
         <div className="travelInfosContainer_middleArrowAndPrice">
           <img className='travelInfosContainer_middleArrowAndPrice_arrowIcon' src={`${process.env.PUBLIC_URL}/assets/images/${downArrow}`} alt="Fleche vers le bas" />
-          <div className="travelInfosContainer_middleArrowAndPrice_priceValue"> {price} €* </div>
+          <div className="travelInfosContainer_middleArrowAndPrice_priceValue"> {prixTrajet()} €* </div>
         </div>
 
         <div className="travelInfosContainer_endTravel">
