@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomeMainTitles = () => {
 
-    const mainTitle = "Taxi et VTC trop cher pour l'aéroport ?";
+    const mainTitle = "Taxi et VTC trop chers pour l'aéroport ?";
     const underTitle = "Partage ta course avec d'autres voyageurs";
 
     return (
