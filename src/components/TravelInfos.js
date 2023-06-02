@@ -14,6 +14,9 @@ const TravelInfos = (props) => {
   const [travel, setTravel] = useState([]);
   const [account, setAccount] = useState([]);
 
+  const [popUpVisibility, setPopUpVisibility] = useState(false);
+  const [selectedTraveller, setSelectedTraveller] = useState();
+
   useEffect(() => {
     axios.get(`${API_TRAVEL_URL}/` + props.id)
       .then(response => {
@@ -106,34 +109,114 @@ const TravelInfos = (props) => {
     }
   };
 
+  const handleTravellerClick = async (traveller) => {
+    if (selectedTraveller && traveller === selectedTraveller._id) {
+      setPopUpVisibility(!popUpVisibility);
+    } else {
+      setPopUpVisibility(true);
+    }
+
+    try {
+      const response = await axios.get(`${API_USER_URL}/id/` + traveller);
+      console.log(response);
+      setSelectedTraveller(response.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="travelInfosContainer">
+
         <div className="travelInfosContainer_startTravel">
           <div className="travelInfosContainer_startTravel_travelTimeAndName"> {startTravelTime} {startTravelName} - {jourDepart} </div>
         </div>
+
         <div className="travelInfosContainer_middleArrowAndPrice">
           <img className='travelInfosContainer_middleArrowAndPrice_arrowIcon' src={`${process.env.PUBLIC_URL}/assets/images/${downArrow}`} alt="Fleche vers le bas" />
           <div className="travelInfosContainer_middleArrowAndPrice_priceValue"> {price} €* </div>
         </div>
+
         <div className="travelInfosContainer_endTravel">
           <div className="travelInfosContainer_endTravel_travelTimeAndName"> {endTravelTime} {endTravelName} </div>
         </div>
+
         <div className="travelInfosContainer_travellers">
           {travellers.map((traveller, index) => (
             <div className="travelInfosContainer_travellers_traveller" key={index}>
-              <div className="travelInfosContainer_travellers_traveller_travellerInfos">
-                <img className='travelInfosContainer_travellers_traveller_travellerInfos_manIco' src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`} alt="icone Monsieur" />
-                {traveller.name && `${traveller.name} `}
-                ({traveller.role})
-                {traveller.flightNumber}
-              </div>
+              {travel.idCompte === localStorage.getItem('user') && index > 0 ? (
+                <div className="travelInfosContainer_travellers_traveller_travellerInfos">
+                  <img
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
+                    src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
+                    alt="icone Monsieur"
+                  />
+                  <p
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
+                    onClick={() => handleTravellerClick(travel.idVoyageurs[index - 1])}
+                  >
+                    {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
+                  </p>
+                </div>
+              ) : travel.idVoyageurs.includes(localStorage.getItem('user')) && index === 0 ? (
+                <div className="travelInfosContainer_travellers_traveller_travellerInfos">
+                  <img
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
+                    src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
+                    alt="icone Monsieur"
+                  />
+                  <p
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
+                    onClick={() => handleTravellerClick(travel.idCompte)}
+                  >
+                    {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
+                  </p>
+                </div>
+              ) : (
+                <div className="travelInfosContainer_travellers_traveller_travellerInfos">
+                  <img
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
+                    src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
+                    alt="icone Monsieur"
+                  />
+                  <p className='travelInfosContainer_travellers_traveller_travellerInfos_p'>
+                    {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
+
+
+        {popUpVisibility && selectedTraveller && account && (
+          <div className='accountDetailsContainer'>
+            <section className='accountDetailsContainer_accountInformationsSection'>
+              <h1 className='accountDetailsContainer_accountInformationsSection_mainTitle'> Informations personnelles </h1>
+              <div className='accountDetailsContainer_accountInformationsSection_container'>
+                <div className='accountDetailsContainer_accountInformationsSection_container_firstLastNames'>
+                  <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle'> Prénom </label>
+                  <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent'> {selectedTraveller.firstName} </label>
+
+                  <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelTitle lastNameTitle'> Nom </label>
+                  <label className='accountDetailsContainer_accountInformationsSection_container_firstLastNames_labelContent lastNameContent'> {selectedTraveller.lastName} </label>
+                </div>
+
+                <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Email </label>
+                <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> {selectedTraveller.email} </label>
+
+                <label className='accountDetailsContainer_accountInformationsSection_container_labelTitle'> Numéro de téléphone </label>
+                <label className='accountDetailsContainer_accountInformationsSection_container_labelContent'> {selectedTraveller.phoneNumber} </label>
+              </div>
+            </section>
+          </div>
+        )}
+
         <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
+
         <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>
-      </div>
+      </div >
       <p className='errorMsg'>{errorMsg}</p>
     </>
   );

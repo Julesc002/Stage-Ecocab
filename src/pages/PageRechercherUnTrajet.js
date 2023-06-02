@@ -147,7 +147,6 @@ const PageRechercherUnTrajet = () => {
                             const distance = distances[index];
                             return { travel, distance };
                         });
-                        console.log(sortedTravels);
                         setTravels(sortedTravels);
                     })
                     .catch((error) => { console.log(error) })

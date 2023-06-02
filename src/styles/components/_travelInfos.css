@@ -79,7 +79,24 @@
 
 .travelInfosContainer_travellers_traveller_travellerInfos {
     background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -3%;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos_p,
+.travelInfosContainer_travellers_traveller_travellerInfos_pClicable {
+    background-color: white;
+    color: black;
     font-size: 16px;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos_pClicable {
+    cursor: pointer;
+    color: var(--linksHoverColor);
+    text-decoration: underline;
+
 }
 
 .travelInfosContainer_travellers_traveller_travellerInfos_manIco {
