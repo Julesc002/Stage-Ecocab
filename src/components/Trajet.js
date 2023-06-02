@@ -14,6 +14,14 @@ const Trajet = (props) => {
 
     const [account, setAccount] = useState();
 
+    const prixTrajet = () => {
+        if (props.lieuDepart === 'Orly Airport (ORY)' || props.lieuArrivee === 'Orly Airport (ORY)') {
+            return (38 / (props.nbVoyageurs + 1)).toFixed(2);
+        } else {
+            return (59 / (props.nbVoyageurs + 1)).toFixed(2);
+        }
+    }
+
     useEffect(() => {
         axios.get(`${API_USER_URL}/id/` + props.idCompte)
             .then(response => {
@@ -72,7 +80,7 @@ const Trajet = (props) => {
                 <p className='containerTrajet_sectionMillieu_text'>{props.nbVoyageurs + 1}/{props.nombreDePassagers}</p>
             </div>
             <div className='containerTrajet_sectionDroite'>
-                <p className='containerTrajet_sectionDroite_textPrice'> 18€* </p>
+                <p className='containerTrajet_sectionDroite_textPrice'> {prixTrajet()}  €* </p>
                 {account && (
                     <p className='containerTrajet_sectionDroite_text'>{account.firstName} {account.lastName}</p>
                 )}

@@ -15,9 +15,12 @@
     background: rgba(0, 0, 0, 0);
 }
 
-.FormFindRoutes_Recherche,
-.FormFindRoutes_RechercheNbPers {
+.FormFindRoutes_Recherche {
     width: calc(25% - 20px);
+}
+
+.FormFindRoutes_RechercheNbPers {
+    width: calc(20% - 20px);
 }
 
 .FormFindRoutes_Recherche_inputTextStart,

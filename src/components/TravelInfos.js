@@ -90,8 +90,8 @@ const TravelInfos = (props) => {
       setErrorMsg('Ce trajet est complet');
     } else if (!localStorage.getItem('isConnected')) {
       setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
-    } else if (localStorage.getItem('user') === travel.idCompte || travel.idVoyageurs.includes(localStorage.getItem('user'))) {
-      setErrorMsg('Vous êtes déjà inscrit à ce trajet');
+    } else if (localStorage.getItem('user') === travel.idCompte) {
+      setErrorMsg('Vous le créateur de ce trajet');
     } else if (dateDepart < currentDate) {
       setErrorMsg('Le trajet sélectionné est en cours ou terminé')
     } else {
@@ -123,6 +123,19 @@ const TravelInfos = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const desinscriptionTrajet = (e) => {
+    e.preventDefault();
+    axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
+      .then(response => {
+        console.log(response.data.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    window.location.reload();
   };
 
   return (
@@ -216,8 +229,15 @@ const TravelInfos = (props) => {
         <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
 
         <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>
-      </div >
+
+      </div>
+      {travel && travel.idVoyageurs && travel.idVoyageurs.includes(localStorage.getItem('user')) ?
+        <button className='travelInfosContainer_reservationButton' onClick={(e) => desinscriptionTrajet(e)}> Se désinscrire </button>
+        :
+        <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>}
+
       <p className='errorMsg'>{errorMsg}</p>
+
     </>
   );
 };

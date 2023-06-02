@@ -10,6 +10,7 @@ router.get('/', TravelCtrl.getNearestTravels);
 router.get('/user/:id', TravelCtrl.getAllTravelsById);
 
 router.put('/:idTravel/user/:idUser', TravelCtrl.addOneUser);
+router.put('/:idTravel/userRemove/:idUser', TravelCtrl.removeOneUser);
 
 router.delete('/:id', TravelCtrl.deleteOneTravel);
 router.delete('/', TravelCtrl.deleteAllTravels);

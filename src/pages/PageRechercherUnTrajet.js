@@ -1,7 +1,7 @@
 import VideoExplication from '../components/VideoExplication';
 import { NavLink } from 'react-router-dom';
 import Trajet from '../components/Trajet';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { API_TRAVEL_URL, OPENROUTE_URL } from '../config';
 import { useLocation } from 'react-router-dom';
@@ -23,20 +23,71 @@ const PageRechercherUnTrajet = () => {
     const [dataStart, setDataStart] = useState([]);
     const [dataDestination, setDataDestination] = useState([]);
     const [airportSelected, setAirportSelected] = useState(false);
+    const [firstAutoSearch, setFirstAutoSearch] = useState(true);
+
+    const handleSubmit = useCallback((e) => {
+        e.preventDefault();
+        const travelSearched = {
+            heureDepart: date,
+            lieuDepart: start,
+            lieuArrivee: destination,
+            whereIsAirport: startOrDestination,
+            nbPersonnes: numberOfPeople
+        }
+
+        const coordinatesTravels = [coordinates];
+        const travelsRes = [];
+
+        axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
+            .then((travels) => {
+                if (travels.data.length === 0) {
+                    setTravels([]);
+                    return;
+                }
+
+                travels.data.travels.forEach((travel) => {
+                    const { coordinates } = travel;
+                    coordinatesTravels.push(coordinates);
+                    travelsRes.push(travel);
+                })
+                axios.post(`${OPENROUTE_URL}`, {
+                    locations: coordinatesTravels,
+                    metrics: ['distance']
+                }, {
+                    headers: {
+                        'Authorization': '5b3ce3597851110001cf6248ad8405df1652406a897dfbf5f1b9beef',
+                    }
+                })
+                    .then((response) => {
+                        const distances = response.data.distances[0];
+                        // On enlève la première valeur du tableau car c'est une comparaison de la distance du point avec lui même
+                        distances.shift();
+                        // Créer un tableau d'objets contenant à la fois les distances et les indices des trajets
+                        const travelsWithDistances = distances.map((distance, index) => ({ distance, index }));
+                        // Trier le tableau d'objets en fonction des distances
+                        travelsWithDistances.sort((a, b) => a.distance - b.distance);
+                        // Récupérer les indices triés
+                        const sortedIndexs = travelsWithDistances.map((travelsWithDistances) => travelsWithDistances.index);
+                        // Utiliser les indices triés pour accéder aux trajets associés
+                        const sortedTravels = sortedIndexs.map((index) => {
+                            const travel = travelsRes[index];
+                            const distance = distances[index];
+                            return { travel, distance };
+                        });
+                        setTravels(sortedTravels);
+                    })
+                    .catch((error) => { console.log(error) })
+            })
+            .catch((err) => console.log(err))
+    }, [start, destination, date, coordinates, setTravels, numberOfPeople, startOrDestination]);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
 
         if (searchParams.get('depart')) {
             setStart(searchParams.get('depart'));
-        }
-        if (searchParams.get('destination')) {
             setDestination(searchParams.get('destination'));
-        }
-        if (searchParams.get('date')) {
             setDate(searchParams.get('date'));
-        }
-        if (searchParams.get('airport')) {
             if (searchParams.get('airport') === 'start') {
                 setStartOrDestination('start');
                 setDataStart(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
@@ -46,12 +97,20 @@ const PageRechercherUnTrajet = () => {
                 setDataDestination(['Aéroport de Paris-Charles de Gaulle (CDG)', 'Orly Airport (ORY)']);
                 setDataStart([]);
             }
-            setAirportSelected(true)
-        }
-        if (searchParams.get('coordinates')) {
-            setCoordinates(searchParams.get('coordinates'));
+            setAirportSelected(true);
+            setCoordinates(searchParams.get('coordinates').split(",").map(Number));
         }
     }, [location.search]);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        if (start && destination && date && airportSelected && coordinates && searchParams.get('depart') && firstAutoSearch) {
+            setFirstAutoSearch(false);
+            handleSubmit({ preventDefault: () => { } });
+        }
+    }, [start, destination, date, airportSelected, coordinates, firstAutoSearch, handleSubmit, location.search]);
+
+
 
 
     const handleSetAirport = (e) => {
@@ -101,57 +160,6 @@ const PageRechercherUnTrajet = () => {
             setSelectedOption(option);
 
         }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const travelSearched = {
-            heureDepart: date,
-            lieuDepart: start,
-            lieuArrivee: destination,
-            whereIsAirport: startOrDestination,
-            nbPersonnes: numberOfPeople
-        }
-
-        const coordinatesTravels = [coordinates];
-        const travelsRes = [];
-
-        axios.get(`${API_TRAVEL_URL}/`, { params: travelSearched })
-            .then((travels) => {
-                travels.data.travels.forEach((travel) => {
-                    const { coordinates } = travel;
-                    coordinatesTravels.push(coordinates);
-                    travelsRes.push(travel);
-                })
-                axios.post(`${OPENROUTE_URL}`, {
-                    locations: coordinatesTravels,
-                    metrics: ['distance']
-                }, {
-                    headers: {
-                        'Authorization': '5b3ce3597851110001cf6248ad8405df1652406a897dfbf5f1b9beef',
-                    }
-                })
-                    .then((response) => {
-                        const distances = response.data.distances[0];
-                        // On enlève la première valeur du tableau car c'est une comparaison de la distance du point avec lui même
-                        distances.shift();
-                        // Créer un tableau d'objets contenant à la fois les distances et les indices des trajets
-                        const travelsWithDistances = distances.map((distance, index) => ({ distance, index }));
-                        // Trier le tableau d'objets en fonction des distances
-                        travelsWithDistances.sort((a, b) => a.distance - b.distance);
-                        // Récupérer les indices triés
-                        const sortedIndexs = travelsWithDistances.map((travelsWithDistances) => travelsWithDistances.index);
-                        // Utiliser les indices triés pour accéder aux trajets associés
-                        const sortedTravels = sortedIndexs.map((index) => {
-                            const travel = travelsRes[index];
-                            const distance = distances[index];
-                            return { travel, distance };
-                        });
-                        setTravels(sortedTravels);
-                    })
-                    .catch((error) => { console.log(error) })
-            })
-            .catch((err) => console.log(err))
     };
 
     const filteredTravels = () => {
