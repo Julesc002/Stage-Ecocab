@@ -228,15 +228,13 @@ const TravelInfos = (props) => {
 
         <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
 
-        <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>
-
+        {travel && travel.idVoyageurs && travel.idVoyageurs.includes(localStorage.getItem('user')) ?
+          <button className='travelInfosContainer_reservationButton' onClick={(e) => desinscriptionTrajet(e)}> Se désinscrire </button>
+          :
+          <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>}
       </div>
-      {travel && travel.idVoyageurs && travel.idVoyageurs.includes(localStorage.getItem('user')) ?
-        <button className='travelInfosContainer_reservationButton' onClick={(e) => desinscriptionTrajet(e)}> Se désinscrire </button>
-        :
-        <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>}
 
-      <p className='errorMsg'>{errorMsg}</p>
+      <p className='errorMsg'> {errorMsg} </p>
 
     </>
   );
