@@ -10,6 +10,7 @@ const travel = mongoose.Schema({
     tailleBagage: String,
     idCompte: String,
     idVoyageurs: [String],
+    idVoyageursInscrits: [String],
     coordinates : [Number]
 })
 

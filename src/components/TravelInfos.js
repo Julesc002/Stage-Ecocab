@@ -125,8 +125,11 @@ const TravelInfos = (props) => {
   };
 
   const desinscriptionTrajet = (e) => {
-    e.preventDefault();
-    axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
+    if (currentDate >= dateDepart) {
+      setErrorMsg('Le trajet a déjà commencé ou est déjà terminé');
+    } else {
+      setErrorMsg('');
+      axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
       .then(response => {
         console.log(response.data.user);
       })
@@ -134,7 +137,8 @@ const TravelInfos = (props) => {
         console.log(error);
       });
 
-    window.location.reload();
+      window.location.reload();
+    }
   };
 
   const prixTrajet = () => {
