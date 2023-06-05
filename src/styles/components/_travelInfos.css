@@ -99,6 +99,23 @@
 
 }
 
+.travelInfosContainer_travellers_traveller_travellerInfos_buttons {
+    width: 33px;
+    height: 34px;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider {
+    width: 30px;
+    height: 30px;
+    background-color: #228B22;
+}
+
+.travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler {
+    width: 30px;
+    height: 30px;
+    background-color: #B22222;
+}
+
 .travelInfosContainer_travellers_traveller_travellerInfos_manIco {
     width: 20px;
     height: 20px;

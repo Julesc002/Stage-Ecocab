@@ -67,7 +67,7 @@ const MesTrajets = () => {
                                 nombreDePassagers={travel.nombreDePassagers}
                                 numeroDeVol={travel.numeroDeVol}
                                 idCompte={travel.idCompte}
-                                nbVoyageurs={travel.idVoyageurs.length}
+                                nbVoyageurs={travel.idVoyageurs.length + travel.idVoyageursInscrits.length}
                                 affichageDate={true}
                             />
                         );

@@ -288,7 +288,7 @@ const PageRechercherUnTrajet = () => {
                                     nombreDePassagers={travel.travel.nombreDePassagers}
                                     numeroDeVol={travel.travel.numeroDeVol}
                                     idCompte={travel.travel.idCompte}
-                                    nbVoyageurs={travel.travel.idVoyageurs.length}
+                                    nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
                                     distance={travel.distance}
                                 />
                             );

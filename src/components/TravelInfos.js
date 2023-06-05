@@ -48,49 +48,82 @@ const TravelInfos = (props) => {
           console.log(error);
         }
       }
-
+  
       if (travel && travel.idVoyageurs) {
         try {
           const promises = travel.idVoyageurs.map(userId =>
             axios.get(`${API_USER_URL}/id/${userId}`)
           );
-
+  
           const responses = await Promise.all(promises);
           const fetchedUsers = responses.map(response => response.data.user);
-
-          const updatedTravellers = [
-            {
-              name: `${account.firstName ? account.firstName + " " : ''}${account.lastName ? account.lastName : ''}`,
-              role: "Organisateur",
-              flightNumber: " Vol " + travel.numeroDeVol
-            },
-            ...fetchedUsers.map(user => ({
-              name: user.firstName + " " + user.lastName,
-              role: "Voyageur",
-              flightNumber: ""
-            }))
-          ];
-
-          setTravellers(updatedTravellers);
+  
+          if (travel.idVoyageursInscrits) {
+            const promisesInscrits = travel.idVoyageursInscrits.map(userId =>
+              axios.get(`${API_USER_URL}/id/${userId}`)
+            );
+  
+            const responsesInscrits = await Promise.all(promisesInscrits);
+            const fetchedUsersInscrits = responsesInscrits.map(response => response.data.user);
+  
+            const updatedTravellers = [
+              {
+                name: `${account.firstName ? account.firstName + " " : ''}${account.lastName ? account.lastName : ''}`,
+                role: "Organisateur",
+                flightNumber: " Vol " + travel.numeroDeVol
+              },
+              ...fetchedUsersInscrits.map(user => ({
+                name: user.firstName + " " + user.lastName,
+                role: "Voyageur",
+                id: user._id,
+                inscrit: true
+              })),
+              ...fetchedUsers.map(user => ({
+                name: user.firstName + " " + user.lastName,
+                role: "Voyageur en attente de confirmation",
+                id: user._id,
+                inscrit: false
+              }))
+            ];
+  
+            setTravellers(updatedTravellers);
+          } else {
+            const updatedTravellers = [
+              {
+                name: `${account.firstName ? account.firstName + " " : ''}${account.lastName ? account.lastName : ''}`,
+                role: "Organisateur",
+                flightNumber: " Vol " + travel.numeroDeVol
+              },
+              ...fetchedUsers.map(user => ({
+                name: user.firstName + " " + user.lastName,
+                role: "Voyageur",
+                id: user._id,
+                inscrit: false
+              }))
+            ];
+  
+            setTravellers(updatedTravellers);
+          }
         } catch (error) {
           console.error(error);
         }
       }
     };
-
+  
     fetchUsers();
   }, [travel, account]);
+  
 
   const [errorMsg, setErrorMsg] = useState('');
 
   const inscriptionTrajet = (e) => {
     e.preventDefault();
-    if (travel.idVoyageurs.length + 1 === travel.nombreDePassagers) {
+    if (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1 === travel.nombreDePassagers) {
       setErrorMsg('Ce trajet est complet');
     } else if (!localStorage.getItem('isConnected')) {
       setErrorMsg('Vous devez être connecté pour vous inscrire à un trajet');
     } else if (localStorage.getItem('user') === travel.idCompte) {
-      setErrorMsg('Vous le créateur de ce trajet');
+      setErrorMsg('Vous êtes le créateur de ce trajet');
     } else if (dateDepart < currentDate) {
       setErrorMsg('Le trajet sélectionné est en cours ou terminé')
     } else {
@@ -98,7 +131,7 @@ const TravelInfos = (props) => {
 
       axios.put(`${API_TRAVEL_URL}/` + props.id + '/user/' + localStorage.getItem('user'))
         .then(response => {
-          console.log(response.data.user);
+          console.log(response.data.travel);
         })
         .catch(error => {
           console.log(error);
@@ -124,34 +157,71 @@ const TravelInfos = (props) => {
     }
   };
 
-  const desinscriptionTrajet = (e) => {
+  const desinscriptionTrajet = (e, idVoyageurs) => {
+    e.preventDefault();
     if (currentDate >= dateDepart) {
       setErrorMsg('Le trajet a déjà commencé ou est déjà terminé');
     } else {
       setErrorMsg('');
-      axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
-      .then(response => {
-        console.log(response.data.user);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      if (idVoyageurs.includes(localStorage.getItem('user'))) {
+        axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
+        .then(response => {
+          console.log(response.data.travel);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      } else {
+        axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemoveConfirmed/' + localStorage.getItem('user'))
+        .then(response => {
+          console.log(response.data.travel);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
 
       window.location.reload();
     }
   };
 
   const prixTrajet = () => {
-    if (travel && travel.idVoyageurs) {
+    if (travel && travel.idVoyageurs && travel.idVoyageursInscrits) {
       if (travel.lieuDepart === 'Orly Airport (ORY)' || travel.lieuArrivee === 'Orly Airport (ORY)') {
-        return (38 / (travel.idVoyageurs.length + 1)).toFixed(2);
+        return (38 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1)).toFixed(2);
       } else {
-        return (59 / (travel.idVoyageurs.length + 1)).toFixed(2);
+        return (59 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1)).toFixed(2);
       }
     }
     return "";
   };
   
+  const confirmerInscription = (e, id) => {
+    e.preventDefault();
+    axios.put(`${API_TRAVEL_URL}/` + props.id + '/userConfirm/' + id)
+      .then(response => {
+        console.log(response.data.travel);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      annulerInscription(e, id);
+  };
+
+  const annulerInscription = (e, id) => {
+    e.preventDefault();
+
+    axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + id)
+      .then(response => {
+        console.log(response.data.travel);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  };
 
   return (
     <>
@@ -173,20 +243,30 @@ const TravelInfos = (props) => {
         <div className="travelInfosContainer_travellers">
           {travellers.map((traveller, index) => (
             <div className="travelInfosContainer_travellers_traveller" key={index}>
-              {travel.idCompte === localStorage.getItem('user') && index > 0 ? (
-                <div className="travelInfosContainer_travellers_traveller_travellerInfos">
-                  <img
-                    className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
-                    src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
-                    alt="icone Monsieur"
-                  />
-                  <p
-                    className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
-                    onClick={() => handleTravellerClick(travel.idVoyageurs[index - 1])}
-                  >
-                    {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
-                  </p>
-                </div>
+            {travel.idCompte === localStorage.getItem('user') && index > 0 ? (
+              <div className="travelInfosContainer_travellers_traveller_travellerInfos">
+                <img
+                  className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
+                  src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
+                  alt="icone Monsieur"
+                />
+                <p
+                  className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
+                  onClick={() => handleTravellerClick(traveller.id)}
+                >
+                  {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
+                </p>
+                {!traveller.inscrit && (
+                  <>
+                    <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => confirmerInscription(e, traveller.id)}>
+                      <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider' src={`${process.env.PUBLIC_URL}/assets/images/valider.svg`} alt='iconeValidation'></img>
+                    </button>
+                    <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => annulerInscription(e, traveller.id)}>
+                      <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler' src={`${process.env.PUBLIC_URL}/assets/images/annuler.svg`} alt='iconeAnnuler'></img>
+                    </button>
+                  </>
+                )}
+              </div>
               ) : travel.idVoyageurs.includes(localStorage.getItem('user')) && index === 0 ? (
                 <div className="travelInfosContainer_travellers_traveller_travellerInfos">
                   <img
@@ -243,8 +323,8 @@ const TravelInfos = (props) => {
 
         <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
 
-        {travel && travel.idVoyageurs && travel.idVoyageurs.includes(localStorage.getItem('user')) ?
-          <button className='travelInfosContainer_reservationButton' onClick={(e) => desinscriptionTrajet(e)}> Se désinscrire </button>
+        {travel && (travel.idVoyageurs || travel.idVoyageursInscrits) && (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) ?
+          <button className='travelInfosContainer_reservationButton' onClick={(e) => desinscriptionTrajet(e, travel.idVoyageurs)}> Se désinscrire </button>
           :
           <button className='travelInfosContainer_reservationButton' onClick={(e) => inscriptionTrajet(e)}> {reservationButton} </button>}
       </div>

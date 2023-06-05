@@ -114,16 +114,55 @@ exports.addOneUser = (req, res) => {
         });
 };
 
-exports.removeOneUser = (req, res) => {
+exports.addOneUserConfirm = (req, res) => {
     const idTravel = req.params.idTravel;
     const idUser = req.params.idUser;
-    Travel.findOneAndUpdate({ _id: idTravel }, { $pull: { idVoyageurs: idUser } }, { new: true })
+    Travel.findOneAndUpdate({ _id: idTravel }, { $push: { idVoyageursInscrits: idUser } }, { new: true })
         .then((travel) => {
             return res.status(200).json({ travel });
         }).catch((error) => {
             return res.status(400).json({ error });
         });
 };
+
+exports.removeOneUser = (req, res) => {
+    const idTravel = req.params.idTravel;
+    const idUser = req.params.idUser;
+    Travel.findOneAndUpdate(
+        { _id: idTravel },
+        { 
+            $pull: { idVoyageurs: idUser }
+        },
+        { new: true }
+    )
+        .then((travel) => {
+            return res.status(200).json({ travel });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
+
+
+exports.removeOneUserConfirmed = (req, res) => {
+    const idTravel = req.params.idTravel;
+    const idUser = req.params.idUser;
+    Travel.findOneAndUpdate(
+        { _id: idTravel },
+        { 
+            $pull: { idVoyageursInscrits: idUser }
+        },
+        { new: true }
+    )
+        .then((travel) => {
+            return res.status(200).json({ travel });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
+
+
 
 
 // PARTIE DELETE
