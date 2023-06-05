@@ -19,3 +19,28 @@
     justify-content: center;
     align-items: center;
 }
+
+.conteneurGlobal_formContainer_carIcon {
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 55%;
+    left: 2%;
+    z-index: 1;
+}
+
+.conteneurGlobal_formContainer_aircraftIcon {
+    position: absolute;
+    height: 22%;
+    right: 1%;
+    top: 10%;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 897px) {
+
+    .conteneurGlobal_formContainer_carIcon,
+    .conteneurGlobal_formContainer_aircraftIcon {
+        display: none;
+    }
+}

@@ -11,3 +11,41 @@
     align-items: center;
     margin-bottom: 2%;
 }
+
+.homeMain_homeArticle_homeHeaderArticle_carIcon {
+    position: absolute;
+    height: 200px;
+    right: 40px;
+    top: 180px;
+}
+
+.homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
+    position: absolute;
+    height: 170px;
+    top: 50%;
+    left: 2%;
+}
+
+@media screen and (max-width: 959px) {
+    .homeMain_homeArticle_homeHeaderArticle_carIcon {
+        display: none;
+    }
+
+    .homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
+        height: 100px;
+        top: 75%;
+        left: 60%;
+    }
+}
+
+@media screen and (max-width: 805px) {
+    .homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
+        top: 50%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
+        display: none;
+    }
+}

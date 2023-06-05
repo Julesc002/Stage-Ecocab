@@ -40,6 +40,8 @@ const MesTrajets = () => {
 
     return (
         <div className='mesTrajets'>
+            <img className='mesTrajets_carIcon' src={`${process.env.PUBLIC_URL}/assets/images/undraw_by_my_car_re_g0c3.svg`} alt='icone voiture' />
+            <img className='mesTrajets_aircraftIcon' src={`${process.env.PUBLIC_URL}/assets/images/undraw_aircraft_re_m05i.svg`} alt='icone avion' />
             <div className='mesTrajets_containerButtons'>
                 <button
                     className={`mesTrajets_containerButtons_buttons ${button1Clicked ? 'mesTrajets_containerButtons_buttonClicked' : ''}`}
@@ -72,23 +74,23 @@ const MesTrajets = () => {
                             />
                         );
                     })
-                : 
-                travels.filter((travel) => travel.heureArrivee <= currentDate).map((travel) => {
-                    return (
-                        <Trajet
-                            id={travel._id}
-                            heureDepart={travel.heureDepart}
-                            heureArrivee={travel.heureArrivee}
-                            lieuDepart={travel.lieuDepart}
-                            lieuArrivee={travel.lieuArrivee}
-                            nombreDePassagers={travel.nombreDePassagers}
-                            numeroDeVol={travel.numeroDeVol}
-                            idCompte={travel.idCompte}
-                            nbVoyageurs={travel.idVoyageurs.length}
-                            affichageDate={true}
-                        />
-                    );
-                })
+                    :
+                    travels.filter((travel) => travel.heureArrivee <= currentDate).map((travel) => {
+                        return (
+                            <Trajet
+                                id={travel._id}
+                                heureDepart={travel.heureDepart}
+                                heureArrivee={travel.heureArrivee}
+                                lieuDepart={travel.lieuDepart}
+                                lieuArrivee={travel.lieuArrivee}
+                                nombreDePassagers={travel.nombreDePassagers}
+                                numeroDeVol={travel.numeroDeVol}
+                                idCompte={travel.idCompte}
+                                nbVoyageurs={travel.idVoyageurs.length}
+                                affichageDate={true}
+                            />
+                        );
+                    })
                 }
             </div>
         </div>

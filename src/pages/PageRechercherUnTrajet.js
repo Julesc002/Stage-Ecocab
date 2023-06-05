@@ -180,7 +180,7 @@ const PageRechercherUnTrajet = () => {
 
     return (
         <article>
-
+            <img className='aircraftIcon' src={`${process.env.PUBLIC_URL}/assets/images/undraw_aircraft_re_m05i.svg`} alt='icone avion' />
             <section className='optionSection'>
                 <div className='optionSection_optionButtonsContainer'>
                     <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('start'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
