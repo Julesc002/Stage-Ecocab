@@ -267,7 +267,7 @@ const TravelInfos = (props) => {
                     </>
                   )}
                 </div>
-              ) : travel.idVoyageurs.includes(localStorage.getItem('user')) && index === 0 ? (
+              ) : (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) && index >= 0 && traveller.id !== localStorage.getItem('user') ? (
                 <div className="travelInfosContainer_travellers_traveller_travellerInfos">
                   <img
                     className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
@@ -276,7 +276,7 @@ const TravelInfos = (props) => {
                   />
                   <p
                     className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
-                    onClick={() => handleTravellerClick(travel.idCompte)}
+                    onClick={() => { if (index === 0) { handleTravellerClick(travel.idCompte) } else { handleTravellerClick(traveller.id) } }}
                   >
                     {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
                   </p>
