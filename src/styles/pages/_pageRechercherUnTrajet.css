@@ -1,5 +1,12 @@
 /* le css de la barre de recherche viens du _form-find-routes */
 
+.aircraftIcon {
+    position: absolute;
+    height: 170px;
+    right: 10px;
+    top: 50px;
+}
+
 .optionSection {
     display: flex;
     flex-direction: column;
@@ -101,6 +108,12 @@
 .containerButtonAndVideo_text {
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+@media (max-width: 955px) {
+    .aircraftIcon {
+        display: none;
+    }
 }
 
 @media (max-width: 850px) {

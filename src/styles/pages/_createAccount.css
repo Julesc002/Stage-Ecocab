@@ -4,3 +4,33 @@
     justify-content: center;
     align-items: center;
 }
+
+.formCreateAccountContainer_carIcon {
+    position: absolute;
+    height: 40%;
+    width: auto;
+    top: 55%;
+    left: -4%;
+    z-index: 1;
+}
+
+.formCreateAccountContainer_aircraftIcon {
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 0%;
+    right: 6%;
+    z-index: 1;
+}
+
+@media screen and (max-width:897px) {
+    .formCreateAccountContainer_carIcon {
+        display: none;
+    }
+
+    .formCreateAccountContainer_aircraftIcon {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -3%;
+    }
+}

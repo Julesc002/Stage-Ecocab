@@ -82,51 +82,51 @@ const FormFindRoutes = () => {
         <article>
             <section className='optionSection'>
                 <div className='optionSection_optionButtonsContainer'>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('start'); setAirportSelected(false); setCoordinates([])}} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
-                    <button className='optionSection_optionButtonsContainer_button' onClick={() => {handleSetAirport('destination'); setAirportSelected(false); setCoordinates([])}} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('start'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
+                    <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('destination'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
                 </div>
             </section>
             <form className='FormFindRoutes' onSubmit={handleSubmit}>
 
-            {startOrDestination === 'start' ?
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} disabled={startOrDestination.length === 0} />
-                    <div className="FormFindRoutes_Recherche_containerResultats">
-                        {displayResults[0] && dataStart.map((place, index) => {
-                            return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setStart(dataStart[index]); setAirportSelected(true)}}> {place} </p>
-                        })}
+                {startOrDestination === 'start' ?
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} disabled={startOrDestination.length === 0} />
+                        <div className="FormFindRoutes_Recherche_containerResultats">
+                            {displayResults[0] && dataStart.map((place, index) => {
+                                return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setStart(dataStart[index]); setAirportSelected(true) }}> {place} </p>
+                            })}
+                        </div>
                     </div>
-                </div>
-                :
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} onChange={(e) => handleStart(e)} disabled={startOrDestination.length === 0} />
-                    <div className="FormFindRoutes_Recherche_containerResultats">
-                        {displayResults[0] && dataStart.map((place, index) => {
-                            return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
-                        })}
+                    :
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextStart" type="text" placeholder="Départ" value={start} onFocus={() => majDisplayResults(0)} onBlur={() => majDisplayResultsOnBlur(0)} onChange={(e) => handleStart(e)} disabled={startOrDestination.length === 0} />
+                        <div className="FormFindRoutes_Recherche_containerResultats">
+                            {displayResults[0] && dataStart.map((place, index) => {
+                                return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                            })}
+                        </div>
                     </div>
-                </div>
-            }
+                }
 
-            {startOrDestination === 'destination' ?
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} disabled={startOrDestination.length === 0} />
-                    <div className="FormFindRoutes_Recherche_containerResultats">
-                        {displayResults[1] && dataDestination.map((place, index) => {
-                            return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setDestination(dataDestination[index]); setAirportSelected(true)}}> {place} </p>
-                        })}
+                {startOrDestination === 'destination' ?
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} disabled={startOrDestination.length === 0} />
+                        <div className="FormFindRoutes_Recherche_containerResultats">
+                            {displayResults[1] && dataDestination.map((place, index) => {
+                                return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setDestination(dataDestination[index]); setAirportSelected(true) }}> {place} </p>
+                            })}
+                        </div>
                     </div>
-                </div>
-                :
-                <div className="FormFindRoutes_Recherche">
-                    <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} onChange={(e) => handleDestinationChange(e)} disabled={startOrDestination.length === 0} />
-                    <div className="FormFindRoutes_Recherche_containerResultats">
-                        {displayResults[1] && dataDestination.map((place, index) => {
-                            return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
-                        })}
+                    :
+                    <div className="FormFindRoutes_Recherche">
+                        <input className="FormFindRoutes_Recherche_inputTextDestination" type="text" placeholder="Destination" value={destination} onFocus={() => majDisplayResults(1)} onBlur={() => majDisplayResultsOnBlur(1)} onChange={(e) => handleDestinationChange(e)} disabled={startOrDestination.length === 0} />
+                        <div className="FormFindRoutes_Recherche_containerResultats">
+                            {displayResults[1] && dataDestination.map((place, index) => {
+                                return <p key={index} className="FormFindRoutes_Recherche_containerResultats_Resultats" onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                            })}
+                        </div>
                     </div>
-                </div>
-            }
+                }
 
                 <div className="FormFindRoutes_Recherche">
                     <input className="FormFindRoutes_Recherche_inputDateTime" type="date" placeholder="Date et heure" value={dateAndTime} onChange={(e) => setDateAndTime(e.target.value)} disabled={startOrDestination.length === 0} />

@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    z-index: 2;
 }
 
 .mesTrajets_containerButtons_buttons {
@@ -28,4 +29,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.mesTrajets_carIcon {
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 50%;
+    left: 6%;
+    z-index: 1;
+}
+
+.mesTrajets_aircraftIcon {
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 30%;
+    right: 6%;
+    z-index: 1;
+}
+
+@media screen and (max-width:897px) {
+
+    .mesTrajets_carIcon,
+    .mesTrajets_aircraftIcon {
+        display: none;
+    }
 }

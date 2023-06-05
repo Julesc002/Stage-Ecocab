@@ -6,6 +6,7 @@
     border-radius: 10px;
     padding: 30px;
     margin: 5%;
+    z-index: 5;
 }
 
 /* Titre du formulaire */

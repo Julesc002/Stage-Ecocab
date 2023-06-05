@@ -115,7 +115,9 @@ const FormCreationTrajet = () => {
     }
 
     if (!localStorage.getItem('isConnected')) {
-        <p className='formContainer_errorMessage'> Vous devez être connecté pour créer un trajet </p>
+        return (
+            <p className='formContainer_errorMessage'> Vous devez être connecté pour créer un trajet ! </p>
+        );
     } else if (travelPosted) {
         return (
             <div className='commitMessageContainer'>
@@ -193,10 +195,10 @@ const FormCreationTrajet = () => {
                                 <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} />
                                 :
                                 <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer'>
-                                    <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleStart(e)} />
-                                    <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer'>
+                                    <input className='FormFindRoutes_Recherche_inputTextStart' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleStart(e)} />
+                                    <div className='FormFindRoutes_Recherche_containerResultats'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                                         ))}
                                     </div>
                                 </div >
@@ -214,10 +216,10 @@ const FormCreationTrajet = () => {
                                 <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' value={destination} />
                                 :
                                 <div className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer'>
-                                    <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndPlace' type='text' placeholder="Arrivée ?" value={destination} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleDestinationChange(e)} />
-                                    <div className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer'>
+                                    <input className='FormFindRoutes_Recherche_inputTextStart' type='text' placeholder="Arrivée ?" value={destination} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleDestinationChange(e)} />
+                                    <div className='FormFindRoutes_Recherche_containerResultats'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='formContainer_form_firstPart_inputsEndTravelContainer_inputAndresultContainer_resultContainer_result' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
                                         ))}
                                     </div>
                                 </div>

@@ -8,6 +8,7 @@
   margin-left: 5%;
   text-decoration: none;
   width: clamp(300px, 50vw, 500px);
+  z-index: 2;
 }
 
 .greenCircle,

@@ -12,15 +12,18 @@
     text-decoration: none;
     padding: 0 0.4rem;
     color: inherit;
+    z-index: 50;
 }
 
 .navigationMenu_titleApp {
-    position: relative;
+    position: absolute;
     left: 50px;
+    top: 20px;
     font-size: clamp(16px, 2vw, 24px);
 }
 
 .navigationMenu_links {
+    position: absolute;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -49,6 +52,7 @@
 
 .navigationMenu_links_subemenuContainer {
     margin-left: -7%;
+    z-index: 99999999;
 }
 
 .navigationMenu_links_subemenuContainer_arrow {
@@ -70,7 +74,7 @@
 
 /* Partie Téléphone */
 
-@media screen and (max-width:980px) {
+@media screen and (max-width:897px) {
     .navigationMenu_links {
         flex-direction: column;
         justify-content: center;
