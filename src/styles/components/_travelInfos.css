@@ -102,18 +102,21 @@
 .travelInfosContainer_travellers_traveller_travellerInfos_buttons {
     width: 33px;
     height: 34px;
+    margin-right: 15px;
 }
 
 .travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider {
     width: 30px;
     height: 30px;
     background-color: #228B22;
+    cursor: pointer;
 }
 
 .travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler {
     width: 30px;
     height: 30px;
     background-color: #B22222;
+    cursor: pointer;
 }
 
 .travelInfosContainer_travellers_traveller_travellerInfos_manIco {

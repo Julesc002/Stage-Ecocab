@@ -32,8 +32,8 @@ const Trajet = (props) => {
             });
     }, [props.idCompte]);
 
-    return (
-        <Link to={`/Details/${props.id}`} className='containerTrajet'>
+    const travelCard = (
+        <>
             <div className='containerTrajet_sectionHeure'>
                 <div className='containerTrajet_sectionHeure_ligne'>
                     <p className='containerTrajet_sectionHeure_ligne_text'>{heureDepart} {/*jourDepart*/}</p>
@@ -86,8 +86,22 @@ const Trajet = (props) => {
                 )}
                 <p className='containerTrajet_sectionDroite_text'>{props.numeroDeVol}</p>
             </div>
-        </Link>
+        </>
     );
+
+    return (
+        <>
+            {!props.unclicable ? (
+                <Link to={`/Details/${props.id}`} className='containerTrajet'>
+                    {travelCard}
+                </Link>
+            ) : (
+                <div className='containerTrajetUnclicable'>
+                    {travelCard}
+                </div>
+            )}
+        </>
+    )
 };
 
 export default Trajet;

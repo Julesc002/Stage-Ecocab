@@ -134,7 +134,7 @@ const PageRechercherUnTrajet = () => {
         setStart(inputValue);
         setCoordinates([]);
         if (inputValue.length >= 2) {
-            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue)
                 .then((res) => setDataStart(res.data.features))
                 .catch((error) => console.log(error))
         }
