@@ -48,24 +48,24 @@ const TravelInfos = (props) => {
           console.log(error);
         }
       }
-  
+
       if (travel && travel.idVoyageurs) {
         try {
           const promises = travel.idVoyageurs.map(userId =>
             axios.get(`${API_USER_URL}/id/${userId}`)
           );
-  
+
           const responses = await Promise.all(promises);
           const fetchedUsers = responses.map(response => response.data.user);
-  
+
           if (travel.idVoyageursInscrits) {
             const promisesInscrits = travel.idVoyageursInscrits.map(userId =>
               axios.get(`${API_USER_URL}/id/${userId}`)
             );
-  
+
             const responsesInscrits = await Promise.all(promisesInscrits);
             const fetchedUsersInscrits = responsesInscrits.map(response => response.data.user);
-  
+
             const updatedTravellers = [
               {
                 name: `${account.firstName ? account.firstName + " " : ''}${account.lastName ? account.lastName : ''}`,
@@ -85,7 +85,7 @@ const TravelInfos = (props) => {
                 inscrit: false
               }))
             ];
-  
+
             setTravellers(updatedTravellers);
           } else {
             const updatedTravellers = [
@@ -101,7 +101,7 @@ const TravelInfos = (props) => {
                 inscrit: false
               }))
             ];
-  
+
             setTravellers(updatedTravellers);
           }
         } catch (error) {
@@ -109,10 +109,10 @@ const TravelInfos = (props) => {
         }
       }
     };
-  
+
     fetchUsers();
   }, [travel, account]);
-  
+
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -165,20 +165,20 @@ const TravelInfos = (props) => {
       setErrorMsg('');
       if (idVoyageurs.includes(localStorage.getItem('user'))) {
         axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
-        .then(response => {
-          console.log(response.data.travel);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+          .then(response => {
+            console.log(response.data.travel);
+          })
+          .catch(error => {
+            console.log(error);
+          });
       } else {
         axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemoveConfirmed/' + localStorage.getItem('user'))
-        .then(response => {
-          console.log(response.data.travel);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+          .then(response => {
+            console.log(response.data.travel);
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
 
       window.location.reload();
@@ -199,7 +199,7 @@ const TravelInfos = (props) => {
     }
     return "";
   };
-  
+
   const confirmerInscription = (e, id) => {
     e.preventDefault();
     axios.put(`${API_TRAVEL_URL}/` + props.id + '/userConfirm/' + id)
@@ -210,7 +210,7 @@ const TravelInfos = (props) => {
         console.log(error);
       });
 
-      annulerInscription(e, id);
+    annulerInscription(e, id);
   };
 
   const annulerInscription = (e, id) => {
@@ -247,31 +247,7 @@ const TravelInfos = (props) => {
         <div className="travelInfosContainer_travellers">
           {travellers.map((traveller, index) => (
             <div className="travelInfosContainer_travellers_traveller" key={index}>
-            {travel.idCompte === localStorage.getItem('user') && index > 0 ? (
-              <div className="travelInfosContainer_travellers_traveller_travellerInfos">
-                <img
-                  className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
-                  src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
-                  alt="icone Monsieur"
-                />
-                <p
-                  className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
-                  onClick={() => handleTravellerClick(traveller.id)}
-                >
-                  {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
-                </p>
-                {!traveller.inscrit && (
-                  <>
-                    <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => confirmerInscription(e, traveller.id)}>
-                      <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider' src={`${process.env.PUBLIC_URL}/assets/images/valider.svg`} alt='iconeValidation'></img>
-                    </button>
-                    <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => annulerInscription(e, traveller.id)}>
-                      <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler' src={`${process.env.PUBLIC_URL}/assets/images/annuler.svg`} alt='iconeAnnuler'></img>
-                    </button>
-                  </>
-                )}
-              </div>
-              ) : travel.idVoyageurs.includes(localStorage.getItem('user')) && index === 0 ? (
+              {travel.idCompte === localStorage.getItem('user') && index > 0 ? (
                 <div className="travelInfosContainer_travellers_traveller_travellerInfos">
                   <img
                     className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
@@ -280,7 +256,31 @@ const TravelInfos = (props) => {
                   />
                   <p
                     className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
-                    onClick={() => handleTravellerClick(travel.idCompte)}
+                    onClick={() => handleTravellerClick(traveller.id)}
+                  >
+                    {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
+                  </p>
+                  {!traveller.inscrit && (
+                    <>
+                      <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => confirmerInscription(e, traveller.id)}>
+                        <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider' src={`${process.env.PUBLIC_URL}/assets/images/valider.svg`} alt='iconeValidation'></img>
+                      </button>
+                      <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => annulerInscription(e, traveller.id)}>
+                        <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler' src={`${process.env.PUBLIC_URL}/assets/images/annuler.svg`} alt='iconeAnnuler'></img>
+                      </button>
+                    </>
+                  )}
+                </div>
+              ) : (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) && index >= 0 && traveller.id !== localStorage.getItem('user') ? (
+                <div className="travelInfosContainer_travellers_traveller_travellerInfos">
+                  <img
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'
+                    src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`}
+                    alt="icone Monsieur"
+                  />
+                  <p
+                    className='travelInfosContainer_travellers_traveller_travellerInfos_pClicable'
+                    onClick={() => { if (index === 0) { handleTravellerClick(travel.idCompte) } else { handleTravellerClick(traveller.id) } }}
                   >
                     {traveller.name && `${traveller.name} `} ({traveller.role}) {traveller.flightNumber}
                   </p>

@@ -134,6 +134,7 @@ const FormCreationTrajet = () => {
                         tailleBagage={baggageSize}
                         idCompte={localStorage.getItem('user')}
                         nbVoyageurs={0}
+                        unclicable={true}
                     />
                 </div>
                 <NavLink to="/RechercherUnTrajet" className="commitMessageContainer_navLink">
