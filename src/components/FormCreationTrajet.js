@@ -181,13 +181,13 @@ const FormCreationTrajet = () => {
                         }
                         setSteps('form');
                     }}> Paris Orly </button>
-                <button className='optionsContainer_travelOptionReturnButton' onClick={() => setSteps('selectOption')}> Retour </button>
+                <button className='optionsContainer_travelOptionReturnButton' onClick={() => { setSteps('selectOption'); setStartOrDestination(''); }}> Retour </button>
             </div>
         );
     } else if (steps === 'form') {
         return (
             <div className='formContainer'>
-                <button className='formContainer_returnButton' onClick={() => setSteps('selectAirport')}> Retour </button>
+                <button className='formContainer_returnButton' onClick={() => { setSteps('selectAirport'); setStart(''); setDestination(''); }}> Retour </button>
                 <form className='formContainer_form' onSubmit={handleSubmit}>
 
                     <div className='formContainer_form_firstPart'>

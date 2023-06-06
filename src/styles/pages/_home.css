@@ -30,16 +30,12 @@
     .homeMain_homeArticle_homeHeaderArticle_carIcon {
         display: none;
     }
-
-    .homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
-        height: 100px;
-        top: 75%;
-        left: 60%;
-    }
 }
 
 @media screen and (max-width: 805px) {
     .homeMain_homeArticle_homeHeaderArticle_aircraftIcon {
+        height: 100px;
+        left: 60%;
         top: 50%;
     }
 }
