@@ -310,6 +310,7 @@ const PageRechercherUnTrajet = () => {
                                     nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
                                     distance={travel.distance}
                                     whereIsAirport={startOrDestination}
+                                    voyageurs={travel.travel.idVoyageurs.concat(travel.travel.idVoyageursInscrits)}
                                 />
                             );
                         })
