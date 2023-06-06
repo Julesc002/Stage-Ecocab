@@ -187,10 +187,14 @@ const TravelInfos = (props) => {
 
   const prixTrajet = () => {
     if (travel && travel.idVoyageurs && travel.idVoyageursInscrits) {
+      let voyageurBonusPrisEnCompte = 1;
+      if ((localStorage.getItem('user') === travel.idCompte) || travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) {
+        voyageurBonusPrisEnCompte = 0;
+      }
       if (travel.lieuDepart === 'Orly Airport (ORY)' || travel.lieuArrivee === 'Orly Airport (ORY)') {
-        return (38 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1)).toFixed(2);
+        return (38 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1 + voyageurBonusPrisEnCompte)).toFixed(2);
       } else {
-        return (59 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1)).toFixed(2);
+        return (59 / (travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1 + voyageurBonusPrisEnCompte)).toFixed(2);
       }
     }
     return "";

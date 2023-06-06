@@ -71,6 +71,7 @@ const MesTrajets = () => {
                                 idCompte={travel.idCompte}
                                 nbVoyageurs={travel.idVoyageurs.length + travel.idVoyageursInscrits.length}
                                 affichageDate={true}
+                                voyageurs={travel.idVoyageurs.concat(travel.idVoyageursInscrits)}
                             />
                         );
                     })
@@ -86,8 +87,9 @@ const MesTrajets = () => {
                                 nombreDePassagers={travel.nombreDePassagers}
                                 numeroDeVol={travel.numeroDeVol}
                                 idCompte={travel.idCompte}
-                                nbVoyageurs={travel.idVoyageurs.length}
+                                nbVoyageurs={travel.idVoyageurs.length + travel.idVoyageursInscrits.length}
                                 affichageDate={true}
+                                voyageurs={travel.idVoyageurs.concat(travel.idVoyageursInscrits)}
                             />
                         );
                     })

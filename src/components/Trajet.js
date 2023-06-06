@@ -15,10 +15,14 @@ const Trajet = (props) => {
     const [account, setAccount] = useState();
 
     const prixTrajet = () => {
+        let voyageurBonusPrisEnCompte = 1;
+        if ((localStorage.getItem('user') === props.idCompte) || props.voyageurs.includes(localStorage.getItem('user'))) {
+            voyageurBonusPrisEnCompte = 0;
+        }
         if (props.lieuDepart === 'Orly Airport (ORY)' || props.lieuArrivee === 'Orly Airport (ORY)') {
-            return (38 / (props.nbVoyageurs + 1)).toFixed(2);
+            return (38 / (props.nbVoyageurs + 1 + voyageurBonusPrisEnCompte)).toFixed(2);
         } else {
-            return (59 / (props.nbVoyageurs + 1)).toFixed(2);
+            return (59 / (props.nbVoyageurs + 1 + voyageurBonusPrisEnCompte)).toFixed(2);
         }
     }
 

@@ -92,10 +92,11 @@ exports.getOneTravel = (req, res) => {
 
 exports.getAllTravelsById = (req, res) => {
     const id = req.params.id;
-    Travel.find({ $or: [{ idCompte: id }, { idVoyageurs: id }] })
+    Travel.find({ $or: [{ idCompte: id }, { idVoyageurs: id }, { idVoyageursInscrits: id }] })
         .then((travels) => {
             return res.status(200).json({ travels });
-        }).catch((error) => {
+        })
+        .catch((error) => {
             return res.status(400).json({ error });
         });
 };

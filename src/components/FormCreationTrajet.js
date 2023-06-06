@@ -37,7 +37,7 @@ const FormCreationTrajet = () => {
         setStart(inputValue);
         setCoordinates([]);
         if (inputValue.length >= 2) {
-            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue)
                 .then((res) => setData(res.data.features))
                 .catch((error) => console.log(error))
         }
@@ -49,7 +49,7 @@ const FormCreationTrajet = () => {
         const inputValue = e.target.value;
         setDestination(inputValue);
         if (inputValue.length >= 2) {
-            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue + ' Île-de-France')
+            axios.get('https://api-adresse.data.gouv.fr/search/?q=' + inputValue)
                 .then((res) => setData(res.data.features))
                 .catch((error) => console.log(error))
         }

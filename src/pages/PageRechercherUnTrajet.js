@@ -290,6 +290,7 @@ const PageRechercherUnTrajet = () => {
                                     idCompte={travel.travel.idCompte}
                                     nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
                                     distance={travel.distance}
+                                    voyageurs={travel.travel.idVoyageurs.concat(travel.travel.idVoyageursInscrits)}
                                 />
                             );
                         })
