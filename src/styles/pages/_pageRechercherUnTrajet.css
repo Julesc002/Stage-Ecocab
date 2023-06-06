@@ -47,6 +47,61 @@
     align-items: center;
 }
 
+.containerTrierAndExplications {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+.containerTrierAndExplications_explications {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.containerTrierAndExplications_explications_circleAndMessage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+}
+
+.containerTrierAndExplications_explications_greenCircle,
+.containerTrierAndExplications_explications_orangeCircle,
+.containerTrierAndExplications_explications_redCircle {
+    width: 30px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.containerTrierAndExplications_explications_orangeCircle {
+    background-color: orange;
+}
+
+.containerTrierAndExplications_explications_redCircle {
+    background-color: red;
+}
+
+.containerTrierAndExplications_explications_text {
+    background-color: white;
+    color: black;
+    margin: 10%;
+}
+
+.containerTrierAndExplications_explications {
+    padding: 1%;
+    padding-bottom: 2%;
+    width: 350px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 1%;
+}
+
 .containerTrierAndTrajets_trier {
     padding: 1%;
     padding-bottom: 2%;

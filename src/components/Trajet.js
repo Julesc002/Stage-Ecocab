@@ -46,7 +46,7 @@ const Trajet = (props) => {
             <div className='containerTrajet_sectionLieu'>
                 <div className='containerTrajet_sectionLieu_ligne'>
                     <p className='containerTrajet_sectionLieu_ligne_text'>{props.lieuDepart}</p>
-                    {props.distance >= 0 ?
+                    {props.whereIsAirport === 'destination' && props.distance >= 0 ?
                         props.distance < 1000 ?
                             <>
                                 <div className="greenCircle"></div>
@@ -73,6 +73,29 @@ const Trajet = (props) => {
                 </div>
                 <div className='containerTrajet_sectionLieu_ligneBas'>
                     <p className='containerTrajet_sectionLieu_ligne_text'>{props.lieuArrivee}</p>
+                    {props.whereIsAirport === 'start' && props.distance >= 0 ?
+                        props.distance < 1000 ?
+                            <>
+                                <div className="greenCircle"></div>
+                                <div className="circle"></div>
+                                <div className="circle"></div>
+                            </>
+                            :
+                            props.distance < 3000 ?
+                                <>
+                                    <div className="circle"></div>
+                                    <div className="orangeCircle"></div>
+                                    <div className="circle"></div>
+                                </>
+                                :
+                                <>
+                                    <div className="circle"></div>
+                                    <div className="circle"></div>
+                                    <div className="redCircle"></div>
+                                </>
+                        :
+                        null
+                    }
                 </div>
             </div>
             <div className='containerTrajet_sectionMillieu'>

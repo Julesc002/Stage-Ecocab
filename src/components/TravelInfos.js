@@ -267,7 +267,7 @@ const TravelInfos = (props) => {
                     </>
                   )}
                 </div>
-              ) : (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) && index >= 0 && traveller.id !== localStorage.getItem('user') ? (
+              ) : (travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) && index >= 0 && traveller.id !== localStorage.getItem('user') ? (
                 <div className="travelInfosContainer_travellers_traveller_travellerInfos">
                   <img
                     className='travelInfosContainer_travellers_traveller_travellerInfos_manIco'

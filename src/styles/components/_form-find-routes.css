@@ -59,6 +59,7 @@
     margin-left: 10px;
     border: 1px solid #ccc;
     margin-top: 6px;
+    z-index: 5;
 }
 
 .FormFindRoutes_Recherche_containerResultats:empty {

@@ -242,37 +242,56 @@ const PageRechercherUnTrajet = () => {
                 <img className='FormFindRoutes_Recherche_icone' src={`${process.env.PUBLIC_URL}/assets/images/manIcoBis.svg`} alt='icone Monsieur' disabled={startOrDestination.length === 0} />
                 <button className="FormFindRoutes_submitButton" type="submit" disabled={coordinates.length === 0 || !airportSelected || date.length === 0 || numberOfPeople < 1}> Recherchez </button>
             </form>
+
             <div className='containerTrierAndTrajets'>
-                <div className='containerTrierAndTrajets_trier'>
-                    <p className='containerTrierAndTrajets_trier_title'>Trier par :</p>
-                    <div className='containerTrierAndTrajets_trier_ligne'>
-                        <input
-                            type='checkbox'
-                            className='containerTrierAndTrajets_trier_ligne_checkbox'
-                            checked={selectedOption === 'heureDepart'}
-                            onClick={() => handleCheckboxClick('heureDepart')}
-                        />
-                        <p className='containerTrierAndTrajets_trier_ligne_text'>Heure de départ</p>
+
+                <div className='containerTrierAndExplications'>
+                    <div className='containerTrierAndExplications_explications'>
+                        <div className='containerTrierAndExplications_explications_circleAndMessage'>
+                            <div class="containerTrierAndExplications_explications_greenCircle" />
+                            <p className='containerTrierAndExplications_explications_text'> -1km </p>
+                        </div>
+                        <div className='containerTrierAndExplications_explications_circleAndMessage'>
+                            <div class="containerTrierAndExplications_explications_orangeCircle" />
+                            <p className='containerTrierAndExplications_explications_text'> -3km </p>
+                        </div>
+                        <div className='containerTrierAndExplications_explications_circleAndMessage'>
+                            <div class="containerTrierAndExplications_explications_redCircle" />
+                            <p className='containerTrierAndExplications_explications_text'> +3km </p>
+                        </div>
                     </div>
-                    <div className='containerTrierAndTrajets_trier_ligne'>
-                        <input
-                            type='checkbox'
-                            className='containerTrierAndTrajets_trier_ligne_checkbox'
-                            checked={selectedOption === 'heureArrivee'}
-                            onClick={() => handleCheckboxClick('heureArrivee')}
-                        />
-                        <p className='containerTrierAndTrajets_trier_ligne_text'>Heure d'arrivée</p>
-                    </div>
-                    <div className='containerTrierAndTrajets_trier_ligne'>
-                        <input
-                            type='checkbox'
-                            className='containerTrierAndTrajets_trier_ligne_checkbox'
-                            checked={selectedOption === 'numVol'}
-                            onClick={() => handleCheckboxClick('numVol')}
-                        />
-                        <p className='containerTrierAndTrajets_trier_ligne_text'>N de vol</p>
+                    <div className='containerTrierAndTrajets_trier'>
+                        <p className='containerTrierAndTrajets_trier_title'>Trier par :</p>
+                        <div className='containerTrierAndTrajets_trier_ligne'>
+                            <input
+                                type='checkbox'
+                                className='containerTrierAndTrajets_trier_ligne_checkbox'
+                                checked={selectedOption === 'heureDepart'}
+                                onClick={() => handleCheckboxClick('heureDepart')}
+                            />
+                            <p className='containerTrierAndTrajets_trier_ligne_text'>Heure de départ</p>
+                        </div>
+                        <div className='containerTrierAndTrajets_trier_ligne'>
+                            <input
+                                type='checkbox'
+                                className='containerTrierAndTrajets_trier_ligne_checkbox'
+                                checked={selectedOption === 'heureArrivee'}
+                                onClick={() => handleCheckboxClick('heureArrivee')}
+                            />
+                            <p className='containerTrierAndTrajets_trier_ligne_text'>Heure d'arrivée</p>
+                        </div>
+                        <div className='containerTrierAndTrajets_trier_ligne'>
+                            <input
+                                type='checkbox'
+                                className='containerTrierAndTrajets_trier_ligne_checkbox'
+                                checked={selectedOption === 'numVol'}
+                                onClick={() => handleCheckboxClick('numVol')}
+                            />
+                            <p className='containerTrierAndTrajets_trier_ligne_text'>N de vol</p>
+                        </div>
                     </div>
                 </div>
+
                 <div className='containerTrajets'>
                     {filteredTravels().length === 0 ? (
                         <p className='containerTrajets_textNoTravels'> Aucun trajet ne correspond à votre recherche. </p>
@@ -290,12 +309,14 @@ const PageRechercherUnTrajet = () => {
                                     idCompte={travel.travel.idCompte}
                                     nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
                                     distance={travel.distance}
+                                    whereIsAirport={startOrDestination}
                                 />
                             );
                         })
                     )}
                 </div>
             </div>
+
             <div className='containerButtonAndVideo'>
                 <p className='containerButtonAndVideo_text'>*Les prix sont propotionnels au nombre de passagers déjà inscrit sur le trajet .</p>
                 <NavLink to="/PosterUnTrajet">
