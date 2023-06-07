@@ -10,21 +10,26 @@ const FormCreationTrajet = () => {
     const [startOrDestination, setStartOrDestination] = useState(''); // On met à jour la variable sur 'start' ou 'destination' en fonction de si on part d'un aéroport ou si on souhaite aller à un aéroport
 
     const [start, setStart] = useState('');
+    const [startTrue, setStartTrue] = useState('');
     const [departureDate, setDepartureDate] = useState("");
     const [departureTime, setDepartureTime] = useState("");
     const [destination, setDestination] = useState("");
+    const [destinationTrue, setDestinationTrue] = useState("");
     const [arrivalDate, setArrivalDate] = useState("");
     const [arrivalTime, setArrivalTime] = useState("");
     const [numberOfPeople, setNumberOfPeople] = useState(2);
     const [flightNumber, setFlightNumber] = useState("");
     const [baggageSize, setBaggageSize] = useState("");
     const [coordinates, setCoordinates] = useState([]);
+    const [coordinatesMetro, setCoordinatesMetro] = useState([]);
+    const [metro, setMetro] = useState([]);
 
     const [dateHourStart, setDateHourStart] = useState("");
     const [dateHourArrival, setDateHourArrival] = useState("");
 
     const [displayResults, setDisplayResults] = useState(false); // Variable pour savoir si l'application affiche ou non une recherche
     const [data, setData] = useState([]); // Variable contenant les résultats de la requête API du gouvernement
+    const [dataMetro, setDataMetro] = useState([]); // Variable contenant les résultats de la requête API de la RATP
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -33,6 +38,8 @@ const FormCreationTrajet = () => {
 
     const handleStart = (e) => {
         setData([]);
+        setStartTrue();
+        setCoordinatesMetro([]);
         const inputValue = e.target.value;
         setStart(inputValue);
         setCoordinates([]);
@@ -46,6 +53,8 @@ const FormCreationTrajet = () => {
     const handleDestinationChange = (e) => {
         setData([]);
         setCoordinates([]);
+        setCoordinatesMetro([]);
+        setDestinationTrue();
         const inputValue = e.target.value;
         setDestination(inputValue);
         if (inputValue.length >= 2) {
@@ -55,6 +64,8 @@ const FormCreationTrajet = () => {
         }
     }
 
+    console.log(startTrue);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!localStorage.getItem('isConnected')) {
@@ -62,13 +73,13 @@ const FormCreationTrajet = () => {
         } else {
             setErrorMessage("");
             let missingFields = "";
-            if (!start) {
+            if (!startTrue) {
                 missingFields += "Départ, ";
             }
             if (!departureTime) {
                 missingFields += "Heure de départ, ";
             }
-            if (!destination) {
+            if (!destinationTrue) {
                 missingFields += "Destination, ";
             }
             if (!arrivalTime) {
@@ -83,9 +94,7 @@ const FormCreationTrajet = () => {
             if (missingFields) {
                 missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
                 setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
-            }
-            if (numberOfPeople < 1) {
-                setErrorMessage('Merci de mettre un nombre de voyageur valide');
+                return ;
             }
             else {
 
@@ -98,14 +107,14 @@ const FormCreationTrajet = () => {
                 const newTravel = {
                     heureDepart: dateHourForStart,
                     heureArrivee: dateHourForArrival,
-                    lieuDepart: start,
-                    lieuArrivee: destination,
+                    lieuDepart: startTrue,
+                    lieuArrivee: destinationTrue,
                     nombreDePassagers: numberOfPeople,
                     numeroDeVol: flightNumber,
                     tailleBagage: baggageSize,
                     idCompte: localStorage.getItem('user'),
                     idVoyageurs: [],
-                    coordinates: coordinates
+                    coordinates: coordinatesMetro
                 }
                 axios.post(`${API_TRAVEL_URL}`, newTravel)
                     .then(() => { setTravelPosted(true) })
@@ -114,6 +123,12 @@ const FormCreationTrajet = () => {
         }
     }
 
+    const getStationsDeMetro = (coord) => {
+        axios.get('https://data.iledefrance-mobilites.fr/api/records/1.0/search/?dataset=emplacement-des-gares-idf&q=mode=METRO&geofilter.distance=' + coord[1] + ',' + coord[0] + ',500')
+                .then((res) => setDataMetro(res.data.records))
+                .catch((error) => console.log(error))
+    }
+ 
     if (!localStorage.getItem('isConnected')) {
         return (
             <p className='formContainer_errorMessage'> Vous devez être connecté pour créer un trajet ! </p>
@@ -127,8 +142,8 @@ const FormCreationTrajet = () => {
                     <Trajet
                         heureDepart={dateHourStart}
                         heureArrivee={dateHourArrival}
-                        lieuDepart={start}
-                        lieuArrivee={destination}
+                        lieuDepart={startTrue}
+                        lieuArrivee={destinationTrue}
                         nombreDePassagers={numberOfPeople}
                         numeroDeVol={flightNumber}
                         tailleBagage={baggageSize}
@@ -166,8 +181,10 @@ const FormCreationTrajet = () => {
                 <button className='optionsContainer_travelOptionButton'
                     onClick={() => {
                         if (startOrDestination === 'start') {
+                            setStartTrue('Aéroport de Paris-Charles de Gaulle (CDG)');
                             setStart('Aéroport de Paris-Charles de Gaulle (CDG)');
                         } else {
+                            setDestinationTrue('Aéroport de Paris-Charles de Gaulle (CDG)');
                             setDestination('Aéroport de Paris-Charles de Gaulle (CDG)');
                         }
                         setSteps('form');
@@ -175,8 +192,10 @@ const FormCreationTrajet = () => {
                 <button className='optionsContainer_travelOptionButton'
                     onClick={() => {
                         if (startOrDestination === 'start') {
+                            setStartTrue('Orly Airport (ORY)');
                             setStart('Orly Airport (ORY)');
                         } else {
+                            setDestinationTrue('Orly Airport (ORY)');
                             setDestination('Orly Airport (ORY)');
                         }
                         setSteps('form');
@@ -196,12 +215,22 @@ const FormCreationTrajet = () => {
                                 <input className='formContainer_form_firstPart_inputsStartTravelContainer_inputStartPlace' type='text' value={start} />
                                 :
                                 <div className='formContainer_form_firstPart_inputsStartTravelContainer_inputAndresultContainer'>
-                                    <input className='FormFindRoutes_Recherche_inputTextStart' type='text' placeholder="Depart ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleStart(e)} />
+                                    <input className='FormFindRoutes_Recherche_inputTextStart' type='text' placeholder="Votre adresse ?" value={start} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleStart(e)} />
                                     <div className='FormFindRoutes_Recherche_containerResultats'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates); getStationsDeMetro(place.geometry.coordinates); setStartTrue(); }}> {place.properties.label} </p>
                                         ))}
                                     </div>
+                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => setMetro(e.target.value)} disabled={coordinates.length === 0}>
+                                        <option value="" disabled hidden>Stations de métro proches</option>
+                                        {dataMetro.length === 0 ? (
+                                            <option className="formContainer_form_selectBaggageSize_value" value="">Pas de stations de métro proches</option>
+                                        ) : (
+                                            dataMetro.map((place, index) => (
+                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d} onClick={() => {setCoordinatesMetro([place.fields.geo_point_2d[1], place.fields.geo_point_2d[0]]); setStartTrue(place.fields.nom_iv)}} > {place.fields.nom_iv}</option>
+                                            ))
+                                        )}
+                                    </select>
                                 </div >
                             }
 
@@ -220,9 +249,19 @@ const FormCreationTrajet = () => {
                                     <input className='FormFindRoutes_Recherche_inputTextStart' type='text' placeholder="Arrivée ?" value={destination} onFocus={() => setDisplayResults(!displayResults)} onBlur={() => setTimeout(() => { setDisplayResults(false); }, 100)} onChange={(e) => handleDestinationChange(e)} />
                                     <div className='FormFindRoutes_Recherche_containerResultats'>
                                         {displayResults && data.map((place, index) => (
-                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates) }}> {place.properties.label} </p>
+                                            <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates); getStationsDeMetro(place.geometry.coordinates); setDestinationTrue(); }}> {place.properties.label} </p>
                                         ))}
                                     </div>
+                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => setMetro(e.target.value)} disabled={coordinates.length === 0}>
+                                        <option value="" disabled hidden>Stations de métro proches</option>
+                                        {dataMetro.length === 0 ? (
+                                            <option className="formContainer_form_selectBaggageSize_value" value="">Pas de stations de métro proches</option>
+                                        ) : (
+                                            dataMetro.map((place, index) => (
+                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d} onClick={() => {setCoordinatesMetro([place.fields.geo_point_2d[1], place.fields.geo_point_2d[0]]); setDestinationTrue(place.fields.nom_iv)}} > {place.fields.nom_iv}</option>
+                                            ))
+                                        )}
+                                    </select>
                                 </div>
                             }
                             <input className='formContainer_form_firstPart_inputsEndTravelContainer_inputEndDate' type='datetime-local'
@@ -249,7 +288,7 @@ const FormCreationTrajet = () => {
                     </select>
 
                     <p className='formContainer_form_text'> Economise jusqu'à 30€ </p>
-                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" disabled={coordinates.length === 0} />
+                    <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" disabled={coordinatesMetro.length === 0} />
                 </form>
                 {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
             </div >

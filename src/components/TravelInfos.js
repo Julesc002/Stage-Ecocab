@@ -126,6 +126,8 @@ const TravelInfos = (props) => {
       setErrorMsg('Vous êtes le créateur de ce trajet');
     } else if (dateDepart < currentDate) {
       setErrorMsg('Le trajet sélectionné est en cours ou terminé')
+    } else if (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) {
+      setErrorMsg('Vous êtes déjà inscrit')
     } else {
       setErrorMsg('');
 
