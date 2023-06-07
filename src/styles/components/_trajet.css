@@ -8,7 +8,7 @@
   margin: 2%;
   margin-left: 5%;
   text-decoration: none;
-  width: clamp(300px, 50vw, 500px);
+  width: clamp(400px, 50vw, 500px);
   z-index: 2;
 }
 
@@ -172,7 +172,9 @@
 }
 
 @media (max-width: 850px) {
-  .containerTrajet {
+
+  .containerTrajet,
+  .containerTrajetUnclicable {
     margin-left: 0%;
   }
 

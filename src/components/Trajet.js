@@ -40,11 +40,11 @@ const Trajet = (props) => {
         <>
             <div className='containerTrajet_sectionHeure'>
                 <div className='containerTrajet_sectionHeure_ligne'>
-                    <p className='containerTrajet_sectionHeure_ligne_text'>{heureDepart} {/*jourDepart*/}</p>
+                    <p className='containerTrajet_sectionHeure_ligne_text'>{heureDepart} </p>
                 </div>
                 <p className='containerTrajet_sectionHeure_Date'>{props.affichageDate ? jourDepart : ''}</p>
                 <div className='containerTrajet_sectionHeure_ligneBas'>
-                    <p className='containerTrajet_sectionHeure_ligne_text'>{heureArrivee} {/*jourArrivee*/}</p>
+                    <p className='containerTrajet_sectionHeure_ligne_text'>{heureArrivee} </p>
                 </div>
             </div>
             <div className='containerTrajet_sectionLieu'>
