@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { API_USER_URL } from '../config';
+import { API_USER_URL, API_TRAVEL_URL } from '../config';
 import axios from 'axios';
-import DeleteAccountConfirmation from './DeleteAccountConfirmation';
 
 const AccountDetails = () => {
 
@@ -150,7 +149,6 @@ const AccountDetails = () => {
             }
             axios.put(`${API_USER_URL}/` + localStorage.getItem('user'), userUpdatePwd)
                 .then(response => {
-                    console.log(response);
                     setUpdatePwd(!updatePwd);
                 })
                 .catch(error => {
@@ -161,8 +159,40 @@ const AccountDetails = () => {
 
     }
 
+    const handleDelete = () => {
+        axios.get(`${API_USER_URL}/id/` + localStorage.getItem('user'))
+            .then(currentUser => {
+                currentUser.data.user.travelsCreated.forEach((travel) => {
+                    axios.delete(`${API_TRAVEL_URL}/${travel}`)
+                })
+                currentUser.data.user.travelsRegistered.forEach((travel) => {
+                    axios.put(`${API_TRAVEL_URL}/${travel}/userRemove/${localStorage.getItem('user')}`);
+                    axios.put(`${API_TRAVEL_URL}/${travel}/userRemoveConfirmed/${localStorage.getItem('user')}`);
+                })
+                axios.delete(`${API_USER_URL}/${localStorage.getItem('user')}`)
+                    .then(() => {
+                        localStorage.removeItem('isConnected');
+                        localStorage.removeItem('user');
+                        window.location.href = '/';
+                    })
+                    .catch((err) => console.log(err))
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     if (showConfirmation) {
-        return <DeleteAccountConfirmation />
+        return (
+            <div className='deleteAccountConfirmationPopUp'>
+                <h1 className='deleteAccountConfirmationPopUp_mainTitle'> Supprimer mon compte </h1>
+                <p className='deleteAccountConfirmationPopUp_p'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla suscipit dolores at dolore? Deleniti, earum eius optio modi dicta voluptatem enim eos quas tenetur aspernatur ab. Assumenda natus vero beatae? </p>
+                <div className='deleteAccountConfirmationPopUp_buttons'>
+                    <button className='deleteAccountConfirmationPopUp_buttons_deleteBtn' onClick={() => handleDelete()}> Supprimer le compte </button>
+                    <button className='deleteAccountConfirmationPopUp_buttons_cancelBtn' onClick={() => setShowConfirmation(false)}> Annuler </button>
+                </div>
+            </div >
+        );
     }
     if (updatePwd) {
         return (

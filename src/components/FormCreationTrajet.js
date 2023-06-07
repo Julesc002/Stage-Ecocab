@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { API_TRAVEL_URL } from '../config';
+import { API_TRAVEL_URL, API_USER_URL } from '../config';
 import { NavLink } from 'react-router-dom';
 import Trajet from './Trajet';
 
@@ -117,7 +117,11 @@ const FormCreationTrajet = () => {
                     coordinates: coordinatesMetro
                 }
                 axios.post(`${API_TRAVEL_URL}`, newTravel)
-                    .then(() => { setTravelPosted(true) })
+                    .then((travel) => {
+                        axios.post(`${API_USER_URL}/${localStorage.getItem('user')}/travels/created`, { travelId: travel.data.travel._id })
+                            .then((res) => { console.log(res); setTravelPosted(true); })
+                            .catch((error) => { console.log(error); })
+                    })
                     .catch((error) => { console.log(error) });
             }
         }
@@ -200,13 +204,13 @@ const FormCreationTrajet = () => {
                         }
                         setSteps('form');
                     }}> Paris Orly </button>
-                <button className='optionsContainer_travelOptionReturnButton' onClick={() => setSteps('selectOption')}> Retour </button>
+                <button className='optionsContainer_travelOptionReturnButton' onClick={() => { setSteps('selectOption'); setStartOrDestination(''); }}> Retour </button>
             </div>
         );
     } else if (steps === 'form') {
         return (
             <div className='formContainer'>
-                <button className='formContainer_returnButton' onClick={() => setSteps('selectAirport')}> Retour </button>
+                <button className='formContainer_returnButton' onClick={() => { setSteps('selectAirport'); setStart(''); setDestination(''); }}> Retour </button>
                 <form className='formContainer_form' onSubmit={handleSubmit}>
 
                     <div className='formContainer_form_firstPart'>
