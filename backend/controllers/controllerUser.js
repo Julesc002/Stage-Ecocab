@@ -28,6 +28,41 @@ exports.createUser = (req, res) => {
         });
 }
 
+exports.addTravelToCreated = (req, res) => {
+    const userId = req.params.id;
+    const travelId = req.body.travelId;
+
+    User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { travelsCreated: travelId } },
+        { new: true }
+    )
+        .then((user) => {
+            return res.status(200).json({ user });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
+
+exports.addTravelToRegistered = (req, res) => {
+    const userId = req.params.id;
+    const travelId = req.body.travelId;
+
+    User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { travelsRegistered: travelId } },
+        { new: true }
+    )
+        .then((user) => {
+            return res.status(200).json({ user });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
+
+
 // Partie GET
 
 exports.getAllUsers = (req, res) => {
@@ -61,15 +96,15 @@ exports.getOneUserWithEmail = (req, res) => {
 
 // Partie DELETE
 
-exports.deleteAllUsers = (req, res) => {
-    User.deleteMany({})
-        .then(() => {
-            return res.status(200).json({ message: 'All users have been deleted successfully.' });
-        })
-        .catch((error) => {
-            return res.status(400).json({ error });
-        });
-}
+// exports.deleteAllUsers = (req, res) => {
+//     User.deleteMany({})
+//         .then(() => {
+//             return res.status(200).json({ message: 'All users have been deleted successfully.' });
+//         })
+//         .catch((error) => {
+//             return res.status(400).json({ error });
+//         });
+// }
 
 exports.deleteOneUser = (req, res) => {
     const id = req.params.id;
@@ -80,6 +115,23 @@ exports.deleteOneUser = (req, res) => {
             return res.status(400).json({ error });
         });
 }
+
+exports.deleteOneTravelFromRegistered = (req, res) => {
+    const userId = req.params.id;
+    const travelId = req.params.travelId;
+
+    User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { travelsRegistered: travelId } },
+        { new: true }
+    )
+        .then((user) => {
+            return res.status(200).json({ user });
+        })
+        .catch((error) => {
+            return res.status(400).json({ error });
+        });
+};
 
 // Partie PUT
 

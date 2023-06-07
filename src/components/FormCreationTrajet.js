@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { API_TRAVEL_URL } from '../config';
+import { API_TRAVEL_URL, API_USER_URL } from '../config';
 import { NavLink } from 'react-router-dom';
 import Trajet from './Trajet';
 
@@ -108,7 +108,11 @@ const FormCreationTrajet = () => {
                     coordinates: coordinates
                 }
                 axios.post(`${API_TRAVEL_URL}`, newTravel)
-                    .then(() => { setTravelPosted(true) })
+                    .then((travel) => {
+                        axios.post(`${API_USER_URL}/${localStorage.getItem('user')}/travels/created`, { travelId: travel.data.travel._id })
+                            .then((res) => { console.log(res); setTravelPosted(true); })
+                            .catch((error) => { console.log(error); })
+                    })
                     .catch((error) => { console.log(error) });
             }
         }

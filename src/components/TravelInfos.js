@@ -131,13 +131,13 @@ const TravelInfos = (props) => {
 
       axios.put(`${API_TRAVEL_URL}/` + props.id + '/user/' + localStorage.getItem('user'))
         .then(response => {
-          console.log(response.data.travel);
+          axios.post(`${API_USER_URL}/${localStorage.getItem('user')}/travels/registered`, { travelId: props.id })
+            .then((res) => { console.log(res); window.location.reload(); })
+            .catch((error) => { console.log(error); })
         })
         .catch(error => {
           console.log(error);
         });
-
-      window.location.reload();
     }
   };
 
@@ -167,6 +167,7 @@ const TravelInfos = (props) => {
         axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemove/' + localStorage.getItem('user'))
           .then(response => {
             console.log(response.data.travel);
+            removeTravelFromRegistered(localStorage.getItem('user'));
           })
           .catch(error => {
             console.log(error);
@@ -175,13 +176,13 @@ const TravelInfos = (props) => {
         axios.put(`${API_TRAVEL_URL}/` + props.id + '/userRemoveConfirmed/' + localStorage.getItem('user'))
           .then(response => {
             console.log(response.data.travel);
+            removeTravelFromRegistered(localStorage.getItem('user'));
           })
           .catch(error => {
             console.log(error);
+            window.location.reload();
           });
       }
-
-      window.location.reload();
     }
   };
 
@@ -223,8 +224,18 @@ const TravelInfos = (props) => {
       .catch(error => {
         console.log(error);
       });
-
     window.location.reload();
+  };
+
+  const removeTravelFromRegistered = (userId) => {
+    axios.delete(`${API_USER_URL}/${userId}/travels/registered/${props.id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -265,7 +276,7 @@ const TravelInfos = (props) => {
                       <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => confirmerInscription(e, traveller.id)}>
                         <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageValider' src={`${process.env.PUBLIC_URL}/assets/images/valider.svg`} alt='iconeValidation'></img>
                       </button>
-                      <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => annulerInscription(e, traveller.id)}>
+                      <button className='travelInfosContainer_travellers_traveller_travellerInfos_buttons' onClick={(e) => { annulerInscription(e, traveller.id); removeTravelFromRegistered(traveller.id); }}>
                         <img className='travelInfosContainer_travellers_traveller_travellerInfos_buttons_imageAnnuler' src={`${process.env.PUBLIC_URL}/assets/images/annuler.svg`} alt='iconeAnnuler'></img>
                       </button>
                     </>
