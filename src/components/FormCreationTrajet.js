@@ -64,8 +64,6 @@ const FormCreationTrajet = () => {
         }
     }
 
-    console.log(startTrue);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!localStorage.getItem('isConnected')) {
@@ -94,7 +92,7 @@ const FormCreationTrajet = () => {
             if (missingFields) {
                 missingFields = missingFields.slice(0, -2); // Supprime la virgule et l'espace à la fin de la chaîne
                 setErrorMessage(`Les champs suivants sont manquants: ${missingFields}`);
-                return ;
+                return;
             }
             else {
 
@@ -129,10 +127,49 @@ const FormCreationTrajet = () => {
 
     const getStationsDeMetro = (coord) => {
         axios.get('https://data.iledefrance-mobilites.fr/api/records/1.0/search/?dataset=emplacement-des-gares-idf&q=mode=METRO&geofilter.distance=' + coord[1] + ',' + coord[0] + ',500')
-                .then((res) => setDataMetro(res.data.records))
-                .catch((error) => console.log(error))
+            .then((res) => {
+                setDataMetro(res.data.records);
+                const newDataMetro = res.data.records;
+                const filtredDataMetro = [];
+                const metrosNames = [];
+                let i = 0;
+                let j = 0;
+                newDataMetro.forEach((place) => {
+                    if (!metrosNames.includes(place.fields.nom_iv)) {
+                        metrosNames.push(place.fields.nom_iv);
+                        filtredDataMetro[j] = newDataMetro[i];
+                        j++;
+                    }
+                    i++;
+                })
+                setDataMetro(filtredDataMetro);
+            })
+            .catch((error) => console.log(error))
     }
- 
+
+    const handleMetroChange = (e) => {
+        const selectedOption = e.target.value;
+        setMetro(selectedOption);
+        if (selectedOption !== "") {
+            const selectedPlace = dataMetro.find(
+                (place) => (place.fields.geo_point_2d[0] + ',' + place.fields.geo_point_2d[1]) === selectedOption
+            );
+            if (selectedPlace) {
+                const coordinates = [
+                    selectedPlace.fields.geo_point_2d[1],
+                    selectedPlace.fields.geo_point_2d[0]
+                ];
+                setCoordinatesMetro(coordinates);
+                if (startOrDestination === 'start') {
+                    setDestinationTrue(selectedPlace.fields.nom_iv);
+                } else {
+                    setStartTrue(selectedPlace.fields.nom_iv);
+                }
+            }
+        }
+    };
+
+
     if (!localStorage.getItem('isConnected')) {
         return (
             <p className='formContainer_errorMessage'> Vous devez être connecté pour créer un trajet ! </p>
@@ -225,13 +262,13 @@ const FormCreationTrajet = () => {
                                             <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setStart(place.properties.label); setCoordinates(place.geometry.coordinates); getStationsDeMetro(place.geometry.coordinates); setStartTrue(); }}> {place.properties.label} </p>
                                         ))}
                                     </div>
-                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => setMetro(e.target.value)} disabled={coordinates.length === 0}>
-                                        <option value="" disabled hidden>Stations de métro proches</option>
+                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => handleMetroChange(e)} disabled={coordinates.length === 0}>
+                                        <option value="" disabled hidden> Stations de métro proches </option>
                                         {dataMetro.length === 0 ? (
-                                            <option className="formContainer_form_selectBaggageSize_value" value="">Pas de stations de métro proches</option>
+                                            <option className="formContainer_form_selectBaggageSize_value" value=""> Pas de stations de métro proches </option>
                                         ) : (
                                             dataMetro.map((place, index) => (
-                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d} onClick={() => {setCoordinatesMetro([place.fields.geo_point_2d[1], place.fields.geo_point_2d[0]]); setStartTrue(place.fields.nom_iv)}} > {place.fields.nom_iv}</option>
+                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d}> {place.fields.nom_iv} </option>
                                             ))
                                         )}
                                     </select>
@@ -256,13 +293,13 @@ const FormCreationTrajet = () => {
                                             <p key={index} className='FormFindRoutes_Recherche_containerResultats_Resultats' onClick={() => { setDestination(place.properties.label); setCoordinates(place.geometry.coordinates); getStationsDeMetro(place.geometry.coordinates); setDestinationTrue(); }}> {place.properties.label} </p>
                                         ))}
                                     </div>
-                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => setMetro(e.target.value)} disabled={coordinates.length === 0}>
-                                        <option value="" disabled hidden>Stations de métro proches</option>
+                                    <select className="formContainer_form_selectBaggageSize" value={metro} onChange={(e) => handleMetroChange(e)} disabled={coordinates.length === 0}>
+                                        <option value="" disabled hidden> Stations de métro proches </option>
                                         {dataMetro.length === 0 ? (
-                                            <option className="formContainer_form_selectBaggageSize_value" value="">Pas de stations de métro proches</option>
+                                            <option className="formContainer_form_selectBaggageSize_value" value=""> Pas de stations de métro proches </option>
                                         ) : (
                                             dataMetro.map((place, index) => (
-                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d} onClick={() => {setCoordinatesMetro([place.fields.geo_point_2d[1], place.fields.geo_point_2d[0]]); setDestinationTrue(place.fields.nom_iv)}} > {place.fields.nom_iv}</option>
+                                                <option key={index} className="formContainer_form_selectBaggageSize_value" value={place.fields.geo_point_2d}> {place.fields.nom_iv} </option>
                                             ))
                                         )}
                                     </select>
@@ -295,7 +332,7 @@ const FormCreationTrajet = () => {
                     <input className='formContainer_form_submitButton' type="submit" value="Créer ton trajet gratuitement !" disabled={coordinatesMetro.length === 0} />
                 </form>
                 {errorMessage !== '' ? <p className='formContainer_errorMessage'> {errorMessage} </p> : null}
-            </div >
+            </div>
         );
     }
 };
