@@ -16,12 +16,12 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-    /* background-color: #010922; */
+    /* background-color: #020A48; */
     /* box-shadow: 0 0 0 3px red inset; */
 }
 
 .container {
-    background-color: #010922;
+    background-color: #020A48;
 }
 
 @font-face {

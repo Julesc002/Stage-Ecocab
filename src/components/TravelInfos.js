@@ -338,6 +338,15 @@ const TravelInfos = (props) => {
           </div>
         )}
 
+        <p className='travelInfosContainer_msgBagage'>
+          {travel && travel.idVoyageurs && travel.idVoyageursInscrits && travel.nombreDePassagers &&
+            <>
+              {travel.idVoyageurs.length + travel.idVoyageursInscrits.length + 1}/{travel.nombreDePassagers}
+              <img className='travelInfosContainer_travellers_traveller_travellerInfos_manIco' src={`${process.env.PUBLIC_URL}/assets/images/${manIco}`} alt="icone Monsieur"/>
+            </>
+          }
+        </p>
+
         <p className='travelInfosContainer_msgBagage'>Type de bagage : {travel.tailleBagage}</p>
 
         {travel && (travel.idVoyageurs || travel.idVoyageursInscrits) && (travel.idVoyageurs.includes(localStorage.getItem('user')) || travel.idVoyageursInscrits.includes(localStorage.getItem('user'))) ?
