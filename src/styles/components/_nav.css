@@ -1,11 +1,16 @@
+/* Pour voir à quoi ressemble la "version sombre" du menu de navigation, enlever les commentaires sur ce fichier, sur le fichier _footer.css et sur le fichier settings.css */
+/* Lignes où il y a la présence de commentaires à enlever sur cette page : 13 - 130 */
+
 /* Partie Ordinateur */
+
 .navigationMenu {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
     min-height: 75px;
-    color: white;
+    color: black;
+    /* color: white; */
 }
 
 .navigationMenu a {
@@ -13,6 +18,7 @@
     padding: 0 0.4rem;
     color: inherit;
     z-index: 50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navigationMenu_titleApp {
@@ -66,6 +72,7 @@
     position: fixed;
     margin-right: 5%;
     border: 1px solid;
+    background-color: white;
 }
 
 .navigationMenu_links_subemenuContainer_submenu_item {
@@ -87,6 +94,8 @@
         visibility: hidden;
         transition: all 0.8s ease-out;
         z-index: 10;
+        background-color: white;
+        /* background-color: #010922; */
     }
 
     .showNavigationMenu .navigationMenu_links {
@@ -120,7 +129,8 @@
         height: 3px;
         position: relative;
         border-radius: 3px;
-        background: white;
+        background: black;
+        /* background: white; */
         transition: all .5s ease-in-out;
     }
 

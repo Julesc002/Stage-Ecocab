@@ -172,7 +172,7 @@ const FormCreationTrajet = () => {
 
     if (!localStorage.getItem('isConnected')) {
         return (
-            <p className='formContainer_errorMessage'> Vous devez être connecté pour créer un trajet ! </p>
+            <p className='errorConnexionMessage'> Vous devez être connecté pour créer un trajet ! </p>
         );
     } else if (travelPosted) {
         return (

@@ -1,3 +1,11 @@
+/* Echec connexion */
+
+.errorConnexionMessage {
+    margin: 30%;
+    width: 110%;
+    text-align: center;
+}
+
 /* Partie Selection d'option */
 
 .optionsContainer {
@@ -8,6 +16,7 @@
     width: 600px;
     height: 400px;
     padding: 5%;
+    margin-top: 5%;
     border-radius: 10px;
     margin-bottom: 17%;
     z-index: 5;
@@ -44,6 +53,7 @@
 .formContainer {
     display: flex;
     flex-direction: column;
+    margin-top: 2%;
     align-items: center;
     z-index: 5;
 }

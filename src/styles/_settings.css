@@ -6,7 +6,7 @@
 }
 
 
-
+/* Enlever le commentaire à la ligne 19 et les commentaires des fichiers _nav.css et _footer.css pour avoir la version "sombre" */
 
 
 *,
@@ -16,8 +16,12 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-    background-color: #010922;
+    /* background-color: #010922; */
     /* box-shadow: 0 0 0 3px red inset; */
+}
+
+.container {
+    background-color: #010922;
 }
 
 @font-face {

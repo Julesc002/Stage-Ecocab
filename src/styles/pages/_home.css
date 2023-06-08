@@ -1,7 +1,6 @@
 .homeMain_homeArticle_homeHeaderArticle {
     display: flex;
     flex-direction: column;
-    margin: 2%;
     margin-left: 3%;
 }
 
@@ -9,7 +8,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2%;
 }
 
 .homeMain_homeArticle_homeHeaderArticle_carIcon {

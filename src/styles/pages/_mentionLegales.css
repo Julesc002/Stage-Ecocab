@@ -1,8 +1,12 @@
 .containerMention {
+    display: flex;
+}
+
+.containerMention_div {
     background-color: white;
-    margin: 5%;
     padding: 2%;
     border-radius: 15px;
+    margin: 5%;
 }
 
 .containerMention_containerMainTitle {
