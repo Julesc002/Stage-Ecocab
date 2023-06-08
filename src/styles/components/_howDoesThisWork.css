@@ -6,7 +6,6 @@
     background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
-    height: 90vh;
     width: 90vw;
 }
 
@@ -15,9 +14,24 @@
     font-size: 24px;
     background-color: white;
     color: black;
-    text-decoration: underline;
     text-decoration-color: #000000;
     margin: 10px;
     padding: 10px;
 
+}
+
+.howDoesThisWorkSection p,
+.howDoesThisWorkSection li {
+    text-align: left;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    text-decoration-color: #000000;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.howDoesThisWorkSection ul {
+    background-color: white;
 }

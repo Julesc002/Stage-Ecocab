@@ -15,6 +15,7 @@ const PageRechercherUnTrajet = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [coordinates, setCoordinates] = useState([]);
     const location = useLocation();
+    const [premiereRecherche, setPremiereRecherche] = useState(true); // sert à savoir si une recherche n'a pas encore été effectuée pour l'affichage d'un message d'information
 
     const [startOrDestination, setStartOrDestination] = useState(''); // On met à jour la variable sur 'start' ou 'destination' en fonction de si on part d'un aéroport ou si on souhaite aller à un aéroport
 
@@ -27,6 +28,7 @@ const PageRechercherUnTrajet = () => {
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
+        setPremiereRecherche(false);
         const travelSearched = {
             heureDepart: date,
             lieuDepart: start,
@@ -76,7 +78,7 @@ const PageRechercherUnTrajet = () => {
                         });
                         setTravels(sortedTravels);
                     })
-                    .catch((error) => { console.log(error) })
+                    .catch((error) => { console.log(error); setTravels([]) })
             })
             .catch((err) => console.log(err))
     }, [start, destination, date, coordinates, setTravels, numberOfPeople, startOrDestination]);
@@ -293,27 +295,31 @@ const PageRechercherUnTrajet = () => {
                 </div>
 
                 <div className='containerTrajets'>
-                    {filteredTravels().length === 0 ? (
-                        <p className='containerTrajets_textNoTravels'> Aucun trajet ne correspond à votre recherche. </p>
+                    {premiereRecherche ? (
+                        <p className='containerTrajets_textNoTravels'> Veuillez effectuer une recherche. </p>
                     ) : (
-                        filteredTravels().map(travel => {
-                            return (
-                                <Trajet
-                                    id={travel.travel._id}
-                                    heureDepart={travel.travel.heureDepart}
-                                    heureArrivee={travel.travel.heureArrivee}
-                                    lieuDepart={travel.travel.lieuDepart}
-                                    lieuArrivee={travel.travel.lieuArrivee}
-                                    nombreDePassagers={travel.travel.nombreDePassagers}
-                                    numeroDeVol={travel.travel.numeroDeVol}
-                                    idCompte={travel.travel.idCompte}
-                                    nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
-                                    distance={travel.distance}
-                                    whereIsAirport={startOrDestination}
-                                    voyageurs={travel.travel.idVoyageurs.concat(travel.travel.idVoyageursInscrits)}
-                                />
-                            );
-                        })
+                        filteredTravels().length === 0 ? (
+                            <p className='containerTrajets_textNoTravels'> Aucun trajet ne correspond à votre recherche. </p>
+                        ) : (
+                            filteredTravels().map(travel => {
+                                return (
+                                    <Trajet
+                                        id={travel.travel._id}
+                                        heureDepart={travel.travel.heureDepart}
+                                        heureArrivee={travel.travel.heureArrivee}
+                                        lieuDepart={travel.travel.lieuDepart}
+                                        lieuArrivee={travel.travel.lieuArrivee}
+                                        nombreDePassagers={travel.travel.nombreDePassagers}
+                                        numeroDeVol={travel.travel.numeroDeVol}
+                                        idCompte={travel.travel.idCompte}
+                                        nbVoyageurs={travel.travel.idVoyageurs.length + travel.travel.idVoyageursInscrits.length}
+                                        distance={travel.distance}
+                                        whereIsAirport={startOrDestination}
+                                        voyageurs={travel.travel.idVoyageurs.concat(travel.travel.idVoyageursInscrits)}
+                                    />
+                                );
+                            })
+                        )
                     )}
                 </div>
             </div>

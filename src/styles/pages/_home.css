@@ -1,3 +1,64 @@
+.FormFindRoutesHome,
+.homeMain,
+.homeMain_homeArticle,
+.homeMain_homeArticle_homeHeaderArticle_carIcon,
+.homeMain_homeArticle_homeHeaderArticle_aircraftIcon,
+.logosContainer,
+.homeCardLogo,
+.homeCardLogo_logoImage,
+.homeCardLogo_logoP {
+  background-color: white;
+}
+
+.containerForm,
+.homeMain_homeArticle_homeHeaderArticle,
+.homeMainTitle,
+.homeUnderTitle,
+.containeurFormHome,
+.optionSection_optionButtonsContainerHome,
+.FormFindRoutesHome,
+.optionSectionHome {
+    background-color: transparent;
+}
+
+.homeMain_img {
+    width: 100%;
+}
+
+.homeMain_homeArticle_homeHeaderArticle {
+    position: absolute;
+    top: 25%;
+}
+
+.containerForm {
+    position: absolute;
+    top: 55%;
+}
+
+.FormFindRoutesHome,
+.optionSection_optionButtonsContainerHome {
+    margin: 0%;
+    padding: 0%;
+}
+
+.homeCardLogo_logoP {
+    color: #010922;
+}
+
+.homeMain_homeArticle_helpVideoAndContactUs {
+    background-color: #485c6c;
+}
+
+.videoPlaceholderHome {
+    background-color: #485c6c;
+    margin-top: 5%;
+}
+
+.containerBoutonContactHome {
+    background-color: #485c6c;
+    margin-bottom: 5%;
+}
+
 .homeMain_homeArticle_homeHeaderArticle {
     display: flex;
     flex-direction: column;
@@ -26,9 +87,26 @@
     left: 2%;
 }
 
+@media screen and (max-width: 1204px) {
+    .homeMain_homeArticle_homeHeaderArticle {
+        position: absolute;
+        top: 15%;
+    }
+    
+    .containerForm {
+        position: absolute;
+        top: 55%;
+    }
+}
+
 @media screen and (max-width: 959px) {
     .homeMain_homeArticle_homeHeaderArticle_carIcon {
         display: none;
+    }
+
+    .containerForm {
+        position: absolute;
+        top: 50%;
     }
 }
 
@@ -37,6 +115,23 @@
         height: 100px;
         left: 60%;
         top: 50%;
+    }
+
+    .homeMain {
+        background-color: #485c6c;
+    }
+
+    .containerForm {
+        position: relative;
+        top: 55%;
+    }
+
+    .FormFindRoutesHome {
+        margin: auto;
+    }
+
+    .containeurFormHome {
+        background-color: #485c6c;
     }
 }
 

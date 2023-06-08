@@ -79,14 +79,14 @@ const FormFindRoutes = () => {
     };
 
     return (
-        <article>
-            <section className='optionSection'>
-                <div className='optionSection_optionButtonsContainer'>
+        <article className="containeurFormHome">
+            <section className='optionSectionHome'>
+                <div className='optionSection_optionButtonsContainerHome'>
                     <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('start'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'start'}> Je pars d'un aéroport </button>
                     <button className='optionSection_optionButtonsContainer_button' onClick={() => { handleSetAirport('destination'); setAirportSelected(false); setCoordinates([]) }} disabled={startOrDestination === 'destination'}> Je me rends à un aéroport </button>
                 </div>
             </section>
-            <form className='FormFindRoutes' onSubmit={handleSubmit}>
+            <form className='FormFindRoutesHome' onSubmit={handleSubmit}>
 
                 {startOrDestination === 'start' ?
                     <div className="FormFindRoutes_Recherche">

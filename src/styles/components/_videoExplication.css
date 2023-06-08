@@ -1,4 +1,5 @@
-.videoPlaceholder {
+.videoPlaceholder,
+.videoPlaceholderHome {
     width: clamp(300px, 60%, 80%);
     height: auto;
     margin: 2.5%;

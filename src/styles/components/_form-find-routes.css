@@ -9,6 +9,16 @@
     padding: 20px;
 }
 
+.FormFindRoutesHome {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    max-width: 800px;
+    padding: 20px;
+}
+
 .FormFindRoutes_Recherche,
 .FormFindRoutes_Recherche2,
 .FormFindRoutes_RechercheNbPers {
@@ -85,6 +95,7 @@
     height: 40px;
     margin-top: 10px;
     z-index: 2;
+    background-color: transparent;
 }
 
 .FormFindRoutes_Recherche_icone[disabled] {

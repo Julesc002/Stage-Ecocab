@@ -7,7 +7,8 @@
     top: 50px;
 }
 
-.optionSection {
+.optionSection,
+.optionSectionHome {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +19,14 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 1000px;
+    width: 100%;
+    padding: 2% 1%;
+}
+
+.optionSection_optionButtonsContainerHome {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     padding: 2% 1%;
 }
 
